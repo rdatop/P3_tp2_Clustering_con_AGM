@@ -69,8 +69,8 @@ public class Grafo {
 	}
 	
 	//entrega el grado del vertice
-	public int gradoDelVertice(int v){
-		return _vecinos.get(v).size();
+	public int gradoDelVertice(int vertice){
+		return _vecinos.get(vertice).size();
 	}
 	
 	//entrega los vecinos del vertice
@@ -91,5 +91,5 @@ public class Grafo {
 //		}
 //		return s;
 //	}	
-
+	
 }

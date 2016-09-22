@@ -15,9 +15,9 @@ public class GrafoPesado {
 	private double[][] _pesos;//y le agrega peso a las aristas (GrafoPesado, peso)
 	
 	//constructor
-	public GrafoPesado(int vertives){//una las dos componentes grafo simple + peso
-		_grafo=new Grafo(vertives);
-		_pesos=new double[vertives][vertives];
+	public GrafoPesado(int vertices){//una las dos componentes grafo simple + peso
+		_grafo=new Grafo(vertices);
+		_pesos=new double[vertices][vertices];
 	}
 	
 	//agregar aristas con peso
