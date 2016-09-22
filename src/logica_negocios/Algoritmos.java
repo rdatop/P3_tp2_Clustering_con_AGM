@@ -3,7 +3,7 @@ package logica_negocios;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Algoritmos{
+public class Algoritmos{//
 	
 	// Algoritmo de Prim
 	public static GrafoPesado AGM(GrafoPesado grafo){
@@ -45,7 +45,7 @@ public class Algoritmos{
 			Arista otra=(Arista)obj;
 			return vertAGM==otra.vertAGM&&vertice==otra.vertice;
 		}
-	}
+	}//fin de clase inner
 	
 	//paquete privado(static sin public/private/protected)
 	// Retorna la arista de menor peso entre un vertice amarillo y uno no amarillo
@@ -54,10 +54,10 @@ public class Algoritmos{
 		Arista ret=new Arista(0,0,Double.MAX_VALUE);//para ir vajando el valor
 		
 		for(Integer i: vertAGM){//for recorre un conjunto de Integer llamados vertAGM
-			for(Integer j: grafo.vecinos(i)){//for recorre un conjunto de Integer llamados vecinos de grafo
+			for(Integer j: grafo.vecinos(i)){//recorre un conjunto de Integer llamados vecinos de grafo
 				if(vertAGM.contains(j)==false){//si el vertice de grafo esta contenido ya en el agm
 					if(grafo.getPesoArista(i, j)<ret.peso){//y si el peso entre un vertAGM y uno NoIncluido es menor que el anterior
-						ret=new Arista(i,j,grafo.getPesoArista(i,j));//retorna la arista con sus estremos y el peso
+						ret=new Arista(i,j,grafo.getPesoArista(i,j));//convierte la arista con sus estremos y el peso
 					}
 				}
 			}

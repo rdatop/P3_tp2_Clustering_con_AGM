@@ -55,5 +55,8 @@ public class GrafoPesado {
 		return _grafo.vecinosDelVertice(i);
 	}
 	
+	public int getCantVertices(){
+		return CantVertices();
+	}
 	
 }
