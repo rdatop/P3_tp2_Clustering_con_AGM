@@ -1,9 +1,19 @@
 package logica_negocios;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+
 import java.util.Set;
 
+
 public class Algoritmos{//
+	
+	//CREAR UNA VARIABLE DE INSTANCIA QUE GUARDE LAS ARISTAS DEL AGM PARA DESPUES ORDENARLAS
+	//E INVERTIRLAS PARA ARMAR LA COLA DE PRIORIDADES
+	public static ArrayList<Arista> _aristasAGM=new ArrayList<Arista>();////////nuevo
+	
+	public static ArrayList<Double> _pesosAristas=new ArrayList<Double>();//////nuevo
+	
 	
 	// Algoritmo de Prim
 	public static GrafoPesado AGM(GrafoPesado grafo){
@@ -17,7 +27,13 @@ public class Algoritmos{//
 			//los vertices con la arista de menor peso
 			
 			vertAMG.add(arista.vertice);//se le agrega todos los vertices negros al agm por prioridad de peso
+			_aristasAGM.add(arista);//////////nuevo
+			_pesosAristas.add(arista.getPeso());
+			//System.out.println(arista.vertice+" "+arista.peso);
+			//mostrar(_aristasAGM);//////////////
 		}
+		
+		//ArrayList<Arista> prueba=_aristasAGM;
 		return resultadoPrim;
 	}
 		
@@ -45,6 +61,24 @@ public class Algoritmos{//
 			Arista otra=(Arista)obj;
 			return vertAGM==otra.vertAGM&&vertice==otra.vertice;
 		}
+		
+		public int getVertAGM() {
+			return vertAGM;
+		}
+		
+		public int getVertice() {
+			return vertice;
+		}
+		
+		public double getPeso() {
+			return peso;
+		}
+		
+		@Override
+		public String toString(){
+			return "["+getPeso()+"]";//+getVertAGM()+"/"+getVertice()+","+
+		}
+				
 	}//fin de clase inner
 	
 	//paquete privado(static sin public/private/protected)
@@ -80,8 +114,50 @@ public class Algoritmos{//
 			}
 		}
 		return ret;
-	}	
+	}
+	
+	public static ArrayList<Double> ordenar(ArrayList<Double> pesosAristas){
+		ArrayList<Double>pesosOrdenados=new ArrayList<Double>();
+		Double max=Double.MAX_VALUE;
+		for (int i = 0; i < pesosAristas.size(); i++) {
+			if(pesosAristas.get(i)<max){
+				pesosOrdenados.add(pesosAristas.get(i));
+			}
+		}
+		return pesosOrdenados;
+		
+	}
+
+
+	//////////////////prueba de empleo luego borar
+	public static void main(String[]args){
+		GrafoPesado grafo = new GrafoPesado(5);
+		grafo.agregarArista(0, 1, 5);
+		grafo.agregarArista(0, 2, 6);
+		grafo.agregarArista(0, 3, 10);
+		grafo.agregarArista(1, 2, 1);
+		grafo.agregarArista(2, 3, 5);
+		grafo.agregarArista(1, 4, 4);
+		grafo.agregarArista(2, 4, 10);
+		grafo.agregarArista(3, 4, 15);
+		
+		
+		
+		
+		Algoritmos.AGM(grafo);
+		System.out.println(_aristasAGM.toString());
+		System.out.println(_pesosAristas.toString());
+		ArrayList<Double>nuevo=new ArrayList<Double>();
+		nuevo=ordenar(_pesosAristas);
+		System.out.println(nuevo.toString());
+		
+		
+		
+
+	}
 	
 	
 
 }
+
+
