@@ -142,8 +142,6 @@ public class Algoritmos{//
 		grafo.agregarArista(3, 4, 15);
 		
 		
-		
-		
 		Algoritmos.AGM(grafo);
 		System.out.println(_aristasAGM.toString());
 		System.out.println(_pesosAristas.toString());
@@ -151,13 +149,6 @@ public class Algoritmos{//
 		nuevo=ordenar(_pesosAristas);
 		System.out.println(nuevo.toString());
 		
-		
-		
-
 	}
-	
-	
 
 }
-
-

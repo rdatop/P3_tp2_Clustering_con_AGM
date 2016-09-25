@@ -50,7 +50,7 @@ public class vista_mapa{
 		
 		miMapa = new JMapViewer();
 		miMapa.setZoomContolsVisible(false);
-		miMapa.setDisplayPositionByLatLon(-34.521, -58.7008, 11);//lat log zoom
+		//miMapa.setDisplayPositionByLatLon(-34.521, -58.7008, 11);//lat log zoom
 
 		// Ponemos un marcador!
 		MapMarker marker = new MapMarkerDot(-34.521, -58.7008);//marcador la facu
