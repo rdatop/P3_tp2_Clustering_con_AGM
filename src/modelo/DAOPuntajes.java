@@ -11,7 +11,7 @@ public class DAOPuntajes {
 
 	private Gson gson;
 	private String nombreArchivo;
-	private ArrayList<Puntaje> listaPuntajes;
+	private ArrayList<Coordenada> listaPuntajes;
 	
 	public DAOPuntajes(String nombreArchivo)throws IOException
 	{
@@ -20,7 +20,7 @@ public class DAOPuntajes {
 		this.listaPuntajes=this.desserializaJson(this.nombreArchivo);
 	}
 	
-	public boolean agregarPuntaje(Puntaje puntaje)//agrega un puntaje a la lista
+	public boolean agregarPuntaje(Coordenada puntaje)//agrega un puntaje a la lista
 	//de puntajes y lo registra en un archivo json
 	{
 		try {
@@ -38,23 +38,23 @@ public class DAOPuntajes {
 		}	
 	}
 	
-	public ArrayList<Puntaje> obtenerPuntajes()//devuelve lista de puntajes y los 
+	public ArrayList<Coordenada> obtenerPuntajes()//devuelve lista de puntajes y los 
 	//usuarios que los obtuvieron
 	{
 		return this.listaPuntajes;
 	}
 	
-	public ArrayList<Puntaje> desserializaJson(String nombreArchivo)throws IOException
+	public ArrayList<Coordenada> desserializaJson(String nombreArchivo)throws IOException
 	{
 		String json=ManejadorArchivos.leerArchivo(nombreArchivo);
 		
-		Type collectionType=new TypeToken<ArrayList<Puntaje>>(){}.getType();
+		Type collectionType=new TypeToken<ArrayList<Coordenada>>(){}.getType();
 		
-		ArrayList<Puntaje> listaPuntajes=gson.fromJson(json,collectionType);
+		ArrayList<Coordenada> listaPuntajes=gson.fromJson(json,collectionType);
 		
 		if(listaPuntajes==null)//sí el archivo está vacio
 		{
-			listaPuntajes=new ArrayList<Puntaje>();//hago una lista vacía
+			listaPuntajes=new ArrayList<Coordenada>();//hago una lista vacía
 		}
 		
 		return listaPuntajes;
