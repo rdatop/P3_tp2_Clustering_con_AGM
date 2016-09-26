@@ -2,33 +2,26 @@ package logica_negocios;
 
 import java.util.ArrayList;
 
+import logica_negocios.Algoritmos.Arista;
+
 
 public class Clustering {
+	
+	//variable de instancia
+	private static ArrayList<Arista>_pesosAristas;
+	
+	//constructor
+	public Clustering(ArrayList<Arista> _pesosAristas){
+		this._pesosAristas=new ArrayList<Arista>();
+		this._pesosAristas=(ArrayList<Arista>) Algoritmos._aristasAGM.clone();
+	}
+	
+	//////// pablito en este punto deberiamos traer el ArrayList de aristas ordenado de mayor a menor
+	//////// no me da bola el .clone que intente mepa
 
-	private static ArrayList<Double>_pesosAristas;
-	
-	public Clustering(ArrayList<Double> _pesosAristas){
-		this._pesosAristas=new ArrayList<Double>();
-		this._pesosAristas=(ArrayList<Double>) Algoritmos._pesosAristas.clone();
-				
-		
-	}
-	
-	
-	public static void mostrar(ArrayList<Double> _pesosAristas2){
-		for (int i = 0; i <_pesosAristas.size()-1; i++) {
-			System.out.println(  "["+i+"]");//+getVertAGM()+"/"+getVertice()+","+
-		}
-	}
-	
-	
-	
-	
-	
-	
 	
 	public static void main(String[]args){
-	mostrar(_pesosAristas);
+	System.out.println(_pesosAristas.toString());
 	
 	}
 }
