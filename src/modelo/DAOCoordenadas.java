@@ -2,6 +2,9 @@ package modelo;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -25,11 +28,11 @@ public class DAOCoordenadas {
 	}
 	
 	public ArrayList<Coordenada> desserializaJson(String nombreArchivo)throws IOException{
-		String json=ManejadorArchivos.leerArchivo(nombreArchivo);
+		BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
 		
 		Type collectionType=new TypeToken<ArrayList<Coordenada>>(){}.getType();
 		
-		ArrayList<Coordenada> listaCoordenadas=gson.fromJson(json,collectionType);
+		ArrayList<Coordenada> listaCoordenadas=gson.fromJson(br,collectionType);
 		
 		if(listaCoordenadas==null)//sí el archivo está vacio
 		{

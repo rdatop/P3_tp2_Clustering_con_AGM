@@ -3,8 +3,6 @@ package tests;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.junit.Test;
-
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import modelo.Coordenada;
 import modelo.DAOCoordenadas;
 
@@ -19,7 +17,7 @@ public class DAOCoordenadasTest
 	}
 	
 	
-	
+	@Test
 	public void obtenerCoordenadasTest() throws IOException{
 		ArrayList<Coordenada> listaCoordenadas=new ArrayList<Coordenada>();
 		listaCoordenadas.add(obtenerInstancia());

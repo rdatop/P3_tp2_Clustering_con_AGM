@@ -18,10 +18,10 @@ public class ManejadorArchivos{
 	public static String leerArchivo(String fileName) throws IOException
 	{
 		FileReader reader = new FileReader(fileName);
-        BufferedReader bufferedReader = new BufferedReader(reader);
-        String contenido=bufferedReader.readLine();
-        bufferedReader.close();
-        return contenido;
+		BufferedReader bufferedReader = new BufferedReader(reader);
+		String contenido = bufferedReader.lines().toString();
+		bufferedReader.close();
+		return contenido;
 	}
 	
 	public static boolean borrarArchivo(String nombreArchivo)
