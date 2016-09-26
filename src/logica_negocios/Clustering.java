@@ -13,7 +13,7 @@ public class Clustering {
 	//constructor
 	public Clustering(ArrayList<Arista> _pesosAristas){
 		this._pesosAristas=new ArrayList<Arista>();
-		this._pesosAristas=(ArrayList<Arista>) Algoritmos._aristasAGM.clone();
+		//this._pesosAristas=(ArrayList<Arista>) Algoritmos._aristasAGM.clone();
 	}
 	
 	//////// pablito en este punto deberiamos traer el ArrayList de aristas ordenado de mayor a menor

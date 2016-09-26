@@ -1,36 +1,30 @@
 package logica_negocios;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-
 import java.util.Set;
+
+import modelo.Tupla_GrafoPesado_Aristas;
 
 
 public class Algoritmos{//
 	
-	//CREAR UNA VARIABLE DE INSTANCIA QUE GUARDE LAS ARISTAS DEL AGM PARA DESPUES ORDENARLAS
-	//E INVERTIRLAS PARA ARMAR LA COLA DE PRIORIDADES
-	public static ArrayList<Arista> _aristasAGM=new ArrayList<Arista>();////////nuevo
-	
-	
 	// Algoritmo de Prim
-	public static GrafoPesado AGM(GrafoPesado grafo){
-		GrafoPesado resultadoPrim=new GrafoPesado(grafo.CantVertices());//grafo con el peso de sus aristas
+	public static Tupla_GrafoPesado_Aristas AGM(GrafoPesado grafo){
+		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(grafo.CantVertices());
 		Set<Integer>vertAMG=new HashSet<Integer>();//vertices del arbol generador minimo
 		vertAMG.add(0);//le agrego algo
 		
 		for(int i=0;i<grafo.CantVertices()-1;i++){//recorro los vertices del grafo hasta el ultimo
 			Arista arista=menorArista(grafo, vertAMG);//crea una arista que sera la de menor valor
-			resultadoPrim.agregarArista(arista.vertAGM, arista.vertice, arista.peso);//se le agrega al agm 
+			tupla.agregaAristaGrafoPesado(arista.vertAGM, arista.vertice, arista.peso);//se le agrega al agm 
 			//los vertices con la arista de menor peso
 			
 			vertAMG.add(arista.vertice);//se le agrega todos los vertices negros al agm por prioridad de peso
-			_aristasAGM.add(arista);//////////nuevo
+			tupla.agregaAristaAListaAgm(arista);
 		}
 		
-		//ArrayList<Arista> prueba=_aristasAGM;
-		return resultadoPrim;
+		return tupla;
 	}
 		
 	//ineer class (clase interna, solo se usa en grafo)
@@ -97,7 +91,7 @@ public class Algoritmos{//
 	// Retorna la arista de menor peso entre un vertice amarillo y uno no amarillo
 	static Arista menorArista(GrafoPesado grafo, Set<Integer>vertAGM){
 		
-		Arista ret=new Arista(0,0,Double.MAX_VALUE);//para ir vajando el valor
+		Arista ret=new Arista(0,0,Double.MAX_VALUE);//para ir bajando el valor
 		
 		for(Integer i: vertAGM){//for recorre un conjunto de Integer llamados vertAGM
 			for(Integer j: grafo.vecinos(i)){//recorre un conjunto de Integer llamados vecinos de grafo
@@ -140,15 +134,16 @@ public class Algoritmos{//
 		grafo.agregarArista(2, 4, 10);
 		grafo.agregarArista(3, 4, 15);
 		
-		Algoritmos.AGM(grafo);
-		System.out.println("asi se crea el AGM");
-		System.out.println(_aristasAGM.toString());
-		System.out.println("asi se ordena de > a <");
-		Collections.sort(_aristasAGM);//ordena de mayot a menor gracias a la implementacion de compareTo en Arista
-		System.out.println(_aristasAGM.toString());
-		System.out.println("asi queda definitivamente");
-		System.out.println(_aristasAGM.toString());
+		System.out.println("Cantidad de vertices del grafo pesado: "+grafo.CantVertices());
 		
+		Tupla_GrafoPesado_Aristas tupla=Algoritmos.AGM(grafo);
+		System.out.println("asi se crea el AGM");
+		System.out.println(tupla.getAristasAGM().toString());
+		System.out.println("asi se ordena de > a <");
+		Collections.sort(tupla.getAristasAGM());//ordena de mayot a menor gracias a la implementacion de compareTo en Arista
+		System.out.println(tupla.getAristasAGM().toString());
+		System.out.println("asi queda definitivamente");
+		System.out.println(tupla.getAristasAGM().toString());
 		
 	}
 }
