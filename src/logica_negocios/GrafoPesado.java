@@ -41,13 +41,21 @@ public class GrafoPesado {
 	}
 			
 	//Expuesto: repatria la cant de vertices sin herencia de la class Grafo
-	public int CantVertices(){//porque no es static en la clase Grafo
-		return _grafo.CantVertices();
+	public int cantVertices(){//porque no es static en la clase Grafo
+		return _grafo.cantVertices();
+	}
+	
+	public int getCantVertices(){
+		return cantVertices();
 	}
 	
 	//Expuesto: repatria la cant de aristas sin herencia de la class Grafo
-	public int Cantaristas(){
-		return _grafo.CantAristas();
+	public int cantAristas(){
+		return _grafo.cantAristas();
+	}
+	
+	public int getCantAristas(){
+		return _grafo.cantAristas();
 	}
 	
 	// Expuesto desde Grafo: Conjunto de vecinos de un vértice
@@ -55,8 +63,6 @@ public class GrafoPesado {
 		return _grafo.vecinosDelVertice(i);
 	}
 	
-	public int getCantVertices(){
-		return CantVertices();
-	}
+	
 	
 }

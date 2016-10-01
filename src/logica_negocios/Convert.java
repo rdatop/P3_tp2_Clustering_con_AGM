@@ -18,11 +18,18 @@ public class Convert {
 	  return Radio * c;		
 	}
 	
-	//calcular distancia entre dos puntos
+	//covercion a Radianes
 	public static Double aRadianes(Double punto){//degree
 	   // Value degree * Pi/180
 	   Double peso = punto * 3.1415926 / 180;
 	   return peso;	
+	}
+	
+	//main a efectos de verificar funcionamiento, luego borrar
+	public static void main(String[]args){
+		System.out.println(calcularDistanciaEntre(-34.52133782929332, -58.70068073272705, -34.520772089706036, -58.702311515808105));
+		System.out.println(calcularDistanciaEntre(-34.520772089706036, -58.702311515808105, -34.52126711205503, -58.70325565338135));
+		System.out.println(calcularDistanciaEntre(-34.52133782929332, -58.70068073272705, -34.52126711205503, -58.70325565338135));
 	}
 	
 	

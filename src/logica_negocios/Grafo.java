@@ -22,12 +22,12 @@ public class Grafo {
 	}
 	
 	//cantidad de vertices
-	public int CantVertices(){
+	public int cantVertices(){
 		return _vecinos.size();
 	}
 	
 	//cantidad de aristas
-	public int CantAristas(){
+	public int cantAristas(){
 		return _aristas;
 	}
 	
@@ -60,8 +60,8 @@ public class Grafo {
 
 	//chequea limites de los parametros
 	private void chequearExtremos(int vert_i, int vert_j) {
-		if (vert_i <= -1 || vert_j <= -1 || vert_i >= CantVertices() || vert_j >= CantVertices()){//verifica rango
-			throw new IllegalArgumentException("Vertices fuera de rango: " + vert_i + ", " + vert_j + " (vertices = " + CantVertices() + ")");
+		if (vert_i <= -1 || vert_j <= -1 || vert_i >= cantVertices() || vert_j >= cantVertices()){//verifica rango
+			throw new IllegalArgumentException("Vertices fuera de rango: " + vert_i + ", " + vert_j + " (vertices = " + cantVertices() + ")");
 		}
 		if(vert_i==vert_j){//verifica que lo tenga rulos
 			throw new IllegalArgumentException("No se pueden agregar loops: " + vert_i);
