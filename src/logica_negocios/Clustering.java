@@ -28,7 +28,7 @@ public class Clustering {
 	public void ordenaAristasDescendente(ArrayList<Arista> aristas){//cambiado para poder ser usado en obviarAristasMayores
 		Collections.sort(aristas);
 	}
-//	public void ordenaAristasDescendente(){//ordena la lista de aristas de mayor a menor //// este es el tuyoooo pablin
+//	public void ordenaAristasDescendente(){////// este es el tuyoooo pablin
 //		Collections.sort(this._pesosAristas);
 //	}
 		
