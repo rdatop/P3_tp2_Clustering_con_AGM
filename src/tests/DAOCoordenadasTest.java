@@ -16,9 +16,9 @@ public class DAOCoordenadasTest
 		this.nombreArchivo="src/modelo/instancia1.json";
 	}
 	
-	
 	@Test
 	public void obtenerCoordenadasTest() throws IOException{
+		
 		ArrayList<Coordenada> listaCoordenadas=new ArrayList<Coordenada>();
 		listaCoordenadas.add(obtenerInstancia());
 		listaCoordenadas.add(obtenerOtraInstancia());
@@ -26,9 +26,14 @@ public class DAOCoordenadasTest
 		DAOCoordenadas dao=new DAOCoordenadas(nombreArchivo);
 		ArrayList<Coordenada> listaCoordenadasDesdeJson=dao.obtenerCoordenadas();
 		
-		assert(listaCoordenadas.get(0).equals(listaCoordenadasDesdeJson.get(0)));
-		assert(listaCoordenadas.get(1).equals(listaCoordenadasDesdeJson.get(1)));
+		assert(Double.compare(listaCoordenadas.get(0).get_latitud(),listaCoordenadasDesdeJson.get(0).get_latitud())==0);
+		assert(Double.compare(listaCoordenadas.get(0).get_longitud(),listaCoordenadasDesdeJson.get(0).get_longitud())==0);
+		assert(Double.compare(listaCoordenadas.get(1).get_latitud(),listaCoordenadasDesdeJson.get(1).get_latitud())==0);
+		assert(Double.compare(listaCoordenadas.get(0).get_longitud(),listaCoordenadasDesdeJson.get(0).get_longitud())==0);
+		
 	}
+	
+	
 	
 	private Coordenada obtenerInstancia(){
 		Coordenada coordenada=new Coordenada(-34.52133782929332,-58.70068073272705);
