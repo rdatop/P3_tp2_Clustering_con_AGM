@@ -9,11 +9,12 @@ import modelo.Vertice;
 public class Grafo {
 	
 	private ArrayList<Vertice> _vertices;
-	private ArrayList<Set<Integer>> _vecinos;
+	private ArrayList<HashSet<Integer>> _vecinos;
 	private int _aristas;//se iran sumando a medida que se agregen
 	
 	public Grafo(ArrayList<Vertice> listaVertices){
 		_vertices=listaVertices;
+		_vecinos=new ArrayList<HashSet<Integer>>();
 		for (int i = 0; i < CantVertices(); i++) {
 			_vecinos.add(new HashSet<Integer>());
 		}
@@ -78,5 +79,9 @@ public class Grafo {
 	public Set<Integer> vecinosDelVertice(int v){
 		Set<Integer> ret=_vecinos.get(v);
 		return ret;
+	}
+
+	public boolean contieneVertice(int v){
+		return v >= 0 && v <= CantVertices();
 	}
 }
