@@ -79,17 +79,4 @@ public class Grafo {
 		return ret;
 	}
 	
-	//toString de representacion no se usa mas
-//	@Override
-//	public String toString(){
-//		String s="";
-//		for(Set<Integer> row:vecinos){
-//			for(Integer item:row){
-//				s+=item+" ";
-//			}
-//			s+="\n";
-//		}
-//		return s;
-//	}	
-	
 }

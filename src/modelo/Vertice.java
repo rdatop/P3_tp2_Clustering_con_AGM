@@ -1,12 +1,12 @@
 package modelo;
 
-public class Coordenada {
+public class Vertice {
 
 	private int id_coordenada;
 	private Double _latitud;
 	private Double _longitud;
 	
-	public Coordenada(Double lat,Double longit)
+	public Vertice(Double lat,Double longit)
 	{
 		setIdCoordenada(GeneradorID.devuelveIDMasUno());
 		set_latitud(lat);
@@ -21,7 +21,7 @@ public class Coordenada {
 		this.id_coordenada = id_coordenada;
 	}
 
-	public Double get_latitud() {
+	public Double getLatitud() {
 		return _latitud;
 	}
 
@@ -29,7 +29,7 @@ public class Coordenada {
 		this._latitud = _latitud;
 	}
 
-	public Double get_longitud() {
+	public Double getLongitud() {
 		return _longitud;
 	}
 
