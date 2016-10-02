@@ -4,26 +4,28 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import modelo.Vertice;
+
 public class Grafo {
 	
+	private ArrayList<Vertice> _vertices;
 	private ArrayList<Set<Integer>> _vecinos;
 	private int _aristas;//se iran sumando a medida que se agregen
 	
-	//constructor con invariante de representacion
-	public Grafo(int vertices){
-		if(vertices<0){
-			throw new IllegalArgumentException("cantidad de vertives negativo: "+vertices);
-		}else{
-			_vecinos=new ArrayList<Set<Integer>>();
-		}
-		for (int i = 0; i < vertices; i++) {
+	public Grafo(ArrayList<Vertice> listaVertices){
+		_vertices=listaVertices;
+		for (int i = 0; i < CantVertices(); i++) {
 			_vecinos.add(new HashSet<Integer>());
 		}
+	}
+
+	public Vertice obtenerVertice(int idVertice){
+		return _vertices.get(idVertice);
 	}
 	
 	//cantidad de vertices
 	public int CantVertices(){
-		return _vecinos.size();
+		return _vertices.size();
 	}
 	
 	//cantidad de aristas
@@ -55,7 +57,6 @@ public class Grafo {
 	public boolean contieneArista(int vert_i, int vert_j){
 		chequearExtremos(vert_i,vert_j);
 		return _vecinos.get(vert_i).contains(vert_j);
-
 	}
 
 	//chequea limites de los parametros
@@ -63,7 +64,7 @@ public class Grafo {
 		if (vert_i <= -1 || vert_j <= -1 || vert_i >= CantVertices() || vert_j >= CantVertices()){//verifica rango
 			throw new IllegalArgumentException("Vertices fuera de rango: " + vert_i + ", " + vert_j + " (vertices = " + CantVertices() + ")");
 		}
-		if(vert_i==vert_j){//verifica que lo tenga rulos
+		if(vert_i==vert_j){//verifica que lo tenga bucles
 			throw new IllegalArgumentException("No se pueden agregar loops: " + vert_i);
 		}
 	}
@@ -78,5 +79,4 @@ public class Grafo {
 		Set<Integer> ret=_vecinos.get(v);
 		return ret;
 	}
-	
 }

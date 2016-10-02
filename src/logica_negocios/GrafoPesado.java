@@ -16,7 +16,9 @@ public class GrafoPesado {
 	
 	//constructor
 	public GrafoPesado(int vertices){//una las dos componentes grafo simple + peso
-		_grafo=new Grafo(vertices);
+		//TODO inicializar bien el grafo simple tomando en cuenta loas cambios agregados
+		//a este
+		_grafo=new Grafo(null);
 		_pesos=new double[vertices][vertices];
 	}
 	
