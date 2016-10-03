@@ -1,9 +1,11 @@
 package logica_negocios;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import logica_negocios.Algoritmos.Arista;
+import modelo.DAOVertices;
 
 public class Clustering {
 	
@@ -54,16 +56,15 @@ public class Clustering {
 	}
 	
 	//main a efectos de verificar funcionamiento, luego borrar
-	public static void main(String[]args){
-		GrafoPesado grafo = new GrafoPesado(5);
-		grafo.agregarArista(0, 1, 5);
-		grafo.agregarArista(0, 2, 6);
-		grafo.agregarArista(0, 3, 10);
-		grafo.agregarArista(1, 2, 1);
-		grafo.agregarArista(2, 3, 5);
-		grafo.agregarArista(1, 4, 4);
-		grafo.agregarArista(2, 4, 10);
-		grafo.agregarArista(3, 4, 15);
+	public static void main(String[]args) throws IOException{
+		
+		DAOVertices daoVertices=new DAOVertices("src/modelo/instancia1.json");
+		GrafoPesado grafo = new GrafoPesado(daoVertices.obtenerVertices());
+		grafo.agregarArista(0, 1);
+		grafo.agregarArista(0, 2);
+		grafo.agregarArista(0, 3);
+		grafo.agregarArista(1, 2);
+		grafo.agregarArista(2, 3);
 		
 		Clustering clustering=new Clustering(Algoritmos.AGM(grafo).getAristasAGM());
 		clustering.ordenaAristasDescendente(clustering._pesosAristas);

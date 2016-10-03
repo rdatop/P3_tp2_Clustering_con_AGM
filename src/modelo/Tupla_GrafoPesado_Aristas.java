@@ -9,13 +9,13 @@ public class Tupla_GrafoPesado_Aristas{
 	private GrafoPesado _grafoPesado;
 	private ArrayList<Arista> _aristasAGM;
 	
-	public Tupla_GrafoPesado_Aristas(int cantVertices){
-		_grafoPesado=new GrafoPesado(cantVertices);
+	public Tupla_GrafoPesado_Aristas(ArrayList<Vertice> vertices){
+		_grafoPesado=new GrafoPesado(vertices);
 		_aristasAGM=new ArrayList<Arista>();
 	}
 
-	public void agregaAristaGrafoPesado(int aristaAgm,int arista,Double peso){
-		_grafoPesado.agregarArista(aristaAgm,arista, peso);
+	public void agregaAristaGrafoPesado(int aristaAgm,int arista){
+		_grafoPesado.agregarArista(aristaAgm,arista);
 	}
 	
 	public void agregaAristaAListaAgm(Arista arista){

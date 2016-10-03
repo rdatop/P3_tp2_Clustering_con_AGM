@@ -1,6 +1,9 @@
 package logica_negocios;
 
+import java.util.ArrayList;
 import java.util.Set;
+
+import modelo.Vertice;
 
 /**
  * Grafo Pesado Utiliza la estructura de un 
@@ -15,18 +18,29 @@ public class GrafoPesado {
 	private double[][] _pesos;//y le agrega peso a las aristas (GrafoPesado, peso)
 	
 	//constructor
-	public GrafoPesado(int vertices){//una las dos componentes grafo simple + peso
-		//TODO inicializar bien el grafo simple tomando en cuenta loas cambios agregados
+	public GrafoPesado(ArrayList<Vertice> vertices){//una las dos componentes grafo simple + peso
+		//TODO inicializar bien el grafo simple tomando en cuenta los cambios agregados
 		//a este
-		_grafo=new Grafo(null);
-		_pesos=new double[vertices][vertices];
+		_grafo=new Grafo(vertices);
+		_pesos=new double[_grafo.CantVertices()][_grafo.CantVertices()];
+	}
+	
+	public ArrayList<Vertice> obtenerVertices(){
+		return _grafo.obtenerVertices();
+	}
+	
+	public Vertice obtenerVertice(int idVertice){
+		return _grafo.obtenerVertice(idVertice);
 	}
 	
 	//agregar aristas con peso
-	public void agregarArista(int vert_i, int vert_j, double peso){
+	public void agregarArista(int vert_i, int vert_j){
 		_grafo.agregarAristas(vert_i, vert_j);//usa tambien el contiene aristas/cheq extremos de grafo simple
-		_pesos[vert_i][vert_j]=peso;//
-		_pesos[vert_j][vert_i]=peso;//agrega de forma simetrica
+		Vertice vertice1=_grafo.obtenerVertice(vert_i);
+		Vertice vertice2=_grafo.obtenerVertice(vert_j);
+		Double calculaDistancia=Convert.calcularDistanciaEntre(vertice1.getLatitud(),vertice1.getLongitud(),vertice2.getLatitud(),vertice2.getLongitud());//;
+		_pesos[vert_i][vert_j]=calculaDistancia;
+		_pesos[vert_j][vert_i]=calculaDistancia;//agrega de forma simetrica
 	}
 	
 	//Expuesto: repatria en contine aristas sin herencia de la class Grafo

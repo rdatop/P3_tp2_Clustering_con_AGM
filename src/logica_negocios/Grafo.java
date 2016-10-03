@@ -20,6 +20,10 @@ public class Grafo {
 		}
 	}
 
+	public ArrayList<Vertice> obtenerVertices(){
+		return _vertices;
+	}
+	
 	public Vertice obtenerVertice(int idVertice){
 		return _vertices.get(idVertice);
 	}

@@ -1,9 +1,11 @@
 package logica_negocios;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import modelo.DAOVertices;
 import modelo.Tupla_GrafoPesado_Aristas;
 
 
@@ -11,13 +13,13 @@ public class Algoritmos{//
 	
 	// Algoritmo de Prim
 	public static Tupla_GrafoPesado_Aristas AGM(GrafoPesado grafo){
-		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(grafo.CantVertices());
+		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(grafo.obtenerVertices());
 		Set<Integer>vertAMG=new HashSet<Integer>();//vertices del arbol generador minimo
 		vertAMG.add(0);//le agrego algo
 		
 		for(int i=0;i<grafo.CantVertices()-1;i++){//recorro los vertices del grafo hasta el ultimo
 			Arista arista=menorArista(grafo, vertAMG);//crea una arista que sera la de menor valor
-			tupla.agregaAristaGrafoPesado(arista.vertAGM, arista.vertice, arista.peso);//se le agrega al agm 
+			tupla.agregaAristaGrafoPesado(arista.vertAGM, arista.vertice);//se le agrega al agm 
 			//los vertices con la arista de menor peso
 			
 			vertAMG.add(arista.vertice);//se le agrega todos los vertices negros al agm por prioridad de peso
@@ -123,16 +125,15 @@ public class Algoritmos{//
 //	}
 	
 	//////////////////prueba de empleo luego borrar
-	public static void main(String[]args){
-		GrafoPesado grafo = new GrafoPesado(5);
-		grafo.agregarArista(0, 1, 5);
-		grafo.agregarArista(0, 2, 6);
-		grafo.agregarArista(0, 3, 10);
-		grafo.agregarArista(1, 2, 1);
-		grafo.agregarArista(2, 3, 5);
-		grafo.agregarArista(1, 4, 4);
-		grafo.agregarArista(2, 4, 10);
-		grafo.agregarArista(3, 4, 15);
+	public static void main(String[]args) throws IOException{
+		DAOVertices daoVertices=new DAOVertices("src/modelo/instancia1.json");
+		GrafoPesado grafo = new GrafoPesado(daoVertices.obtenerVertices());
+		grafo.agregarArista(0, 1);
+		grafo.agregarArista(0, 2);
+		grafo.agregarArista(0, 3);
+		grafo.agregarArista(1, 2);
+		grafo.agregarArista(2, 3);
+		System.out.println("Pesoooo "+grafo.getPesoArista(1,2));
 		
 		System.out.println("Cantidad de vertices del grafo pesado: "+grafo.CantVertices());
 		
