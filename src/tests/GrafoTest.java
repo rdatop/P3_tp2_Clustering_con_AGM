@@ -24,6 +24,15 @@ public class GrafoTest
 	}
 	
 	@Test
+	public void ObtenerVerticeTest()
+	{
+		Grafo grafo=new Grafo(caminito().obtenerVertices());
+		Vertice vertice=grafo.obtenerVertice(0);
+		assertEquals( -34.52133782929332,vertice.getLatitud(), 1e-4 );
+		assertEquals( -58.70068073272705,vertice.getLongitud(), 1e-4 );
+	}
+	
+	@Test
 	public void agregarAristaBordeTest()
 	{
 		Grafo grafo = casita();
