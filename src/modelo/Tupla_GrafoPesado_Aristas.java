@@ -29,4 +29,15 @@ public class Tupla_GrafoPesado_Aristas{
 	public ArrayList<Arista> getAristasAGM(){
 		return _aristasAGM;
 	}
+	
+	//Expuesto: repatria en contine aristas sin herencia de la class GrafoPesado/Grafo
+	public boolean getContieneArista(int vert_i, int vert_j) {
+		return _grafoPesado.contieneArista(vert_i, vert_j);
+	}
+	
+    //Expuesto: repatria la cant de aristas sin herencia de la class GrafoPesado/Grafo
+	public int getCantAristas() {
+		return _grafoPesado.cantAristas();
+	}
+	
 }

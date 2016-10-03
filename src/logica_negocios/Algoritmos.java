@@ -13,11 +13,15 @@ public class Algoritmos{//
 	
 	// Algoritmo de Prim
 	public static Tupla_GrafoPesado_Aristas AGM(GrafoPesado grafo){
+<<<<<<< HEAD
 		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(grafo.obtenerVertices());
+=======
+		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(grafo.cantVertices());
+>>>>>>> 738578030eb82c6f06cd4f58f7a602f36146e9fd
 		Set<Integer>vertAMG=new HashSet<Integer>();//vertices del arbol generador minimo
 		vertAMG.add(0);//le agrego algo
 		
-		for(int i=0;i<grafo.CantVertices()-1;i++){//recorro los vertices del grafo hasta el ultimo
+		for(int i=0;i<grafo.cantVertices()-1;i++){//recorro los vertices del grafo hasta el ultimo
 			Arista arista=menorArista(grafo, vertAMG);//crea una arista que sera la de menor valor
 			tupla.agregaAristaGrafoPesado(arista.vertAGM, arista.vertice);//se le agrega al agm 
 			//los vertices con la arista de menor peso
@@ -91,7 +95,7 @@ public class Algoritmos{//
 	
 	//paquete privado(static sin public/private/protected)
 	// Retorna la arista de menor peso entre un vertice amarillo y uno no amarillo
-	static Arista menorArista(GrafoPesado grafo, Set<Integer>vertAGM){
+	public static Arista menorArista(GrafoPesado grafo, Set<Integer>vertAGM){
 		
 		Arista ret=new Arista(0,0,Double.MAX_VALUE);//para ir bajando el valor
 		
@@ -135,7 +139,7 @@ public class Algoritmos{//
 		grafo.agregarArista(2, 3);
 		System.out.println("Pesoooo "+grafo.getPesoArista(1,2));
 		
-		System.out.println("Cantidad de vertices del grafo pesado: "+grafo.CantVertices());
+		System.out.println("Cantidad de vertices del grafo pesado: "+grafo.cantVertices());
 		
 		Tupla_GrafoPesado_Aristas tupla=Algoritmos.AGM(grafo);
 		System.out.println("asi se crea el AGM");
