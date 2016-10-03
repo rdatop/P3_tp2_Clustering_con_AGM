@@ -31,6 +31,4 @@ public class Convert {
 		System.out.println(calcularDistanciaEntre(-34.520772089706036, -58.702311515808105, -34.52126711205503, -58.70325565338135));
 		System.out.println(calcularDistanciaEntre(-34.52133782929332, -58.70068073272705, -34.52126711205503, -58.70325565338135));
 	}
-	
-	
 }

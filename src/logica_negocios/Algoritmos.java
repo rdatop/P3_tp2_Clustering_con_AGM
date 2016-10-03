@@ -8,16 +8,13 @@ import java.util.Set;
 import modelo.DAOVertices;
 import modelo.Tupla_GrafoPesado_Aristas;
 
-
 public class Algoritmos{//
 	
 	// Algoritmo de Prim
 	public static Tupla_GrafoPesado_Aristas AGM(GrafoPesado grafo){
-<<<<<<< HEAD
+
 		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(grafo.obtenerVertices());
-=======
-		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(grafo.cantVertices());
->>>>>>> 738578030eb82c6f06cd4f58f7a602f36146e9fd
+
 		Set<Integer>vertAMG=new HashSet<Integer>();//vertices del arbol generador minimo
 		vertAMG.add(0);//le agrego algo
 		
@@ -34,7 +31,7 @@ public class Algoritmos{//
 	}
 		
 	//ineer class (clase interna, solo se usa en grafo)
-	public static class Arista implements Comparable<Arista>{//adiere a Comparable
+	public static class Arista implements Comparable<Arista>{//adhiere a Comparable
 		
 		//variables de instancia
 		public int vertAGM;
@@ -137,7 +134,7 @@ public class Algoritmos{//
 		grafo.agregarArista(0, 3);
 		grafo.agregarArista(1, 2);
 		grafo.agregarArista(2, 3);
-		System.out.println("Pesoooo "+grafo.getPesoArista(1,2));
+		System.out.println("Peso: "+grafo.getPesoArista(1,2));
 		
 		System.out.println("Cantidad de vertices del grafo pesado: "+grafo.cantVertices());
 		

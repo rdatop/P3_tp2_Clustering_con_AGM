@@ -78,7 +78,4 @@ public class GrafoPesado {
 	public Set<Integer> vecinos(int i){
 		return _grafo.vecinosDelVertice(i);
 	}
-	
-	
-	
 }

@@ -29,13 +29,12 @@ public class Grafo {
 	}
 	
 	//cantidad de vertices
-<<<<<<< HEAD
 	public int CantVertices(){
 		return _vertices.size();
-=======
+	}
+
 	public int cantVertices(){
 		return _vecinos.size();
->>>>>>> 738578030eb82c6f06cd4f58f7a602f36146e9fd
 	}
 	
 	//cantidad de aristas
@@ -60,7 +59,7 @@ public class Grafo {
 			_aristas --;//resta una arista 
 		}
 		_vecinos.get(vert_i).remove(vert_j);//
-		_vecinos.get(vert_j).remove(vert_i);//des asignacion asimetrica
+		_vecinos.get(vert_j).remove(vert_i);//asignacion asimetrica
 	}
 		
 	//verifica relacion entre vertices
@@ -90,6 +89,7 @@ public class Grafo {
 		return ret;
 	}
 
+	//checkea si existe un vertice tomando como parámetro su id
 	public boolean contieneVertice(int v){
 		return v >= 0 && v <= CantVertices();
 	}
