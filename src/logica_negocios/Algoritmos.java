@@ -8,31 +8,29 @@ import java.util.Set;
 import modelo.DAOVertices;
 import modelo.Tupla_GrafoPesado_Aristas;
 
-public class Algoritmos{//
+public class Algoritmos{
+	//sin constructor
 	
 	// Algoritmo de Prim
 	public static Tupla_GrafoPesado_Aristas AGM(GrafoPesado grafo){
-
+		//Tupla: grafoPesado + lista de aristas del AGM (dirigido a Clustering)
 		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(grafo.obtenerVertices());
-
-		Set<Integer>vertAMG=new HashSet<Integer>();//vertices del arbol generador minimo
-		vertAMG.add(0);//le agrego algo
+		Set<Integer>vertAMG=new HashSet<Integer>();//vertices del AGM
+		vertAMG.add(0);//se inicializa
 		
 		for(int i=0;i<grafo.cantVertices()-1;i++){//recorro los vertices del grafo hasta el ultimo
 			Arista arista=menorArista(grafo, vertAMG);//crea una arista que sera la de menor valor
-			tupla.agregaAristaGrafoPesado(arista.vertAGM, arista.vertice);//se le agrega al agm 
+			tupla.agregaAristaGrafoPesado(arista.vertAGM, arista.vertice);//se agrega al AGM 
 			//los vertices con la arista de menor peso
 			
-			vertAMG.add(arista.vertice);//se le agrega todos los vertices negros al agm por prioridad de peso
+			vertAMG.add(arista.vertice);//se agrega AGM los vertices por prioridad de peso
 			tupla.agregaAristaAListaAgm(arista);
 		}
-		
 		return tupla;
 	}
 		
-	//ineer class (clase interna, solo se usa en grafo)
+	/** Ineer class (clase interna, solo se usa en grafo)*/
 	public static class Arista implements Comparable<Arista>{//adhiere a Comparable
-		
 		//variables de instancia
 		public int vertAGM;
 		public int vertice;
@@ -45,7 +43,7 @@ public class Algoritmos{//
 			peso=pesoArista;
 		}
 		
-		//equals de object sobre escrito
+		// Equals de object sobreescrito (comparacion por igualdad)
 		@Override
 		public boolean equals(Object obj){
 			if(this==obj){
@@ -55,10 +53,10 @@ public class Algoritmos{//
 				return false;
 			}
 			Arista otra=(Arista)obj;
-			return vertAGM==otra.vertAGM&&vertice==otra.vertice;
+			return vertAGM==otra.vertAGM && vertice==otra.vertice;
 		}
 		
-		//compareTo sobreescrito
+		// CompareTo sobreescrito (comparacion por peso de aristas - Clustering)
 		@Override
 		public int compareTo(Arista otraArista) {
 			if (getPeso()< otraArista.getPeso()) {
@@ -70,7 +68,7 @@ public class Algoritmos{//
 			return 0;
 		}
 		
-		//getters
+		// Lectura protegida
 		public int getVertAGM() {
 			return vertAGM;
 		}
@@ -83,22 +81,21 @@ public class Algoritmos{//
 			return peso;
 		}
 		
-		//representacion luego borrar
+		///////////////representacion luego borrar
 		@Override
 		public String toString(){
 			return "["+getVertAGM()+"/"+getVertice()+", "+getPeso()+"]";
 		}
-	}//fin de clase inner
+	}/**fin de clase inner*/
 	
-	//paquete privado(static sin public/private/protected)
-	// Retorna la arista de menor peso entre un vertice amarillo y uno no amarillo
+	// Retorna la arista de menor peso entre un verticeAGM y uno no AMG
 	public static Arista menorArista(GrafoPesado grafo, Set<Integer>vertAGM){
 		
 		Arista ret=new Arista(0,0,Double.MAX_VALUE);//para ir bajando el valor
 		
 		for(Integer i: vertAGM){//for recorre un conjunto de Integer llamados vertAGM
 			for(Integer j: grafo.vecinos(i)){//recorre un conjunto de Integer llamados vecinos de grafo
-				if(vertAGM.contains(j)==false){//si el vertice de grafo esta contenido ya en el agm
+				if(vertAGM.contains(j)==false){//si el vertice de grafo esta contenido ya en el AGM
 					if(grafo.getPesoArista(i, j)<ret.peso){//y si el peso entre un vertAGM y uno NoIncluido es menor que el anterior
 						ret=new Arista(i,j,grafo.getPesoArista(i,j));//convierte la arista con sus estremos y el peso
 					}
@@ -108,23 +105,7 @@ public class Algoritmos{//
 		return ret;
 	}
 	
-//	/** para ver la arista mayor este los vecinos*/
-//	// Retorna la arista de mayor peso entre un vertice amarillo y uno no amarillo
-//	static Arista mayorArista(GrafoPesado grafo, Set<Integer>vertAGM){
-//		Arista ret=new Arista(0,0,Double.MIN_VALUE);//para ir vajando el valor
-//		
-//		for(Integer i: vertAGM){//for recorre un conjunto de Integer llamados vertAGM
-//			for(Integer j: grafo.vecinos(i)){//for recorre un conjunto de Integer llamados vecinos de grafo
-//				if(vertAGM.contains(j)==false){//si el vertice de grafo esta contenido ya en el agm
-//					if(grafo.getPesoArista(i, j)>ret.peso){//y si el peso entre un vertAGM y uno NoIncluido es menor que el anterior
-//						ret=new Arista(i,j,grafo.getPesoArista(i,j));//retorna la arista con sus estremos y el peso
-//					}
-//				}
-//			}
-//		}
-//		return ret;
-//	}
-	
+
 	//////////////////prueba de empleo luego borrar
 	public static void main(String[]args) throws IOException{
 		DAOVertices daoVertices=new DAOVertices("src/modelo/instancia1.json");

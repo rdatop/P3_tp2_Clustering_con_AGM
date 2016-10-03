@@ -10,31 +10,34 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class DAOVertices {
-
-	private Gson gson;
+	//variables de instancia
+	private Gson _gson;
 	@SuppressWarnings("unused")
 	private String nombreArchivo;
 	private ArrayList<Vertice> listaCoordenadas;
 	
+	// Cosntructor
 	public DAOVertices(String nombreArchivo)throws IOException
 	{
-		this.gson=new Gson();
+		this._gson=new Gson();
 		this.nombreArchivo=nombreArchivo;
 		//this.listaCoordenadas=this.desserializaJson(this.nombreArchivo);//este tiene que ir
 		this.listaCoordenadas=this.creaListaVerticesHardcodeada();
 	}
 
-	public ArrayList<Vertice> obtenerVertices()//devuelve lista de coordenadas
+	// Retorna lista de coordenadas
+	public ArrayList<Vertice> obtenerVertices()
 	{
 		return this.listaCoordenadas;
 	}
 	
+	// Desserializa y retorna una lista de coordenadas
 	public ArrayList<Vertice> desserializaJson(String nombreArchivo)throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
 		
 		Type collectionType=new TypeToken<ArrayList<Vertice>>(){}.getType();
 		
-		ArrayList<Vertice> listaCoordenadas=gson.fromJson(br,collectionType);
+		ArrayList<Vertice> listaCoordenadas=_gson.fromJson(br,collectionType);
 		
 		if(listaCoordenadas==null)//sí el archivo está vacio
 		{
@@ -44,6 +47,7 @@ public class DAOVertices {
 		return listaCoordenadas;
 	}
 	
+	///////a efectos de prueba de funcionamiento   luego c borra
 	private ArrayList<Vertice> creaListaVerticesHardcodeada() {
 		ArrayList<Vertice> aux=new ArrayList<Vertice>();
 		aux.add(new Vertice(-34.52133782929332,-58.70068073272705));

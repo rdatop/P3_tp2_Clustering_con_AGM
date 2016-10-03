@@ -5,10 +5,11 @@ import logica_negocios.Algoritmos.Arista;
 import logica_negocios.GrafoPesado;
 
 public class Tupla_GrafoPesado_Aristas{
-
+	//variables de instancia
 	private GrafoPesado _grafoPesado;
 	private ArrayList<Arista> _aristasAGM;
 	
+	// Cosntrutor
 	public Tupla_GrafoPesado_Aristas(ArrayList<Vertice> vertices){
 		_grafoPesado=new GrafoPesado(vertices);
 		_aristasAGM=new ArrayList<Arista>();

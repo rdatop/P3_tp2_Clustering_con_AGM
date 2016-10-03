@@ -27,12 +27,9 @@ public class Clustering {
 	}
 	
 	// Ordena el conj de aristas de > a < peso
-	public void ordenaAristasDescendente(ArrayList<Arista> aristas){//cambiado para poder ser usado en obviarAristasMayores
-		Collections.sort(aristas);
+	public void ordenaAristasDescendente(ArrayList<Arista> aristas){
+		Collections.sort(aristas);//para poder utilizar Collections.sort se modificio la clase inner Aristas con compareTo
 	}
-//	public void ordenaAristasDescendente(){////// este es el tuyoooo pablin
-//		Collections.sort(this._pesosAristas);
-//	}
 		
 	/*-- Metodos auxiliares --*/
 	// Clona un ArrayList de aristas
@@ -50,12 +47,13 @@ public class Clustering {
 		}
 	}
 	
-	// Getter de la lista de aristas
+	// Lectura protegida de la lista de aristas
 	public ArrayList<Arista> getPesosAristas(){
 		return _pesosAristas;
 	}
 	
-	//main a efectos de verificar funcionamiento, luego borrar
+	
+	////////////main a efectos de verificar funcionamiento, luego borrar
 	public static void main(String[]args) throws IOException{
 		
 		DAOVertices daoVertices=new DAOVertices("src/modelo/instancia1.json");

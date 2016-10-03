@@ -7,7 +7,7 @@ import modelo.Vertice;
 
 /**
  * Grafo Pesado Utiliza la estructura de un 
- * GRAFO simple(clase Grafo) y le agrega 
+ * Grafo simple(clase Grafo) y le agrega 
  * pesos a sus aristas
  * @author Agus-MSI
  */
@@ -17,65 +17,69 @@ public class GrafoPesado {
 	private Grafo _grafo;//sin herencia usa un grafo simple de la clase Grafo
 	private double[][] _pesos;//y le agrega peso a las aristas (GrafoPesado, peso)
 	
-	//constructor
-	public GrafoPesado(ArrayList<Vertice> vertices){//una las dos componentes grafo simple + peso
+	//constructor grafo simple + matriz de peso
+	public GrafoPesado(ArrayList<Vertice> vertices){
 		//TODO inicializar bien el grafo simple tomando en cuenta los cambios agregados
 		//a este
 		_grafo=new Grafo(vertices);
 		_pesos=new double[_grafo.CantVertices()][_grafo.CantVertices()];
 	}
+		
+	// Agregar aristas con peso, actua la clase Convert (lat y log de los vertices)
+	public void agregarArista(int idVert_i, int idVert_j){
+		_grafo.agregarAristas(idVert_i, idVert_j);//contiene aristas/cheq extremos de grafo simple
+		Vertice vertice1=_grafo.obtenerVertice(idVert_i);
+		Vertice vertice2=_grafo.obtenerVertice(idVert_j);//obtiene los vertices para generar peso de arista
+		Double calculaDistancia=Convert.calcularDistanciaEntre(vertice1.getLatitud(),vertice1.getLongitud(),vertice2.getLatitud(),vertice2.getLongitud());
+		_pesos[idVert_i][idVert_j]=calculaDistancia;
+		_pesos[idVert_j][idVert_i]=calculaDistancia;//peso de forma simetrica
+	}
 	
+	// Expuesto: cant de vertices de la clase Grafo
 	public ArrayList<Vertice> obtenerVertices(){
 		return _grafo.obtenerVertices();
 	}
 	
+	// Expuesto: obtiene un vertice segun id
 	public Vertice obtenerVertice(int idVertice){
 		return _grafo.obtenerVertice(idVertice);
 	}
-	
-	//agregar aristas con peso
-	public void agregarArista(int vert_i, int vert_j){
-		_grafo.agregarAristas(vert_i, vert_j);//usa tambien el contiene aristas/cheq extremos de grafo simple
-		Vertice vertice1=_grafo.obtenerVertice(vert_i);
-		Vertice vertice2=_grafo.obtenerVertice(vert_j);
-		Double calculaDistancia=Convert.calcularDistanciaEntre(vertice1.getLatitud(),vertice1.getLongitud(),vertice2.getLatitud(),vertice2.getLongitud());//;
-		_pesos[vert_i][vert_j]=calculaDistancia;
-		_pesos[vert_j][vert_i]=calculaDistancia;//agrega de forma simetrica
+		
+	// Peso de una arista entre dos vertices
+	public double getPesoArista(int idVert_a, int idVert_b){
+		if(_grafo.contieneArista(idVert_a, idVert_b)==false){
+			throw new IllegalArgumentException("Se consulto el peso de una arista inexistente! " + idVert_a + ", " + idVert_b);
+		}
+		return _pesos[idVert_a][idVert_b];//si no es falso el cont arist entrega el peso de la arista
 	}
 	
-	//Expuesto: repatria en contine aristas sin herencia de la class Grafo
+	// Expuesto: contine aristas sin herencia de la class Grafo
 	public boolean contieneArista(int vert_i, int vert_j){//porque no es static en la clase Grafo
 		return _grafo.contieneArista(vert_i, vert_j);
 	}
 	
-	//entrega el peso de una arista determinada entre dos vertices
-	public double getPesoArista(int vert_a, int vert_b){
-		if(_grafo.contieneArista(vert_a, vert_b)==false){//usa el contiene aristas repatriado de grafo simple
-			throw new IllegalArgumentException("Se consulto el peso de una arista inexistente! " + vert_a + ", " + vert_b);
-		}
-		return _pesos[vert_a][vert_b];//si no es falso el cont arist entrega el peso de la arista
-	}
-			
-	//Expuesto: repatria la cant de vertices sin herencia de la class Grafo
+	// Expuesto: cant de vertices sin herencia de la class Grafo
 	public int cantVertices(){//porque no es static en la clase Grafo
 		return _grafo.cantVertices();
 	}
 	
+	// Lectura protegida cant de vertices
 	public int getCantVertices(){
 		return cantVertices();
 	}
 	
-	//Expuesto: repatria la cant de aristas sin herencia de la class Grafo
+	// Expuesto: cant de aristas sin herencia de la class Grafo
 	public int cantAristas(){
 		return _grafo.cantAristas();
 	}
 	
+	// Lectura protegida cant de aristas
 	public int getCantAristas(){
-		return _grafo.cantAristas();
+		return cantAristas();
 	}
 	
-	// Expuesto desde Grafo: Conjunto de vecinos de un vértice
-	public Set<Integer> vecinos(int i){
-		return _grafo.vecinosDelVertice(i);
+	// Expuesto: conjunto de vecinos de un vértice
+	public Set<Integer> vecinos(int id){
+		return _grafo.vecinosDelVertice(id);
 	}
 }

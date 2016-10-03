@@ -7,11 +7,12 @@ import java.util.Set;
 import modelo.Vertice;
 
 public class Grafo {
-	
+	//variables de instancia
 	private ArrayList<Vertice> _vertices;
 	private ArrayList<HashSet<Integer>> _vecinos;
 	private int _aristas;//se iran sumando a medida que se agregen
 	
+	//constructor
 	public Grafo(ArrayList<Vertice> listaVertices){
 		_vertices=listaVertices;
 		_vecinos=new ArrayList<HashSet<Integer>>();
@@ -19,78 +20,81 @@ public class Grafo {
 			_vecinos.add(new HashSet<Integer>());
 		}
 	}
-
+	
+	// Entrega la lista de vertices
 	public ArrayList<Vertice> obtenerVertices(){
 		return _vertices;
 	}
 	
+	// Entrega un vertice particular
 	public Vertice obtenerVertice(int idVertice){
 		return _vertices.get(idVertice);
 	}
 	
-	//cantidad de vertices
+	// Cant de vertices de grafo
 	public int CantVertices(){
 		return _vertices.size();
 	}
-
+	
+	// Cant de Vecinos
 	public int cantVertices(){
 		return _vecinos.size();
 	}
 	
-	//cantidad de aristas
+	// Cant de Aristas
 	public int cantAristas(){
 		return _aristas;
 	}
 	
-	//agrega, relaciona dos vertices mediante una aristas
-	public void agregarAristas(int vert_i, int vert_j){
-		chequearExtremos(vert_i, vert_j);//verifica rangos
-		if(!contieneArista(vert_i,vert_j)){//verifica que no esten relacionados
-			_aristas++;//suma cant aristas
+	// Relaciona dos vertices mediante una aristas
+	public void agregarAristas(int idVert_i, int idVert_j){
+		chequearExtremos(idVert_i, idVert_j);//verifica rangos
+		if(!contieneArista(idVert_i,idVert_j)){//verifica que no esten asignados
+			_aristas++;//incremente cant aristas
 		}
-		_vecinos.get(vert_i).add(vert_j);//
-		_vecinos.get(vert_j).add(vert_i);//asignacion simetrica
+		_vecinos.get(idVert_i).add(idVert_j);//
+		_vecinos.get(idVert_j).add(idVert_i);//asignacion simetrica
 	}
 	
-	//elimida, desvincula dos vertices eliminando la arista q los unio
-	public void removerArista(int vert_i, int vert_j){
-		chequearExtremos(vert_i, vert_j);
-		if(contieneArista(vert_i, vert_j)){//si esta asignado
-			_aristas --;//resta una arista 
+	// Desvincula dos vertices eliminando la arista q los unio
+	public void removerArista(int idVert_i, int idVert_j){
+		chequearExtremos(idVert_i, idVert_j);
+		if(contieneArista(idVert_i, idVert_j)){//si esta asignado
+			_aristas --;//decrementa cant aristas 
 		}
-		_vecinos.get(vert_i).remove(vert_j);//
-		_vecinos.get(vert_j).remove(vert_i);//asignacion asimetrica
+		_vecinos.get(idVert_i).remove(idVert_j);//
+		_vecinos.get(idVert_j).remove(idVert_i);//desasignacion asimetrica
 	}
 		
-	//verifica relacion entre vertices
-	public boolean contieneArista(int vert_i, int vert_j){
-		chequearExtremos(vert_i,vert_j);
-		return _vecinos.get(vert_i).contains(vert_j);
+	// Verifica asignacion entre vertices
+	public boolean contieneArista(int idVert_i, int idVert_j){
+		chequearExtremos(idVert_i,idVert_j);
+		return _vecinos.get(idVert_i).contains(idVert_j);
 	}
 
-	//chequea limites de los parametros
-	private void chequearExtremos(int vert_i, int vert_j) {
-		if (vert_i <= -1 || vert_j <= -1 || vert_i >= cantVertices() || vert_j >= cantVertices()){//verifica rango
-			throw new IllegalArgumentException("Vertices fuera de rango: " + vert_i + ", " + vert_j + " (vertices = " + cantVertices() + ")");
+	// Verifica limites de los parametros
+	private void chequearExtremos(int idVert_i, int idVert_j) {
+		if (idVert_i <= -1 || idVert_j <= -1 || idVert_i >= cantVertices() || idVert_j >= cantVertices()){//verifica rango
+			throw new IllegalArgumentException("Vertices fuera de rango: " + idVert_i + ", " + idVert_j + " (vertices = " + cantVertices() + ")");
 		}
-		if(vert_i==vert_j){//verifica que lo tenga bucles
-			throw new IllegalArgumentException("No se pueden agregar loops: " + vert_i);
+		if(idVert_i==idVert_j){//verifica que lo tenga bucles
+			throw new IllegalArgumentException("No se pueden agregar loops: " + idVert_i);
 		}
 	}
 	
-	//entrega el grado del vertice
-	public int gradoDelVertice(int vertice){
-		return _vecinos.get(vertice).size();
+	// Entrega el grado del vertice
+	public int gradoDelVertice(int idVertice){
+		return _vecinos.get(idVertice).size();
 	}
 	
-	//entrega los vecinos del vertice
-	public Set<Integer> vecinosDelVertice(int v){
-		Set<Integer> ret=_vecinos.get(v);
+	// Entrega los vecinos del vertice
+	public Set<Integer> vecinosDelVertice(int idVertice){
+		Set<Integer> ret=_vecinos.get(idVertice);
 		return ret;
 	}
 
-	//checkea si existe un vertice tomando como parámetro su id
-	public boolean contieneVertice(int v){
-		return v >= 0 && v <= CantVertices();
+	// Verifica la existencia de un vertice tomando como parámetro su id
+	public boolean contieneVertice(int idVertice){
+		return idVertice >= 0 && idVertice <= CantVertices();
 	}
 }
