@@ -13,7 +13,8 @@ import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
 
-public class vista_mapa{
+public class vista_mapa
+{
 	private JFrame frame;
 	private JMapViewer miMapa;
 
@@ -44,13 +45,14 @@ public class vista_mapa{
 	private void initialize()
 	{
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(-5,33, 1400, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		miMapa = new JMapViewer();
-		miMapa.setZoomContolsVisible(false);
-		//miMapa.setDisplayPositionByLatLon(-34.521, -58.7008, 11);//lat log zoom
+		miMapa.setZoomContolsVisible(true);//zoom incorporado
+		//miMapa.setDisplayPositionByLatLon(-34.567078, -58.741493, 10);
+		miMapa.setDisplayPositionByLatLon(-34.521, -58.7008, 11);//lat log zoom
 
 		// Ponemos un marcador!
 		MapMarker marker = new MapMarkerDot(-34.521, -58.7008);//marcador la facu

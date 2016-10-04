@@ -30,7 +30,8 @@ public class DAOVertices {
 	}
 	
 	// Desserializa y retorna una lista de coordenadas
-	private ArrayList<Vertice> desserializaJson(String nombreArchivo)throws IOException{
+	private ArrayList<Vertice> desserializaJson(String nombreArchivo)throws IOException
+	{
 		BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
 		
 		Type collectionType=new TypeToken<ArrayList<Vertice>>(){}.getType();

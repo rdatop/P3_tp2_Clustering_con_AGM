@@ -15,28 +15,32 @@ public class Tupla_GrafoPesado_Aristas{
 		_aristasAGM=new ArrayList<Arista>();
 	}
 
+	// Agrega aristas del grafo pesado
 	public void agregaAristaGrafoPesado(int aristaAgm,int arista){
 		_grafoPesado.agregarArista(aristaAgm,arista);
 	}
 	
+	// Construye una lista con los vertices y aristas del AGM
 	public void agregaAristaAListaAgm(Arista arista){
 		_aristasAGM.add(arista);
 	}
 	
+	// Lectura protegida de grafo Pesado
 	public GrafoPesado getGrafoPesado(){
 		return _grafoPesado;
 	}
 
+	// Lectura protegida de la lista de vertices y aristas del AGM
 	public ArrayList<Arista> getAristasAGM(){
 		return _aristasAGM;
 	}
 	
-	//Expuesto: repatria en contine aristas sin herencia de la class GrafoPesado/Grafo
+	//Expuesto: contine aristas sin herencia de la class GrafoPesado/Grafo
 	public boolean getContieneArista(int vert_i, int vert_j) {
 		return _grafoPesado.contieneArista(vert_i, vert_j);
 	}
 	
-    //Expuesto: repatria la cant de aristas sin herencia de la class GrafoPesado/Grafo
+    //Expuesto: cant de aristas sin herencia de la class GrafoPesado/Grafo
 	public int getCantAristas() {
 		return _grafoPesado.cantAristas();
 	}
