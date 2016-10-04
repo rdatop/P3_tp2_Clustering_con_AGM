@@ -2,8 +2,8 @@ package modelo;
 
 public class Vertice {
 	//variables de instancia
-	private Double _latitud;
-	private Double _longitud;
+	private Double latitud;
+	private Double longitud;
 	
 	// Constructor
 	public Vertice(Double lat,Double longit){
@@ -12,18 +12,18 @@ public class Vertice {
 	}
 
 	public Double getLatitud() {
-		return _latitud;
+		return latitud;
 	}
 
 	public void setLatitud(Double _latitud) {
-		this._latitud = _latitud;
+		this.latitud = _latitud;
 	}
 
 	public Double getLongitud() {
-		return _longitud;
+		return longitud;
 	}
 
 	public void setLongitud(Double _longitud) {
-		this._longitud = _longitud;
+		this.longitud = _longitud;
 	}
 }
