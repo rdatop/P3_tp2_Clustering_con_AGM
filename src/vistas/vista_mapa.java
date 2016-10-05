@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
@@ -17,6 +19,7 @@ public class vista_mapa
 {
 	private JFrame frame;
 	private JMapViewer miMapa;
+	
 
 	public static void main(String[] args)
 	{
@@ -44,6 +47,8 @@ public class vista_mapa
 
 	private void initialize()
 	{
+		
+		
 		frame = new JFrame();
 		frame.setBounds(-5,33, 1400, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,13 +56,26 @@ public class vista_mapa
 		
 		miMapa = new JMapViewer();
 		miMapa.setZoomContolsVisible(true);//zoom incorporado
-		//miMapa.setDisplayPositionByLatLon(-34.567078, -58.741493, 10);
 		miMapa.setDisplayPositionByLatLon(-34.521, -58.7008, 11);//lat log zoom
 
 		// Ponemos un marcador!
 		MapMarker marker = new MapMarkerDot(-34.521, -58.7008);//marcador la facu
 		marker.getStyle().setBackColor(Color.RED);
 		miMapa.addMapMarker(marker);
+		
+		frame.setContentPane(miMapa);
+		miMapa.setLayout(null);
+		
+		/*boton de seleccio en este caso equipos*/
+		JComboBox<String> comboBox_1 = new JComboBox<String>();
+		comboBox_1.setBounds(51, 630, 220, 20);
+		
+		//comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"(Seleccione La Instancia a Cargar)", "instancia1", "instancia2", "instancia3", "instancia4", "instancia5"}));
+		String[] arregloInstancias={"(Seleccione La Instancia a Cargar)", "instancia1", "instancia2", "instancia3", "instancia4", "instancia5"};
+		comboBox_1.setModel(new DefaultComboBoxModel<String>(arregloInstancias));
+		
+		miMapa.add(comboBox_1);
+		
 		
 		// Ahora un polígono!
 		ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
@@ -74,6 +92,6 @@ public class vista_mapa
 		for(Coordinate c: coordenadas)
 			miMapa.addMapMarker(new MapMarkerDot(c));
 		
-		frame.setContentPane(miMapa);
+		
 	}
 }
