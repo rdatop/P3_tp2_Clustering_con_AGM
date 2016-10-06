@@ -2,7 +2,7 @@ package vistas;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.LayoutManager;
+
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -14,40 +14,33 @@ import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
 
-import logica_negocios.Grafo;
+
 import logica_negocios.GrafoPesado;
 
-import java.awt.Dimension;
-import java.awt.Component;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.CardLayout;
-import java.awt.FlowLayout;
-import net.miginfocom.swing.MigLayout;
-import java.awt.BorderLayout;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JPanel;
-import javax.swing.RootPaneContainer;
 
-import java.awt.Rectangle;
+import java.awt.Component;
+
+
+import javax.swing.border.LineBorder;
+
+import javax.swing.JPanel;
+
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-import javax.swing.JLayeredPane;
+
 import javax.swing.JComboBox;
 import javax.swing.border.MatteBorder;
-import java.awt.ComponentOrientation;
+
+
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.EventQueue;
+
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 
@@ -128,11 +121,19 @@ public class vista_ppal {
 		frame.setContentPane(_mapa);
 		_mapa.add(panel);
 		
-		//combobox		
-		JComboBox<String> comboBox_1 = new JComboBox<String>();
-		String[] arregloInstancias={"(Seleccione La Instancia a Cargar)", "instancia1", "instancia2", "instancia3", "instancia4", "instancia5"};
-		comboBox_1.setModel(new DefaultComboBoxModel<String>(arregloInstancias));
-		panel.add(comboBox_1);
+		//String[] arregloInstancias={"(Seleccione La Instancia a Cargar)", "instancia1", "instancia2", "instancia3", "instancia4", "instancia5"};
+		// Options in the combobox
+        String[] options = { "(Seleccione La Instancia a Cargar)", "instancia1", "instancia2", "instancia3", "instancia4", "instancia5" };
+        JComboBox<String> comboBox = new JComboBox<String>(options);
+		panel.add(comboBox);
+		comboBox.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Do something when you select a value
+            	System.out.println("Index seleccionado: "+options[comboBox.getSelectedIndex()]); 
+            }
+        });
 		
 		//indicacion de Clusters
 		Cant_de_Clusterlabel = new JLabel("Cantidad de Clusters");
@@ -175,6 +176,10 @@ public class vista_ppal {
 			_mapa.addMapMarker(new MapMarkerDot(c));
 	}
 	private class SwingAction extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		public SwingAction() {
 			putValue(NAME, "SwingAction");
 			putValue(SHORT_DESCRIPTION, "Some short description");
