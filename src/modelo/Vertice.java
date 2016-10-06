@@ -30,6 +30,4 @@ public class Vertice {
 	public Double getLongitud() {
 		return longitud;
 	}
-
-	
 }

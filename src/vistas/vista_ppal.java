@@ -13,6 +13,10 @@ import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
+
+import logica_negocios.Grafo;
+import logica_negocios.GrafoPesado;
+
 import java.awt.Dimension;
 import java.awt.Component;
 import javax.swing.border.BevelBorder;
@@ -24,12 +28,14 @@ import java.awt.FlowLayout;
 import net.miginfocom.swing.MigLayout;
 import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import javax.swing.RootPaneContainer;
 
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import javax.swing.JLayeredPane;
@@ -39,6 +45,11 @@ import java.awt.ComponentOrientation;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.EventQueue;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 public class vista_ppal {
 
@@ -48,6 +59,8 @@ public class vista_ppal {
 	private JTextField Clusters_textField;
 	private JButton Iniciar_button;
 	private JPanel panel;
+	private final Action action = new SwingAction();
+	private GrafoPesado _grafo;
 	
 
 	/**
@@ -132,9 +145,19 @@ public class vista_ppal {
 		
 		//boton para iniciar el clustering
 		Iniciar_button = new JButton("Iniciar Division");
+		Iniciar_button.setAction(action);
 		panel.add(Iniciar_button);
-				
-		
+		Iniciar_button.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				int cluster=Integer.parseInt(Clusters_textField.getText());
+				if(cluster>_grafo.getCantVertices()||cluster<1){
+					
+					//JOptionPane.showMessageDialog(null,"Coloque un Nro valido de Clusters");
+				}else{
+					////////preguntar a pablo
+				}
+			}
+		});
 		
 		// Ahora un polígono!
 		ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
@@ -150,5 +173,13 @@ public class vista_ppal {
 		// Y un marcador en cada vértice del polígono!
 		for(Coordinate c: coordenadas)
 			_mapa.addMapMarker(new MapMarkerDot(c));
+	}
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "SwingAction");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
 	}
 }
