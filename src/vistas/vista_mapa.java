@@ -15,6 +15,8 @@ import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
 
+import com.google.gson.JsonNull;
+
 public class vista_mapa
 {
 	private JFrame frame;
