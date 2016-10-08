@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
@@ -24,6 +25,9 @@ import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
+
+import modelo.DAOVertices;
+import modelo.Vertice;
 
 public class vista_ppal {
 
@@ -132,20 +136,27 @@ public class vista_ppal {
 					seteaCantClusters(0);//reseteo el valor del campo de cantidad de clusters
 				}
 				
-				if(erroresValidacion){
+				if(erroresValidacion){//si hubo errores en la validación
 					JOptionPane.showMessageDialog(null,mensajeErroresValidacion);
-				}else{
+				}else{//si no hubo errores
 					JOptionPane.showMessageDialog(null,"Ahi va la division!");
-					muestraNuevoMapa();
+					String instanciaSelecionada=options[cmbxInstancias.getSelectedIndex()];
+					try{
+						muestraNuevoMapa(instanciaSelecionada);
+					}catch(IOException exception){
+						System.out.println("Error al cargar la instancia");
+					}
 				}
 			}
-		});
-		
-		
+		});	
 	}
 
-	public void muestraNuevoMapa() {
+	public void muestraNuevoMapa(String instancia) throws IOException {
 		////////ACCIONES QUE SE VAN A REPETIR
+		DAOVertices dao=new DAOVertices("src/modelo/"+instancia+".json");
+		Vertice primerVertice=dao.obtenerVertices().get(0);
+		System.out.println("Primer punto a mostrar-> "+primerVertice.getLatitud()+" "+primerVertice.getLongitud());
+		
 		_mapa.setDisplayPositionByLatLon(-34.521, -58.7008, 11);//repetir
 		ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
 		coordenadas.add(new Coordinate(-34.532, -58.7128));
