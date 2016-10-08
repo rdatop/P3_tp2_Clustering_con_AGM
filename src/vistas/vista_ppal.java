@@ -98,23 +98,6 @@ public class vista_ppal {
 		frame.setContentPane(_mapa);
 		_mapa.add(panel);
 		
-		////////ACCIONES QUE SE VAN A REPETIR
-		_mapa.setDisplayPositionByLatLon(-34.521, -58.7008, 11);//repetir
-		ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
-		coordenadas.add(new Coordinate(-34.532, -58.7128));
-		coordenadas.add(new Coordinate(-34.546, -58.719));
-		coordenadas.add(new Coordinate(-34.559, -58.721));
-		coordenadas.add(new Coordinate(-34.569, -58.725));
-		coordenadas.add(new Coordinate(-34.532, -58.730));
-		
-		MapPolygon polygon = new MapPolygonImpl(coordenadas);
-		_mapa.addMapPolygon(polygon);
-				
-		// Y un marcador en cada vértice del polígono!
-		for(Coordinate c: coordenadas)
-			_mapa.addMapMarker(new MapMarkerDot(c));
-		////////FIN ACCIONES QUE SE VAN A REPETIR
-		
         final String[] options = { "(Seleccione La Instancia a Cargar)", "instancia1", "instancia2", "instancia3", "instancia4", "instancia5" };
         final JComboBox<String> cmbxInstancias = new JComboBox<String>(options);
 		panel.add(cmbxInstancias);
@@ -153,11 +136,31 @@ public class vista_ppal {
 					JOptionPane.showMessageDialog(null,mensajeErroresValidacion);
 				}else{
 					JOptionPane.showMessageDialog(null,"Ahi va la division!");
+					muestraNuevoMapa();
 				}
 			}
 		});
 		
 		
+	}
+
+	public void muestraNuevoMapa() {
+		////////ACCIONES QUE SE VAN A REPETIR
+		_mapa.setDisplayPositionByLatLon(-34.521, -58.7008, 11);//repetir
+		ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
+		coordenadas.add(new Coordinate(-34.532, -58.7128));
+		coordenadas.add(new Coordinate(-34.546, -58.719));
+		coordenadas.add(new Coordinate(-34.559, -58.721));
+		coordenadas.add(new Coordinate(-34.569, -58.725));
+		coordenadas.add(new Coordinate(-34.532, -58.730));
+		
+		MapPolygon polygon = new MapPolygonImpl(coordenadas);
+		_mapa.addMapPolygon(polygon);
+				
+		// Y un marcador en cada vértice del polígono!
+		for(Coordinate c: coordenadas)
+			_mapa.addMapMarker(new MapMarkerDot(c));
+		////////FIN ACCIONES QUE SE VAN A REPETIR
 	}
 	
 	private void seteaCantClusters(int cant){
