@@ -21,8 +21,8 @@ public class Clustering {
 	public ArrayList<Arista> obviarAristasMayores(ArrayList<Arista> aristas, int cantClusters){
 		ArrayList<Arista> aux=new ArrayList<Arista>();
 		ordenaAristasDescendente(aux);
-		int aristasEliminadas=cantClusters-1;
-		recorreAgrega(aristas, aux, aristasEliminadas);//de, a, indice de inicio
+		int aristasAEliminar=cantClusters-1;
+		recorreAgrega(aristas, aux, aristasAEliminar);//de, a, indice de inicio
 		return aux;
 	}
 	

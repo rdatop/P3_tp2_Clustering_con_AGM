@@ -151,31 +151,33 @@ public class vista_ppal {
 		});	
 	}
 
-	public void muestraNuevoMapa(String instancia) throws IOException {
-		////////ACCIONES QUE SE VAN A REPETIR
+	/*-- Métodos auxiliares --*/
+	private void muestraNuevoMapa(String instancia) throws IOException {
 		DAOVertices dao=new DAOVertices("src/modelo/"+instancia+".json");
 		Vertice primerVertice=dao.obtenerVertices().get(0);
-		System.out.println("Primer punto a mostrar-> "+primerVertice.getLatitud()+" "+primerVertice.getLongitud());
 		
-		_mapa.setDisplayPositionByLatLon(-34.521, -58.7008, 11);//repetir
-		ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
-		coordenadas.add(new Coordinate(-34.532, -58.7128));
-		coordenadas.add(new Coordinate(-34.546, -58.719));
-		coordenadas.add(new Coordinate(-34.559, -58.721));
-		coordenadas.add(new Coordinate(-34.569, -58.725));
-		coordenadas.add(new Coordinate(-34.532, -58.730));
+		_mapa.setDisplayPositionByLatLon(primerVertice.getLatitud(),primerVertice.getLongitud(),12);
+		ArrayList<Coordinate> coordenadas = llenaListaCoordenadas(dao.obtenerVertices());
 		
+		/*-- Armado del/los polígono/s --*/
 		MapPolygon polygon = new MapPolygonImpl(coordenadas);
 		_mapa.addMapPolygon(polygon);
 				
 		// Y un marcador en cada vértice del polígono!
 		for(Coordinate c: coordenadas)
 			_mapa.addMapMarker(new MapMarkerDot(c));
-		////////FIN ACCIONES QUE SE VAN A REPETIR
+	}
+
+	/*-- Genera una lista de coordendas --*/
+	private ArrayList<Coordinate> llenaListaCoordenadas(ArrayList<Vertice> listaVertices) {
+		ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
+		for(Vertice vertice:listaVertices){
+			coordenadas.add(new Coordinate(vertice.getLatitud(),vertice.getLongitud()));
+		}
+		return coordenadas;
 	}
 	
 	private void seteaCantClusters(int cant){
 		txtCantClusters.setText("0");
-	}
-	
+	}	
 }
