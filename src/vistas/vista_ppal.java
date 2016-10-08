@@ -13,6 +13,7 @@ import javax.swing.UIManager;
 import javax.swing.JComboBox;
 import javax.swing.border.MatteBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -29,8 +30,8 @@ public class vista_ppal {
 	private JFrame frame;
 	private JMapViewer _mapa;
 	private JLabel lblCantClusters;
-	private JTextField txtClusters;
-	private JButton btnIniciar;
+	private JTextField txtCantClusters;
+	private JButton btnIniciarDivision;
 	private JPanel panel;
 	
 	/**
@@ -55,6 +56,7 @@ public class vista_ppal {
 	public vista_ppal() {
 		try{
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -101,26 +103,34 @@ public class vista_ppal {
 		////////FIN ACCIONES QUE SE VAN A REPETIR
 		
         final String[] options = { "(Seleccione La Instancia a Cargar)", "instancia1", "instancia2", "instancia3", "instancia4", "instancia5" };
-        final JComboBox<String> comboBox = new JComboBox<String>(options);
-		panel.add(comboBox);
-		
-		//options[comboBox.getSelectedIndex()]//Accedo a la opcion del combo box elegida
+        final JComboBox<String> cmbxInstancias = new JComboBox<String>(options);
+		panel.add(cmbxInstancias);
 		
 		//indicacion de Clusters
 		lblCantClusters = new JLabel("Cantidad de Clusters");
 		panel.add(lblCantClusters);
 		
 		//campo a llenar con la cant de clusters
-		txtClusters = new JTextField();
-		txtClusters.setColumns(2);
-		panel.add(txtClusters);
+		txtCantClusters = new JTextField();
+		txtCantClusters.setColumns(2);
+		seteaCantClusters(0);
+		panel.add(txtCantClusters);
 		
 		//boton para iniciar el clustering
-		btnIniciar = new JButton("Iniciar Division");
-		panel.add(btnIniciar);
-		btnIniciar.addActionListener(new ActionListener(){
+		btnIniciarDivision = new JButton("Iniciar Division");
+		panel.add(btnIniciarDivision);
+		btnIniciarDivision.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				//////////
+				
+				int cantClusters=Integer.parseInt(txtCantClusters.getText());
+				
+				if(cmbxInstancias.getSelectedIndex()==0){//no se eligió una instancia valida
+					JOptionPane.showMessageDialog(null,"Por favor elija una instancia");
+				}
+				if(cantClusters < 1){
+					JOptionPane.showMessageDialog(null,"La cantidad de clusters debe de ser igual o mayor a 1");
+					seteaCantClusters(0);//reseteo el valor del campo
+				}
 			}
 		});
 		
@@ -138,6 +148,10 @@ public class vista_ppal {
 		// Y un marcador en cada vértice del polígono!
 		for(Coordinate c: coordenadas)
 			_mapa.addMapMarker(new MapMarkerDot(c));
+	}
+	
+	private void seteaCantClusters(int cant){
+		txtCantClusters.setText("0");
 	}
 	
 }
