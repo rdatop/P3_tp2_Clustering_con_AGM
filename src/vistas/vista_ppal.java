@@ -159,6 +159,9 @@ public class vista_ppal {
 		_mapa.setDisplayPositionByLatLon(primerVertice.getLatitud(),primerVertice.getLongitud(),12);
 		ArrayList<Coordinate> coordenadas = llenaListaCoordenadas(dao.obtenerVertices());
 		
+		_mapa.removeAllMapPolygons();//borra todas las aristas
+		_mapa.removeAllMapMarkers();//borra todos los marcadores
+		
 		/*-- Armado del/los polígono/s --*/
 		MapPolygon polygon = new MapPolygonImpl(coordenadas);
 		_mapa.addMapPolygon(polygon);
