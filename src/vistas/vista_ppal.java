@@ -123,13 +123,23 @@ public class vista_ppal {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				int cantClusters=Integer.parseInt(txtCantClusters.getText());
+				boolean erroresValidacion=false;
+				String	mensajeErroresValidacion="";
 				
 				if(cmbxInstancias.getSelectedIndex()==0){//no se eligió una instancia valida
-					JOptionPane.showMessageDialog(null,"Por favor elija una instancia");
+					erroresValidacion=true;
+					mensajeErroresValidacion+="-Por favor seleccione una instancia\n";
 				}
 				if(cantClusters < 1){
-					JOptionPane.showMessageDialog(null,"La cantidad de clusters debe de ser igual o mayor a 1");
-					seteaCantClusters(0);//reseteo el valor del campo
+					erroresValidacion=true;
+					mensajeErroresValidacion+="-La cantidad de clusters debe de ser igual o mayor a 1";
+					seteaCantClusters(0);//reseteo el valor del campo de cantidad de clusters
+				}
+				
+				if(erroresValidacion){
+					JOptionPane.showMessageDialog(null,mensajeErroresValidacion);
+				}else{
+					JOptionPane.showMessageDialog(null,"Ahi va la division!");
 				}
 			}
 		});
