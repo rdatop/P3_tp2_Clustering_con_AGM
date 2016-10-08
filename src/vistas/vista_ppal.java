@@ -2,10 +2,22 @@ package vistas;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
+import logica_negocios.GrafoPesado;
 
+import javax.swing.border.LineBorder;
+import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import javax.swing.JComboBox;
+import javax.swing.border.MatteBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
 
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
@@ -13,36 +25,6 @@ import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
-
-
-import logica_negocios.GrafoPesado;
-
-
-import java.awt.Component;
-
-
-import javax.swing.border.LineBorder;
-
-import javax.swing.JPanel;
-
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-
-
-import javax.swing.JComboBox;
-import javax.swing.border.MatteBorder;
-
-
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 
 public class vista_ppal {
 
@@ -52,7 +34,6 @@ public class vista_ppal {
 	private JTextField Clusters_textField;
 	private JButton Iniciar_button;
 	private JPanel panel;
-	private final Action action = new SwingAction();
 	private GrafoPesado _grafo;
 	
 
@@ -105,13 +86,11 @@ public class vista_ppal {
 		_mapa.setMapPolygonsVisible(true);
 		_mapa.setMapMarkerVisible(true);
 		_mapa.setZoomContolsVisible(true);//zoom incorporado
-		_mapa.setDisplayPositionByLatLon(-34.521, -58.7008, 11);//lat log zoom
-		
-		//colocar marcador ungs
+		////////////////////colocar marcador ungs
 		MapMarker ungs=new MapMarkerDot(-34.521, -58.7008);
 		ungs.getStyle().setBackColor(Color.DARK_GRAY);
 		_mapa.addMapMarker(ungs);
-		
+		////////////////////
 		//panel que contiene las acciones contenido en mapa
 		panel = new JPanel();
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 128)));
@@ -121,19 +100,15 @@ public class vista_ppal {
 		frame.setContentPane(_mapa);
 		_mapa.add(panel);
 		
-		//String[] arregloInstancias={"(Seleccione La Instancia a Cargar)", "instancia1", "instancia2", "instancia3", "instancia4", "instancia5"};
-		// Options in the combobox
-        String[] options = { "(Seleccione La Instancia a Cargar)", "instancia1", "instancia2", "instancia3", "instancia4", "instancia5" };
-        JComboBox<String> comboBox = new JComboBox<String>(options);
+		////////ACCIONES QUE SE VAN A REPETIR
+		_mapa.setDisplayPositionByLatLon(-34.521, -58.7008, 11);//repetir
+		////////FIN ACCIONES QUE SE VAN A REPETIR
+		
+        final String[] options = { "(Seleccione La Instancia a Cargar)", "instancia1", "instancia2", "instancia3", "instancia4", "instancia5" };
+        final JComboBox<String> comboBox = new JComboBox<String>(options);
 		panel.add(comboBox);
-		comboBox.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Do something when you select a value
-            	System.out.println("Index seleccionado: "+options[comboBox.getSelectedIndex()]); 
-            }
-        });
+		
+		//options[comboBox.getSelectedIndex()]//Accedo a la opcion del combo box elegida
 		
 		//indicacion de Clusters
 		Cant_de_Clusterlabel = new JLabel("Cantidad de Clusters");
@@ -146,7 +121,6 @@ public class vista_ppal {
 		
 		//boton para iniciar el clustering
 		Iniciar_button = new JButton("Iniciar Division");
-		Iniciar_button.setAction(action);
 		panel.add(Iniciar_button);
 		Iniciar_button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
@@ -175,16 +149,5 @@ public class vista_ppal {
 		for(Coordinate c: coordenadas)
 			_mapa.addMapMarker(new MapMarkerDot(c));
 	}
-	private class SwingAction extends AbstractAction {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-		public void actionPerformed(ActionEvent e) {
-		}
-	}
+	
 }
