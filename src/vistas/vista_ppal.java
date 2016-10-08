@@ -88,6 +88,7 @@ public class vista_ppal {
 		_mapa.setMapPolygonsVisible(true);
 		_mapa.setMapMarkerVisible(true);
 		_mapa.setZoomContolsVisible(true);//zoom incorporado
+		_mapa.setDisplayPositionByLatLon(-34.521, -58.7008,12);
 		////////////////////colocar marcador ungs
 		MapMarker ungs=new MapMarkerDot(-34.521, -58.7008);
 		ungs.getStyle().setBackColor(Color.DARK_GRAY);
