@@ -6,8 +6,6 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-import logica_negocios.GrafoPesado;
-
 import javax.swing.border.LineBorder;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
@@ -30,13 +28,11 @@ public class vista_ppal {
 
 	private JFrame frame;
 	private JMapViewer _mapa;
-	private JLabel Cant_de_Clusterlabel;
-	private JTextField Clusters_textField;
-	private JButton Iniciar_button;
+	private JLabel lblCantClusters;
+	private JTextField txtClusters;
+	private JButton btnIniciar;
 	private JPanel panel;
-	private GrafoPesado _grafo;
 	
-
 	/**
 	 * Launch the application.
 	 */
@@ -111,26 +107,20 @@ public class vista_ppal {
 		//options[comboBox.getSelectedIndex()]//Accedo a la opcion del combo box elegida
 		
 		//indicacion de Clusters
-		Cant_de_Clusterlabel = new JLabel("Cantidad de Clusters");
-		panel.add(Cant_de_Clusterlabel);
+		lblCantClusters = new JLabel("Cantidad de Clusters");
+		panel.add(lblCantClusters);
 		
 		//campo a llenar con la cant de clusters
-		Clusters_textField = new JTextField();
-		Clusters_textField.setColumns(2);
-		panel.add(Clusters_textField);
+		txtClusters = new JTextField();
+		txtClusters.setColumns(2);
+		panel.add(txtClusters);
 		
 		//boton para iniciar el clustering
-		Iniciar_button = new JButton("Iniciar Division");
-		panel.add(Iniciar_button);
-		Iniciar_button.addActionListener(new ActionListener(){
+		btnIniciar = new JButton("Iniciar Division");
+		panel.add(btnIniciar);
+		btnIniciar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				int cluster=Integer.parseInt(Clusters_textField.getText());
-				if(cluster>_grafo.getCantVertices()||cluster<1){
-					
-					//JOptionPane.showMessageDialog(null,"Coloque un Nro valido de Clusters");
-				}else{
-					////////preguntar a pablo
-				}
+				//////////
 			}
 		});
 		
