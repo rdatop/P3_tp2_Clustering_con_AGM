@@ -29,8 +29,9 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
 import modelo.DAOVertices;
 import modelo.Vertice;
 
-public class vista_ppal {
-
+public class vista_ppal 
+{
+	//variables de instancia
 	private JFrame frame;
 	private JMapViewer _mapa;
 	private JLabel lblCantClusters;
@@ -41,10 +42,14 @@ public class vista_ppal {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+			{
+				try 
+				{
 					vista_ppal window = new vista_ppal();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -54,14 +59,15 @@ public class vista_ppal {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public vista_ppal() {
-		try{
+	//constructor
+	public vista_ppal() 
+	{
+		try//manejo de look and feel
+		{
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 			
-		}catch(Exception e){
+		}catch(Exception e)
+		{
 			e.printStackTrace();
 		}
 		initialize();
@@ -70,7 +76,8 @@ public class vista_ppal {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
 		//creacion del frame
 		frame = new JFrame();
 		frame.setBounds(-6,10, 1400, 725);
@@ -89,11 +96,13 @@ public class vista_ppal {
 		_mapa.setMapMarkerVisible(true);
 		_mapa.setZoomContolsVisible(true);//zoom incorporado
 		_mapa.setDisplayPositionByLatLon(-34.521, -58.7008,12);
+		
 		////////////////////colocar marcador ungs
 		MapMarker ungs=new MapMarkerDot(-34.521, -58.7008);
 		ungs.getStyle().setBackColor(Color.DARK_GRAY);
 		_mapa.addMapMarker(ungs);
 		////////////////////
+		
 		//panel que contiene las acciones contenido en mapa
 		panel = new JPanel();
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 128)));
@@ -120,26 +129,32 @@ public class vista_ppal {
 		//boton para iniciar el clustering
 		btnIniciarDivision = new JButton("Iniciar Division");
 		panel.add(btnIniciarDivision);
-		btnIniciarDivision.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+		btnIniciarDivision.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				
 				int cantClusters=Integer.parseInt(txtCantClusters.getText());
 				boolean erroresValidacion=false;
 				String	mensajeErroresValidacion="";
 				
-				if(cmbxInstancias.getSelectedIndex()==0){//no se eligió una instancia valida
+				if(cmbxInstancias.getSelectedIndex()==0)//no se eligió una instancia valida
+				{
 					erroresValidacion=true;
 					mensajeErroresValidacion+="-Por favor seleccione una instancia\n";
 				}
-				if(cantClusters < 1){
+				if(cantClusters < 1)
+				{
 					erroresValidacion=true;
 					mensajeErroresValidacion+="-La cantidad de clusters debe de ser igual o mayor a 1";
 					seteaCantClusters(0);//reseteo el valor del campo de cantidad de clusters
 				}
 				
-				if(erroresValidacion){//si hubo errores en la validación
+				if(erroresValidacion)//si hubo errores en la validación
+				{
 					JOptionPane.showMessageDialog(null,mensajeErroresValidacion);
-				}else{//si no hubo errores
+				}else//si no hubo errores
+				{
 					JOptionPane.showMessageDialog(null,"Ahi va la division!");
 					String instanciaSelecionada=options[cmbxInstancias.getSelectedIndex()];
 					try{
@@ -153,7 +168,8 @@ public class vista_ppal {
 	}
 
 	/*-- Métodos auxiliares --*/
-	private void muestraNuevoMapa(String instancia) throws IOException {
+	private void muestraNuevoMapa(String instancia) throws IOException 
+	{
 		DAOVertices dao=new DAOVertices("src/modelo/"+instancia+".json");
 		Vertice primerVertice=dao.obtenerVertices().get(0);
 		
@@ -173,7 +189,8 @@ public class vista_ppal {
 	}
 
 	/*-- Genera una lista de coordendas --*/
-	private ArrayList<Coordinate> llenaListaCoordenadas(ArrayList<Vertice> listaVertices) {
+	private ArrayList<Coordinate> llenaListaCoordenadas(ArrayList<Vertice> listaVertices) 
+	{
 		ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
 		for(Vertice vertice:listaVertices){
 			coordenadas.add(new Coordinate(vertice.getLatitud(),vertice.getLongitud()));
@@ -181,7 +198,8 @@ public class vista_ppal {
 		return coordenadas;
 	}
 	
-	private void seteaCantClusters(int cant){
+	private void seteaCantClusters(int cant)
+	{
 		txtCantClusters.setText("0");
 	}	
 }

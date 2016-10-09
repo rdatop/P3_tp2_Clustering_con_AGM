@@ -11,11 +11,13 @@ import logica_negocios.Algoritmos;
 import logica_negocios.GrafoPesado;
 import modelo.Vertice;
 
-public class AlgoritmosTest {
+public class AlgoritmosTest 
+{
 
 	//testeo de un vertice del agm
 	@Test
-	public void unAmarilloTest() {
+	public void unAmarilloTest() 
+	{
 		GrafoPesado grafo=instancia();
 		
 		Set<Integer>amarillos=new HashSet<Integer>();
@@ -48,7 +50,7 @@ public class AlgoritmosTest {
 //		Tupla_GrafoPesado_Aristas agm = Algoritmos.AGM(grafo);
 //		
 //		assertTrue(agm.getContieneArista(1, 2));
-//		assertTrue(agm.getContieneArista(1, 4));
+//		assertTrue(agm.getContieneArista(1, 4));    2, 3
 //		assertTrue(agm.getContieneArista(4 ,3));
 //		assertTrue(agm.getContieneArista(0, 1));
 //		assertEquals(4, agm.getCantAristas());		

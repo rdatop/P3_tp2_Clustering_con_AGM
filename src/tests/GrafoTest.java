@@ -99,7 +99,7 @@ public class GrafoTest
 		
 		grafo.agregarAristas(0,1);
 		
-		assertEquals(3, grafo.CantVertices());
+		assertEquals(3, grafo.cantVertices());
 		assertEquals(3, grafo.cantAristas());		
 		
 		grafo.removerArista(2, 0);
