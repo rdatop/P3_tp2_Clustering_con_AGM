@@ -29,6 +29,12 @@ public class Tupla_GrafoPesado_Aristas
 		_aristasAGM.add(arista);
 	}
 	
+	//Elimina una arista de una lista de aristas del AGM
+	public void eliminarAristaA(Arista arista)
+	{
+		_aristasAGM.remove(arista);
+	}
+	
 	// Lectura protegida de grafo Pesado
 	public GrafoPesado getGrafoPesado()
 	{

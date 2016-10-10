@@ -1,7 +1,6 @@
 package logica_negocios;
 
-//import java.io.IOException;
-//import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -94,11 +93,6 @@ public class Algoritmos
 			return peso;
 		}
 		
-//		///////////////representacion luego borrar
-//		@Override
-//		public String toString(){
-//			return "["+getVertAGM()+"/"+getVertice()+", "+getPeso()+"]";
-//		}
 	}/**fin de clase inner*/
 	
 	// Retorna la arista de menor peso entre un verticeAGM y uno no AMG
@@ -122,28 +116,16 @@ public class Algoritmos
 		return ret;
 	}
 	
-
-	//////////////////prueba de empleo luego borrar
-//	public static void main(String[]args) throws IOException{
-//		DAOVertices daoVertices=new DAOVertices("src/modelo/instancia1.json");
-//		GrafoPesado grafo = new GrafoPesado(daoVertices.obtenerVertices());
-//		grafo.agregarArista(0, 1);
-//		grafo.agregarArista(0, 2);
-//		grafo.agregarArista(0, 3);
-//		grafo.agregarArista(1, 2);
-//		grafo.agregarArista(2, 3);
-//		System.out.println("Peso: "+grafo.getPesoArista(1,2));
-//		
-//		System.out.println("Cantidad de vertices del grafo pesado: "+grafo.cantVertices());
-//		
-//		Tupla_GrafoPesado_Aristas tupla=Algoritmos.AGM(grafo);
-//		System.out.println("asi se crea el AGM");
-//		System.out.println(tupla.getAristasAGM().toString());
-//		System.out.println("asi se ordena de > a <");
-//		Collections.sort(tupla.getAristasAGM());//ordena de mayot a menor gracias a la implementacion de compareTo en Arista
-//		System.out.println(tupla.getAristasAGM().toString());
-//		System.out.println("asi queda definitivamente");
-//		System.out.println(tupla.getAristasAGM().toString());
-//		
-//	}
+	public static Arista aristaMayorPeso(ArrayList<Arista> listaAristas){
+		Arista ret=new Arista(0,0,Double.MAX_VALUE);
+		
+		for(int i=0;i<listaAristas.size();i++){
+			Arista aristaActual=listaAristas.get(i);
+			if(aristaActual.getPeso()>ret.getPeso()){
+				ret=new Arista(aristaActual.getVertAGM(),aristaActual.getVertice(),aristaActual.getPeso());
+			}
+		}
+		
+		return ret;
+	}
 }
