@@ -1,39 +1,30 @@
 package modelo;
 
-public class Vertice 
-{
-	//variables de instancia
+public class Vertice {
+	
 	private Double latitud;
 	private Double longitud;
-	
-	// constructor
-	public Vertice(Double lat,Double longit)
+	public Vertice(Double latitud, Double longitud)
 	{
-		setLatitud(lat);
-		setLongitud(longit);
+		
+		this.setLatitud(latitud);
+		this.setLongitud(longitud);
 	}
-
-	// Ingreso de latitud
-	public void setLatitud(Double _latitud) 
-	{
-		this.latitud = _latitud;
-	}
-	
-	// Lectura protegida de latitud
 	public Double getLatitud() 
 	{
-		return latitud;
+		return this.latitud;
 	}
-
-	// Ingreso de longitud
-	public void setLongitud(Double _longitud) 
+	public void setLatitud(Double latitud)
 	{
-		this.longitud = _longitud;
+		this.latitud = latitud;
 	}
-
-	// Lectura protegida longitud
-	public Double getLongitud() 
+	public Double getLongitud()
 	{
-		return longitud;
+		return this.longitud;
 	}
+	public void setLongitud(Double longitud)
+	{
+		this.longitud = longitud;
+	}
+	
 }
