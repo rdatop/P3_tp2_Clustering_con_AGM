@@ -1,7 +1,7 @@
 package logica_negocios;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedList;
 
 import logica_negocios.Algoritmos.Arista;
 import modelo.Tupla_GrafoPesado_Aristas;
@@ -18,29 +18,36 @@ public class Clustering
 	}
 	
 	//Devuelve una lista de vertices emulando ser clusters
-	public ArrayList<HashSet<Vertice>> listaClusters(int cantClusters){
-		ArrayList<HashSet<Vertice>> listaClusters=new ArrayList<HashSet<Vertice>>();
+	public ArrayList<LinkedList<Vertice>> listaClusters(int cantClusters){
+		
+		ArrayList<LinkedList<Vertice>> listaClusters=new ArrayList<LinkedList<Vertice>>();
 		ArrayList<Arista> listaAristasMayores=new ArrayList<Arista>();
 		ArrayList<Arista> listaAuxAristas=clonaAristas(tuplaGrafoAristas.getAristasAGM());
 		
 		populaListaClusters(listaClusters,cantClusters);
 		 
-		////////Guardo en una lista las cantClusters-1 aristas mayores 
+		listaAristasMayores(cantClusters, listaAristasMayores, listaAuxAristas);
+		
+		//Ordeno la lista de aristas mayores segun nivel de aparicion
+		@SuppressWarnings("unused")
+		ArrayList<Arista> listaAristasMayoresOrdenadas=listaOrdenadaPorAparicion(tuplaGrafoAristas.getAristasAGM(),listaAristasMayores);
+		
+		//formo las listas de clusters
+		
+		return listaClusters;
+	}
+
+	public void listaAristasMayores(int cantClusters, ArrayList<Arista> listaAristasMayores,
+			ArrayList<Arista> listaAuxAristas) {
+		////////Guardo en una lista la cantClusters-1 aristas mayores 
 		for(int i=0;i<cantClusters-1;i++)
 		{
 			Arista aristaMayor=Algoritmos.aristaMayorPeso(listaAuxAristas);
 			listaAristasMayores.add(aristaMayor);
 			listaAuxAristas.remove(aristaMayor);
 		}
-		
-		////////Ordenar por aparición las cantClusters-1 aristas mayores
-		
-		
-		return listaClusters;
 	}
 
-	
-		
 	/*-- Metodos auxiliares --*/
 	// Clona un ArrayList de aristas
 	private ArrayList<Arista> clonaAristas(ArrayList<Arista> aristas)
@@ -58,6 +65,38 @@ public class Clustering
 			Arista actual=aristas.get(i);
 			aux.add(new Arista(actual.getVertAGM(),actual.getVertice(),actual.getPeso()));
 		}
+	}
+	
+	//Devuelve una lista de aristas ordenadas por orden de aparición en la lista
+	//de aristas del AGM
+	private ArrayList<Arista> listaOrdenadaPorAparicion(ArrayList<Arista> aristasAGM,
+			ArrayList<Arista> listaAristasMayores)
+	{
+		ArrayList<Arista> listaOrdenadaPorAparicion=new ArrayList<Arista>();
+		
+		for(Arista arista:aristasAGM)//recorro las aristas del AGM
+		{
+			for(Arista aristaMayor:listaAristasMayores)//por cada recorrida del AGM recorro
+				//la lista de aristas mayores
+			{
+				if(arista.equals(aristaMayor))//si las dos aristas son iguales , la agrego
+					//a la nueva lista(teniendo en cuenta su aparición)
+				{
+					listaOrdenadaPorAparicion.add(new Arista(arista.getVertAGM(),
+															 arista.getVertice(),
+															 arista.getPeso()));
+				}
+			}
+		}
+		
+		return listaOrdenadaPorAparicion;
+	}
+	
+	private void populaListaClusters(ArrayList<LinkedList<Vertice>> listaClusters,int cantClusters) {
+		for(int i=0;i<cantClusters;i++)
+		{
+			listaClusters.add(new LinkedList<Vertice>());
+		}	
 	}
 	
 //	// Ordena el conj de aristas de > a < peso
@@ -89,12 +128,7 @@ public class Clustering
 //		
 //	}
 	
-	private void populaListaClusters(ArrayList<HashSet<Vertice>> listaClusters,int cantClusters) {
-			for(int i=0;i<cantClusters;i++)
-			{
-				listaClusters.add(new HashSet<Vertice>());
-			}	
-	}
+	
 
 	public static void main(String[] args)
 	{
