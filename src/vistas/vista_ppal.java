@@ -141,7 +141,7 @@ public class vista_ppal
 				boolean erroresValidacion=false;
 				String	mensajeErroresValidacion="";
 				
-				if(cmbxInstancias.getSelectedIndex()==0)//no se eligió una instancia valida
+				if(cmbxInstancias.getSelectedIndex()==0)//no se eligiï¿½ una instancia valida
 				{
 					erroresValidacion=true;
 					mensajeErroresValidacion+="-Por favor seleccione una instancia\n";
@@ -153,7 +153,7 @@ public class vista_ppal
 					seteaCantClusters(0);//reseteo el valor del campo de cantidad de clusters
 				}
 				
-				if(erroresValidacion)//si hubo errores en la validación
+				if(erroresValidacion)//si hubo errores en la validaciï¿½n
 				{
 					JOptionPane.showMessageDialog(null,mensajeErroresValidacion);
 				}else//si no hubo errores
@@ -183,7 +183,7 @@ public class vista_ppal
 		_mapa.removeAllMapPolygons();//borra todas las aristas
 		_mapa.removeAllMapMarkers();//borra todos los marcadores
 		
-		/*-- Armado del/los polígono/s --*/
+		/*-- Armado del/los polï¿½gono/s --*/
 		//Arma tantos poligonos teniendo en cuenta la cantidad de grupos
 		//de vertices(clusters) que reciba
 		for(ArrayList<Vertice> cluster:clustering.listaClusters(cantClusters))
@@ -194,7 +194,7 @@ public class vista_ppal
 		}
 		
 		ArrayList<Coordinate> coordenadas = llenaListaCoordenadas(grafo.obtenerVertices());
-		// Y un marcador en cada vértice del polígono!
+		// Y un marcador en cada vï¿½rtice del polï¿½gono!
 		for(Coordinate c: coordenadas)
 			_mapa.addMapMarker(new MapMarkerDot(c));
 	}

@@ -33,7 +33,7 @@ public class Clustering
 //		listaOrdenadaPorAparicion(listaAux,listaAristasMayores);
 //		
 //		////Recorro la lista AGM hasta que encuentro una de las aristas Mayores.Voy agregando
-//		////los puntos amarillos de las aristas en un cluster(el cluster cambia sí encuentro
+//		////los puntos amarillos de las aristas en un cluster(el cluster cambia sï¿½ encuentro
 //		////una de las aristas mayores)
 //		for(int i=0;i<tuplaGrafoAristas.getAristasAGM().size();i++)// y por q no rrecorres lista aux
 //		{
@@ -105,7 +105,7 @@ public class Clustering
 		}
 	}
 	
-	//Devuelve una lista de aristas ordenadas por orden de aparición en la lista de aristas del AGM
+	//Devuelve una lista de aristas ordenadas por orden de apariciï¿½n en la lista de aristas del AGM
 	private void listaOrdenadaPorAparicion(ArrayList<Arista> aristasAGM,ArrayList<Arista> listaAristasMayores)
 	{
 		ArrayList<Arista> listaOrdenadaPorAparicion=new ArrayList<Arista>();
@@ -116,7 +116,7 @@ public class Clustering
 				//la lista de aristas mayores
 			{
 				if(arista.equals(aristaMayor))//si las dos aristas son iguales , la agrego
-					//a la nueva lista(teniendo en cuenta su aparición)
+					//a la nueva lista(teniendo en cuenta su apariciï¿½n)
 				{
 					listaOrdenadaPorAparicion.add(new Arista(arista.getVertAGM(),
 																 arista.getVertice(),
@@ -147,40 +147,12 @@ public class Clustering
 		}
 	}
 	
-	
-	
-	
 //	// Ordena el conj de aristas de > a < peso
 //	private void ordenaAristasDescendente(ArrayList<Arista> aristas)
 //	{
-//		Collections.sort(aristas);//para poder utilizar Collections.sort se modificó la clase
+//		Collections.sort(aristas);//para poder utilizar Collections.sort se modificï¿½ la clase
 //		//inner Aristas con compareTo
 //	}
 	
-	
-	
-	////////////main a efectos de verificar funcionamiento, luego borrar
-	public static void main(String[]args) throws IOException{
-		
-		DAOVertices daoVertices=new DAOVertices("src/modelo/instancia_borrar.json");//    este archivo no existe
-		                                                                            // y si le pones uno q existe
-		GrafoPesado grafo=new GrafoPesado(daoVertices.obtenerVertices());           //dice que esta asignando loops
-		
-		Tupla_GrafoPesado_Aristas tupla=Algoritmos.AGM(grafo);//tupla grafo pesado/agm lista de aristas
-		
-		///////////////////////////quiero ver pesos de aristas//////////////////////////
-		
-		for(int i=0;i<tupla.getAristasAGM().size();i++)
-		{
-			Arista aristaActual=tupla.getAristasAGM().get(i);
-			
-			System.out.println("Peso de la arista "+i+":"+aristaActual.getPeso());
-		}
-		
-		/////////////////////////////////////////////////////////
-		
-		//System.out.println(daoVertices.obtenerVertices().get(0).getLatitud());
-				
-	}
 	
 }
