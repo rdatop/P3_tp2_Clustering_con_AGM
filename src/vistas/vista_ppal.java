@@ -182,14 +182,16 @@ public class vista_ppal
 		
 		_mapa.removeAllMapPolygons();//borra todas las aristas
 		_mapa.removeAllMapMarkers();//borra todos los marcadores
-		
+		System.out.println("prueba");
 		/*-- Armado del/los pol�gono/s --*/
 		//Arma tantos poligonos teniendo en cuenta la cantidad de grupos
 		//de vertices(clusters) que reciba
 		for(ArrayList<Vertice> cluster:clustering.listaClusters(cantClusters))
 		{
+			System.out.println("prueba");
 			ArrayList<Coordinate> coordenadasDesdeCluster = llenaListaCoordenadas(cluster);
 			MapPolygon polygon = new MapPolygonImpl(coordenadasDesdeCluster);
+			System.out.println("prueba"+coordenadasDesdeCluster.toString());
 			_mapa.addMapPolygon(polygon);
 		}
 		
