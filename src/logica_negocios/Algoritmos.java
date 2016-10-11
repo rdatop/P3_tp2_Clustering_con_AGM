@@ -116,12 +116,16 @@ public class Algoritmos
 		return ret;
 	}
 	
-	public static Arista aristaMayorPeso(ArrayList<Arista> listaAristas){
-		Arista ret=new Arista(0,0,Double.MAX_VALUE);
+	// Retorna la arista de mayor peso de la lista de aristas del AGM
+	public static Arista aristaMayorPeso(ArrayList<Arista> listaAristas)
+	{
+		Arista ret=new Arista(0,0,Double.MIN_VALUE);
 		
-		for(int i=0;i<listaAristas.size();i++){
+		for(int i=0;i<listaAristas.size();i++)
+		{
 			Arista aristaActual=listaAristas.get(i);
-			if(aristaActual.getPeso()>ret.getPeso()){
+			if(aristaActual.getPeso()>ret.getPeso())
+			{
 				ret=new Arista(aristaActual.getVertAGM(),aristaActual.getVertice(),aristaActual.getPeso());
 			}
 		}

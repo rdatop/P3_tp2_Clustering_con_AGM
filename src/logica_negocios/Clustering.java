@@ -20,9 +20,7 @@ public class Clustering
 	
 	//Devuelve una lista de vertices emulando ser clusters
 	public ArrayList<ArrayList<Vertice>> listaClusters(int cantClusters){
-		
 		ArrayList<ArrayList<Vertice>> listaClusters=new ArrayList<ArrayList<Vertice>>();
-		
 		listaClusters.add(new ArrayList<Vertice>());
 		
 		for(int i=0;i<tuplaGrafoAristas.getGrafoPesado().getCantVertices();i++)
@@ -44,25 +42,6 @@ public class Clustering
 		}
 	}
 
-	/*-- Metodos auxiliares --*/
-	// Clona un ArrayList de aristas
-	private ArrayList<Arista> clonaAristas(ArrayList<Arista> aristas)
-	{
-		ArrayList<Arista> aux=new ArrayList<Arista>();
-		recorreAgrega(aristas, aux, 0);//de, a, indice de inicio
-		return aux;
-	}
-	
-	// Unifica recorrido y agregado de un ArrayList a otro
-	private void recorreAgrega(ArrayList<Arista> aristas, ArrayList<Arista> aux, int indice) 
-	{
-		for(int i=indice;i<aristas.size();i++)
-		{
-			Arista actual=aristas.get(i);
-			aux.add(new Arista(actual.getVertAGM(),actual.getVertice(),actual.getPeso()));
-		}
-	}
-	
 	//Devuelve una lista de aristas ordenadas por orden de aparición en la lista
 	//de aristas del AGM
 	private ArrayList<Arista> listaOrdenadaPorAparicion(ArrayList<Arista> aristasAGM,
@@ -88,13 +67,32 @@ public class Clustering
 		return listaOrdenadaPorAparicion;
 	}
 	
-	private void populaListaClusters(ArrayList<LinkedList<Vertice>> listaClusters,int cantClusters) {
+	private void populaListaClusters(ArrayList<LinkedList<Vertice>> listaClusters,int cantClusters) 
+	{
 		for(int i=0;i<cantClusters;i++)
 		{
 			listaClusters.add(new LinkedList<Vertice>());
 		}	
 	}
 	
+	/*-- Metodos auxiliares --*/
+	// Clona un ArrayList de aristas
+	private ArrayList<Arista> clonaAristas(ArrayList<Arista> aristas)
+	{
+		ArrayList<Arista> aux=new ArrayList<Arista>();
+		recorreAgrega(aristas, aux, 0);//de, a, indice de inicio
+		return aux;
+	}
+	
+	// Unifica recorrido y agregado de un ArrayList a otro
+	private void recorreAgrega(ArrayList<Arista> aristas, ArrayList<Arista> aux, int indice) 
+	{
+		for(int i=indice;i<aristas.size();i++)
+		{
+			Arista actual=aristas.get(i);
+			aux.add(new Arista(actual.getVertAGM(),actual.getVertice(),actual.getPeso()));
+		}
+	}
 //	// Ordena el conj de aristas de > a < peso
 //	private void ordenaAristasDescendente(ArrayList<Arista> aristas)
 //	{
