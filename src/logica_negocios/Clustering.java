@@ -2,7 +2,6 @@ package logica_negocios;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import logica_negocios.Algoritmos.Arista;
 import modelo.DAOVertices;
@@ -35,7 +34,7 @@ public class Clustering
 		
 		////Recorro la lista AGM hasta que encuentro una de las aristas Mayores.Voy agregando
 		////los puntos amarillos de las aristas en un cluster(el cluster cambia sí encuentro
-		////una de las aristas mayores
+		////una de las aristas mayores)
 		for(int i=0;i<tuplaGrafoAristas.getAristasAGM().size();i++)
 		{
 			Arista AristaAGMActual=tuplaGrafoAristas.getAristasAGM().get(i);
@@ -123,12 +122,6 @@ public class Clustering
 		listaAristasMayores=listaOrdenadaPorAparicion;
 	}
 	
-	private void populaListaClusters(ArrayList<LinkedList<Vertice>> listaClusters,int cantClusters) {
-		for(int i=0;i<cantClusters;i++)
-		{
-			listaClusters.add(new LinkedList<Vertice>());
-		}	
-	}
 	
 //	// Ordena el conj de aristas de > a < peso
 //	private void ordenaAristasDescendente(ArrayList<Arista> aristas)
