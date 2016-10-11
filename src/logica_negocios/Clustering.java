@@ -20,31 +20,87 @@ public class Clustering
 	
 	//Devuelve una lista de vertices emulando ser clusters
 	public ArrayList<ArrayList<Vertice>> listaClusters(int cantClusters){
-		ArrayList<ArrayList<Vertice>> listaClusters=new ArrayList<ArrayList<Vertice>>();
-		listaClusters.add(new ArrayList<Vertice>());
 		
-		for(int i=0;i<tuplaGrafoAristas.getGrafoPesado().getCantVertices();i++)
+		ArrayList<ArrayList<Vertice>> listaClusters=new ArrayList<ArrayList<Vertice>>();
+		
+		ArrayList<Arista> listaAristasMayores=new ArrayList<Arista>();
+		
+		ArrayList<Arista> listaAux=clonaAristas(tuplaGrafoAristas.getAristasAGM());
+		
+		////Recorro la lista auxiliar y busco las cantClusters-1 aristas mayores
+		llenaListaAristasMayores(cantClusters, listaAristasMayores, listaAux);
+		
+		////Ordeno la lista de aristas mayores teniendo en cuenta su orden de aparicion
+		listaOrdenadaPorAparicion(listaAux,listaAristasMayores);
+		
+		////Recorro la lista AGM hasta que encuentro una de las aristas Mayores.Voy agregando
+		////los puntos amarillos de las aristas en un cluster(el cluster cambia sí encuentro
+		////una de las aristas mayores
+		for(int i=0;i<tuplaGrafoAristas.getAristasAGM().size();i++)
 		{
-			listaClusters.get(0).add(tuplaGrafoAristas.getGrafoPesado().obtenerVertice(i));
+			Arista AristaAGMActual=tuplaGrafoAristas.getAristasAGM().get(i);
+			
+			for(int j=0;j<listaAristasMayores.size();j++)
+			{
+				if(AristaAGMActual.equals(listaAristasMayores.get(j)))//si la arista actual
+				//coincide con una de las aristas mayores a excluir	
+				{
+					
+				}
+			}
 		}
+		
+//		for(int j=0;j<cantClusters;j++)
+//		{
+//			listaClusters.add(new ArrayList<Vertice>());
+//			
+//			for(int i=0;i<tuplaGrafoAristas.getGrafoPesado().getCantVertices();i++)
+//			{
+//				listaClusters.get(j).add(tuplaGrafoAristas.getGrafoPesado().obtenerVertice(i));
+//			}
+//		}
 		
 		return listaClusters;
 	}
 
-	private void listaAristasMayores(int cantClusters, ArrayList<Arista> listaAristasMayores,
-			ArrayList<Arista> listaAuxAristas) {
-		////////Guardo en una lista la cantClusters-1 aristas mayores 
+	
+
+	////Recorro la lista auxiliar y busco las cantClusters-1 aristas mayores
+	public void llenaListaAristasMayores(int cantClusters, ArrayList<Arista> listaAristasMayores,
+			ArrayList<Arista> listaAux) {
+		
 		for(int i=0;i<cantClusters-1;i++)
 		{
-			Arista aristaMayor=Algoritmos.aristaMayorPeso(listaAuxAristas);
-			listaAristasMayores.add(aristaMayor);
-			listaAuxAristas.remove(aristaMayor);
+			Arista aristaMayor=Algoritmos.aristaMayorPeso(listaAux);
+			
+			listaAristasMayores.add(new Arista(aristaMayor.vertAGM,aristaMayor.getVertice(),aristaMayor.getPeso()));
+			
+			listaAux.remove(aristaMayor);
 		}
 	}
 
+	/*-- Metodos auxiliares --*/
+	// Clona un ArrayList de aristas
+	private ArrayList<Arista> clonaAristas(ArrayList<Arista> aristas)
+	{
+		ArrayList<Arista> aux=new ArrayList<Arista>();
+		recorreAgrega(aristas, aux, 0);//de, a, indice de inicio
+		return aux;
+	}
+	
+	// Unifica recorrido y agregado de un ArrayList a otro
+	private void recorreAgrega(ArrayList<Arista> aristas, ArrayList<Arista> aux, int indice) 
+	{
+		for(int i=indice;i<aristas.size();i++)
+		{
+			Arista actual=aristas.get(i);
+			aux.add(new Arista(actual.getVertAGM(),actual.getVertice(),actual.getPeso()));
+		}
+	}
+	
 	//Devuelve una lista de aristas ordenadas por orden de aparición en la lista
 	//de aristas del AGM
-	private ArrayList<Arista> listaOrdenadaPorAparicion(ArrayList<Arista> aristasAGM,
+	private void listaOrdenadaPorAparicion(ArrayList<Arista> aristasAGM,
 			ArrayList<Arista> listaAristasMayores)
 	{
 		ArrayList<Arista> listaOrdenadaPorAparicion=new ArrayList<Arista>();
@@ -64,35 +120,16 @@ public class Clustering
 			}
 		}
 		
-		return listaOrdenadaPorAparicion;
+		listaAristasMayores=listaOrdenadaPorAparicion;
 	}
 	
-	private void populaListaClusters(ArrayList<LinkedList<Vertice>> listaClusters,int cantClusters) 
-	{
+	private void populaListaClusters(ArrayList<LinkedList<Vertice>> listaClusters,int cantClusters) {
 		for(int i=0;i<cantClusters;i++)
 		{
 			listaClusters.add(new LinkedList<Vertice>());
 		}	
 	}
 	
-	/*-- Metodos auxiliares --*/
-	// Clona un ArrayList de aristas
-	private ArrayList<Arista> clonaAristas(ArrayList<Arista> aristas)
-	{
-		ArrayList<Arista> aux=new ArrayList<Arista>();
-		recorreAgrega(aristas, aux, 0);//de, a, indice de inicio
-		return aux;
-	}
-	
-	// Unifica recorrido y agregado de un ArrayList a otro
-	private void recorreAgrega(ArrayList<Arista> aristas, ArrayList<Arista> aux, int indice) 
-	{
-		for(int i=indice;i<aristas.size();i++)
-		{
-			Arista actual=aristas.get(i);
-			aux.add(new Arista(actual.getVertAGM(),actual.getVertice(),actual.getPeso()));
-		}
-	}
 //	// Ordena el conj de aristas de > a < peso
 //	private void ordenaAristasDescendente(ArrayList<Arista> aristas)
 //	{
