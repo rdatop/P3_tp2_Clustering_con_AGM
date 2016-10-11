@@ -26,7 +26,10 @@ import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
 
+import logica_negocios.Clustering;
+import logica_negocios.GrafoPesado;
 import modelo.DAOVertices;
+import modelo.Tupla_GrafoPesado_Aristas;
 import modelo.Vertice;
 
 public class vista_ppal 
@@ -158,7 +161,7 @@ public class vista_ppal
 					JOptionPane.showMessageDialog(null,"Ahi va la division!");
 					String instanciaSelecionada=options[cmbxInstancias.getSelectedIndex()];
 					try{
-						muestraNuevoMapa(instanciaSelecionada);
+						muestraNuevoMapa(instanciaSelecionada,cantClusters);
 					}catch(IOException exception){
 						System.out.println("Error al cargar la instancia");
 					}
@@ -166,23 +169,31 @@ public class vista_ppal
 			}
 		});	
 	}
-
-	/*-- Métodos auxiliares --*/
-	private void muestraNuevoMapa(String instancia) throws IOException 
+	
+	private void muestraNuevoMapa(String instancia,int cantClusters) throws IOException 
 	{
 		DAOVertices dao=new DAOVertices("src/modelo/"+instancia+".json");
-		Vertice primerVertice=dao.obtenerVertices().get(0);
+		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(dao.obtenerVertices());
+		GrafoPesado grafo=tupla.getGrafoPesado();
+		Clustering clustering=new Clustering(tupla);
+		Vertice primerVertice=grafo.obtenerVertice(0);
 		
 		_mapa.setDisplayPositionByLatLon(primerVertice.getLatitud(),primerVertice.getLongitud(),12);
-		ArrayList<Coordinate> coordenadas = llenaListaCoordenadas(dao.obtenerVertices());
 		
 		_mapa.removeAllMapPolygons();//borra todas las aristas
 		_mapa.removeAllMapMarkers();//borra todos los marcadores
 		
 		/*-- Armado del/los polígono/s --*/
-		MapPolygon polygon = new MapPolygonImpl(coordenadas);
-		_mapa.addMapPolygon(polygon);
-				
+		//Arma tantos poligonos teniendo en cuenta la cantidad de grupos
+		//de vertices(clusters) que reciba
+		for(ArrayList<Vertice> cluster:clustering.listaClusters(cantClusters))
+		{
+			ArrayList<Coordinate> coordenadasDesdeCluster = llenaListaCoordenadas(cluster);
+			MapPolygon polygon = new MapPolygonImpl(coordenadasDesdeCluster);
+			_mapa.addMapPolygon(polygon);
+		}
+		
+		ArrayList<Coordinate> coordenadas = llenaListaCoordenadas(grafo.obtenerVertices());
 		// Y un marcador en cada vértice del polígono!
 		for(Coordinate c: coordenadas)
 			_mapa.addMapMarker(new MapMarkerDot(c));
