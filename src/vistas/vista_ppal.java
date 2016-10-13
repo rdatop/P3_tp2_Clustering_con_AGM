@@ -26,6 +26,7 @@ import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
 
+import logica_negocios.Algoritmos.Arista;
 import logica_negocios.Clustering;
 import logica_negocios.GrafoPesado;
 import modelo.DAOVertices;
@@ -41,6 +42,7 @@ public class vista_ppal
 	private JTextField txtCantClusters;
 	private JButton btnIniciarDivision;
 	private JPanel panel;
+	private ArrayList<Arista> listaAristasAMG;
 	
 	/**
 	 * Launch the application.
@@ -141,7 +143,7 @@ public class vista_ppal
 				boolean erroresValidacion=false;
 				String	mensajeErroresValidacion="";
 				
-				if(cmbxInstancias.getSelectedIndex()==0)//no se eligi� una instancia valida
+				if(cmbxInstancias.getSelectedIndex()==0)//no se eligio una instancia valida
 				{
 					erroresValidacion=true;
 					mensajeErroresValidacion+="-Por favor seleccione una instancia\n";
@@ -158,7 +160,7 @@ public class vista_ppal
 					JOptionPane.showMessageDialog(null,mensajeErroresValidacion);
 				}else//si no hubo errores
 				{
-					JOptionPane.showMessageDialog(null,"Ahi va la division!");
+					JOptionPane.showMessageDialog(null,"Iniciando division!");
 					String instanciaSelecionada=options[cmbxInstancias.getSelectedIndex()];
 					try{
 						muestraNuevoMapa(instanciaSelecionada,cantClusters);
@@ -172,10 +174,11 @@ public class vista_ppal
 	
 	private void muestraNuevoMapa(String instancia,int cantClusters) throws IOException 
 	{
+		
+		
 		DAOVertices dao=new DAOVertices("src/modelo/"+instancia+".json");
 		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(dao.obtenerVertices());
 		GrafoPesado grafo=tupla.getGrafoPesado();
-		
 		//agregando pesos a las aristas del grafo pesado
 		for (int i = 0; i <grafo.cantVertices()-1; i++) {
 			for (int j = i+1; j < grafo.cantVertices(); j++) {
@@ -184,12 +187,28 @@ public class vista_ppal
 		}
 		
 		//centra el mapa y hace zoom segun instancia elegida
-		Vertice primerVertice=grafo.obtenerVertice((grafo.getCantVertices())/2);
+				Vertice primerVertice=grafo.obtenerVertice((grafo.getCantVertices())/2);
+				
+				_mapa.setDisplayPositionByLatLon(primerVertice.getLatitud(),primerVertice.getLongitud(),12);
+				
+				_mapa.removeAllMapPolygons();//borra todas las aristas
+				_mapa.removeAllMapMarkers();//borra todos los marcadores		
 		
-		_mapa.setDisplayPositionByLatLon(primerVertice.getLatitud(),primerVertice.getLongitud(),12);
 		
-		_mapa.removeAllMapPolygons();//borra todas las aristas
-		_mapa.removeAllMapMarkers();//borra todos los marcadores
+		//lista de aristas del AGM
+		Clustering cluster=new Clustering(tupla.getAristasAGM());
+		listaAristasAMG=new ArrayList<Arista>();
+		listaAristasAMG=cluster.getPesosAristas();
+		cluster.obviarAristasMayores(listaAristasAMG, cantClusters);
+		
+		for (int i = 0; i < listaAristasAMG.size(); i++) {
+			
+			
+		}
+		
+		
+		
+		
 		
 		
 		/*-- Armado del/los poligono/s --*/
