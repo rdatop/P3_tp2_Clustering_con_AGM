@@ -175,7 +175,7 @@ public class vista_ppal
 		DAOVertices dao=new DAOVertices("src/modelo/"+instancia+".json");
 		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(dao.obtenerVertices());
 		GrafoPesado grafo=tupla.getGrafoPesado();
-		Clustering clustering=new Clustering(tupla);
+		//Clustering clustering=new Clustering(tupla);
 		Vertice primerVertice=grafo.obtenerVertice(0);
 		
 		_mapa.setDisplayPositionByLatLon(primerVertice.getLatitud(),primerVertice.getLongitud(),12);
@@ -186,14 +186,14 @@ public class vista_ppal
 		/*-- Armado del/los pol�gono/s --*/
 		//Arma tantos poligonos teniendo en cuenta la cantidad de grupos
 		//de vertices(clusters) que reciba
-		for(ArrayList<Vertice> cluster:clustering.listaClusters(cantClusters))
-		{
-			System.out.println("prueba");
-			ArrayList<Coordinate> coordenadasDesdeCluster = llenaListaCoordenadas(cluster);
-			MapPolygon polygon = new MapPolygonImpl(coordenadasDesdeCluster);
-			System.out.println("prueba"+coordenadasDesdeCluster.toString());
-			_mapa.addMapPolygon(polygon);
-		}
+//		for(ArrayList<Vertice> cluster:clustering.listaClusters(cantClusters))
+//		{
+//			System.out.println("prueba");
+//			ArrayList<Coordinate> coordenadasDesdeCluster = llenaListaCoordenadas(cluster);
+//			MapPolygon polygon = new MapPolygonImpl(coordenadasDesdeCluster);
+//			//System.out.println("prueba"+coordenadasDesdeCluster.toString());
+//			_mapa.addMapPolygon(polygon);
+//		}
 		
 		ArrayList<Coordinate> coordenadas = llenaListaCoordenadas(grafo.obtenerVertices());
 		// Y un marcador en cada v�rtice del pol�gono!

@@ -1,9 +1,12 @@
 package logica_negocios;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import modelo.DAOVertices;
 //import modelo.DAOVertices;
 import modelo.Tupla_GrafoPesado_Aristas;
 
@@ -68,11 +71,11 @@ public class Algoritmos
 		{
 			if (getPeso()< otraArista.getPeso()) 
 			{
-				return 1;//invertido ordenamiento inverso
+				return -1;
 			}
 			if (getPeso()> otraArista.getPeso())
 			{
-				return -1;//invertido ordenamiento inverso
+				return 1;
 			}
 			return 0;
 		}
@@ -91,6 +94,12 @@ public class Algoritmos
 		public double getPeso() 
 		{
 			return peso;
+		}
+		
+		//representacion luego borrar
+		@Override
+		public String toString(){
+			return "["+getVertAGM()+"/"+getVertice()+", "+getPeso()+"]";
 		}
 		
 	}/**fin de clase inner*/
@@ -116,20 +125,44 @@ public class Algoritmos
 		return ret;
 	}
 	
-	// Retorna la arista de mayor peso de la lista de aristas del AGM
-	public static Arista aristaMayorPeso(ArrayList<Arista> listaAristas)
-	{
-		Arista ret=new Arista(0,0,Double.MIN_VALUE);
-		
-		for(int i=0;i<listaAristas.size();i++)
-		{
-			Arista aristaActual=listaAristas.get(i);
-			if(aristaActual.getPeso()>ret.getPeso())
-			{
-				ret=new Arista(aristaActual.getVertAGM(),aristaActual.getVertice(),aristaActual.getPeso());
+	//////////////////prueba de empleo luego borrar
+	public static void main(String[]args) throws IOException{
+		DAOVertices daoVertices=new DAOVertices("src/modelo/instancia1.json");
+		GrafoPesado grafo = new GrafoPesado(daoVertices.obtenerVertices());
+		for (int i = 0; i <grafo.cantVertices()-1; i++) {
+			for (int j = i+1; j < grafo.cantVertices(); j++) {
+				grafo.agregarArista(i, j);
 			}
 		}
-		
-		return ret;
-	}
+
+		System.out.println("Cantidad de vertices del grafo pesado: "+grafo.cantVertices());
+
+		Tupla_GrafoPesado_Aristas tupla=Algoritmos.AGM(grafo);
+		System.out.println("asi se crea el AGM");
+		System.out.println(tupla.getAristasAGM().toString());
+		System.out.println("asi se ordena de > a <");
+		Collections.sort(tupla.getAristasAGM());
+		Collections.reverse(tupla.getAristasAGM());
+		System.out.println(tupla.getAristasAGM().toString());
+		System.out.println("asi queda definitivamente");
+		System.out.println(tupla.getAristasAGM().toString());
+
+}
+	
+//	// Retorna la arista de mayor peso de la lista de aristas del AGM
+//	public static Arista aristaMayorPeso(ArrayList<Arista> listaAristas)
+//	{
+//		Arista ret=new Arista(0,0,Double.MIN_VALUE);
+//		
+//		for(int i=0;i<listaAristas.size();i++)
+//		{
+//			Arista aristaActual=listaAristas.get(i);
+//			if(aristaActual.getPeso()>ret.getPeso())
+//			{
+//				ret=new Arista(aristaActual.getVertAGM(),aristaActual.getVertice(),aristaActual.getPeso());
+//			}
+//		}
+//		
+//		return ret;
+//	}
 }

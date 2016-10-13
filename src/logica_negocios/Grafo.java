@@ -14,9 +14,9 @@ public class Grafo
 	private int _aristas;//se iran sumando a medida que se agregen
 	
 	//constructor
-	public Grafo(ArrayList<Vertice> listaVertices)
+	public Grafo(ArrayList<Vertice> vertices)
 	{
-		_vertices=listaVertices;
+		_vertices=vertices;
 		_vecinos=new ArrayList<HashSet<Integer>>();
 		for (int i = 0; i < cantVertices(); i++) {
 			_vecinos.add(new HashSet<Integer>());
@@ -115,4 +115,14 @@ public class Grafo
 	{
 		return idVertice >= 0 && idVertice <= cantVertices();
 	}
+	
+	@Override
+	public String toString(){
+		String s="";
+		for (int i = 0; i < _vertices.size(); i++) {
+			System.out.println(s+",");
+		}
+		
+		return s;
+	}	
 }

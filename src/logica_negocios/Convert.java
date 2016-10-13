@@ -1,5 +1,7 @@
 package logica_negocios;
 
+//import Logica.Coordenada;
+
 public class Convert 
 {
 	//variable de instancia sin constructor
@@ -25,10 +27,18 @@ public class Convert
 	   return peso;	
 	}
 	
-	//main a efectos de verificar funcionamiento, luego borrar
-//	public static void main(String[]args){
-//		System.out.println(calcularDistanciaEntre(-34.52133782929332, -58.70068073272705, -34.520772089706036, -58.702311515808105));
-//		System.out.println(calcularDistanciaEntre(-34.520772089706036, -58.702311515808105, -34.52126711205503, -58.70325565338135));
-//		System.out.println(calcularDistanciaEntre(-34.52133782929332, -58.70068073272705, -34.52126711205503, -58.70325565338135));
+//	public static double calcularDistanciaEntre(Double lat1, Double lon1, Double lat2, Double lon2) {
+//		double dx = lat1-lat2;//coordinada.getLatitud() - this.getLatitud();
+//		double dy = lon1-lon2;//coordinada.getLongitud() - this.getLongitud();
+//		double dCuadrado = dx * dx + dy * dy;
+//		
+//		return Math.sqrt(dCuadrado);
 //	}
+	
+	//main a efectos de verificar funcionamiento, luego borrar
+	public static void main(String[]args){
+		System.out.println(calcularDistanciaEntre(-34.52133782929332, -58.70068073272705, -34.520772089706036, -58.702311515808105));
+		System.out.println(calcularDistanciaEntre(-34.520772089706036, -58.702311515808105, -34.52126711205503, -58.70325565338135));
+		System.out.println(calcularDistanciaEntre(-34.52133782929332, -58.70068073272705, -34.52126711205503, -58.70325565338135));
+	}
 }
