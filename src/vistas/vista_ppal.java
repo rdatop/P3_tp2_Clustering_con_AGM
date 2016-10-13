@@ -175,15 +175,24 @@ public class vista_ppal
 		DAOVertices dao=new DAOVertices("src/modelo/"+instancia+".json");
 		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(dao.obtenerVertices());
 		GrafoPesado grafo=tupla.getGrafoPesado();
-		//Clustering clustering=new Clustering(tupla);
-		Vertice primerVertice=grafo.obtenerVertice(0);
+		
+		//agregando pesos a las aristas del grafo pesado
+		for (int i = 0; i <grafo.cantVertices()-1; i++) {
+			for (int j = i+1; j < grafo.cantVertices(); j++) {
+				grafo.agregarArista(i, j);
+			}
+		}
+		
+		//centra el mapa y hace zoom segun instancia elegida
+		Vertice primerVertice=grafo.obtenerVertice((grafo.getCantVertices())/2);
 		
 		_mapa.setDisplayPositionByLatLon(primerVertice.getLatitud(),primerVertice.getLongitud(),12);
 		
 		_mapa.removeAllMapPolygons();//borra todas las aristas
 		_mapa.removeAllMapMarkers();//borra todos los marcadores
-		System.out.println("prueba");
-		/*-- Armado del/los pol�gono/s --*/
+		
+		
+		/*-- Armado del/los poligono/s --*/
 		//Arma tantos poligonos teniendo en cuenta la cantidad de grupos
 		//de vertices(clusters) que reciba
 //		for(ArrayList<Vertice> cluster:clustering.listaClusters(cantClusters))
@@ -196,7 +205,7 @@ public class vista_ppal
 //		}
 		
 		ArrayList<Coordinate> coordenadas = llenaListaCoordenadas(grafo.obtenerVertices());
-		// Y un marcador en cada v�rtice del pol�gono!
+		// Y un marcador en cada vertice del poligono!
 		for(Coordinate c: coordenadas)
 			_mapa.addMapMarker(new MapMarkerDot(c));
 	}

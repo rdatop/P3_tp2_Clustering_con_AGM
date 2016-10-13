@@ -20,7 +20,6 @@ public class Clustering {
 	// Obvía las aristas mayores de acuerdo a la cant de clusters -1
 	public ArrayList<Arista> obviarAristasMayores(ArrayList<Arista> aristas, int cantClusters){
 		ArrayList<Arista> aux=new ArrayList<Arista>();
-		ordenaAristasDescendente(aux);
 		int aristasEliminadas=cantClusters-1;
 		recorreAgrega(aristas, aux, aristasEliminadas);//de, a, indice de inicio
 		return aux;
@@ -45,6 +44,7 @@ public class Clustering {
 		for(int i=indice;i<aristas.size();i++){
 			Arista actual=aristas.get(i);
 			aux.add(new Arista(actual.getVertAGM(),actual.getVertice(),actual.getPeso()));
+			ordenaAristasDescendente(aux);
 		}
 	}
 	
@@ -65,42 +65,12 @@ public class Clustering {
 				grafo.agregarArista(i, j);
 			}
 		}
-//		GrafoPesado grafo = new GrafoPesado(5);
-//		grafo.agregarArista(0, 1, 5);
-//		grafo.agregarArista(0, 2, 6);
-//		grafo.agregarArista(0, 3, 10);
-//		grafo.agregarArista(1, 2, 1);
-//		grafo.agregarArista(2, 3, 5);
-//		grafo.agregarArista(1, 4, 4);
-//		grafo.agregarArista(2, 4, 10);
-//		grafo.agregarArista(3, 4, 15);
-//		
+
 		Clustering clustering=new Clustering(Algoritmos.AGM(grafo).getAristasAGM());
-//		clustering.ordenaAristasDescendente(clustering._pesosAristas);
-//		System.out.println(clustering.getPesosAristas().toString());
-//		
-//		//prueba de obviar aristas mayores
-		System.out.println(clustering.obviarAristasMayores(clustering.getPesosAristas(), 1).toString());
-//		
+		System.out.println(" Aristas ya ordenadas de > a <");
+		System.out.println(clustering.getPesosAristas().toString());
+		
+		System.out.println(" Prueba clustering");
+		System.out.println(clustering.obviarAristasMayores(clustering.getPesosAristas(), 3).toString());
 	}	
-	
-	
-//	public static void main(String[]args) throws IOException{
-//		
-//		DAOVertices daoVertices=new DAOVertices("src/modelo/instancia1.json");
-//		GrafoPesado grafo = new GrafoPesado(daoVertices.obtenerVertices());
-//		grafo.agregarArista(0, 1);
-//		grafo.agregarArista(0, 2);
-//		grafo.agregarArista(0, 3);
-//		grafo.agregarArista(1, 2);
-//		grafo.agregarArista(2, 3);
-//		
-//		Clustering clustering=new Clustering(Algoritmos.AGM(grafo).getAristasAGM());
-//		clustering.ordenaAristasDescendente(clustering._pesosAristas);
-//		System.out.println(clustering.getPesosAristas().toString());
-//		
-//		//prueba de obviar aristas mayores
-//		System.out.println(clustering.obviarAristasMayores(clustering.getPesosAristas(), 3).toString());
-//		
-//	}
 }
