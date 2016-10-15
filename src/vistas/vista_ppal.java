@@ -22,9 +22,7 @@ import java.io.IOException;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
-import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
 
 import logica_negocios.Algoritmos.Arista;
 import logica_negocios.Clustering;
@@ -36,13 +34,13 @@ import modelo.Vertice;
 public class vista_ppal 
 {
 	//variables de instancia
-	private JFrame frame;
+	private JFrame _frame;
 	private JMapViewer _mapa;
-	private JLabel lblCantClusters;
-	private JTextField txtCantClusters;
-	private JButton btnIniciarDivision;
-	private JPanel panel;
-	private ArrayList<Arista> listaAristasAMG;
+	private JLabel _lblCantClusters;
+	private JTextField _txtCantClusters;
+	private JButton _btnIniciarDivision;
+	private JPanel _panel;
+	private ArrayList<Arista> _listaAristasAMG;
 	
 	/**
 	 * Launch the application.
@@ -56,7 +54,7 @@ public class vista_ppal
 				try 
 				{
 					vista_ppal window = new vista_ppal();
-					window.frame.setVisible(true);
+					window._frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -84,62 +82,62 @@ public class vista_ppal
 	private void initialize() 
 	{
 		//creacion del frame
-		frame = new JFrame();
-		frame.setBounds(-6,10, 1400, 725);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		this._frame = new JFrame();
+		this._frame.setBounds(-6,10, 1400, 725);
+		this._frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this._frame.getContentPane().setLayout(null);
 			
 		//creacion, centrado y punto de referencia del mapa contenido en frame
-		_mapa=new JMapViewer();
-		_mapa.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
-		_mapa.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		_mapa.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		_mapa.setTileGridVisible(false);
-		_mapa.setScrollWrapEnabled(true);
-		_mapa.setMapRectanglesVisible(true);
-		_mapa.setMapPolygonsVisible(true);
-		_mapa.setMapMarkerVisible(true);
-		_mapa.setZoomContolsVisible(true);//zoom incorporado
-		_mapa.setDisplayPositionByLatLon(-34.521, -58.7008,12);//punto predeterminado:UNGS
+		this._mapa=new JMapViewer();
+		this._mapa.setBorder(new LineBorder(Color.LIGHT_GRAY, 2));
+		this._mapa.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+		this._mapa.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		this._mapa.setTileGridVisible(false);
+		this._mapa.setScrollWrapEnabled(true);
+		this._mapa.setMapRectanglesVisible(true);
+		this._mapa.setMapPolygonsVisible(true);
+		this._mapa.setMapMarkerVisible(true);
+		this._mapa.setZoomContolsVisible(true);//zoom incorporado
+		this._mapa.setDisplayPositionByLatLon(-34.521, -58.7008,12);//punto predeterminado:UNGS
 		
 		////////////////////colocar marcador ungs
 		MapMarker ungs=new MapMarkerDot(-34.521, -58.7008);
 		ungs.getStyle().setBackColor(Color.DARK_GRAY);
-		_mapa.addMapMarker(ungs);
+		this._mapa.addMapMarker(ungs);
 		////////////////////
 		
 		//panel que contiene las acciones contenido en mapa
-		panel = new JPanel();
-		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 128)));
-		panel.setBounds(0, 651, 1362, 35);
+		this._panel = new JPanel();
+		this._panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(128, 128, 128)));
+		this._panel.setBounds(0, 651, 1362, 35);
 		
 		//contencion de elementos
-		frame.setContentPane(_mapa);
-		_mapa.add(panel);
+		this._frame.setContentPane(_mapa);
+		this._mapa.add(_panel);
 		
         final String[] options = { "(Seleccione La Instancia a Cargar)", "instancia1", "instancia2", "instancia3", "instancia4", "instancia5" };
         final JComboBox<String> cmbxInstancias = new JComboBox<String>(options);
-		panel.add(cmbxInstancias);
+        this._panel.add(cmbxInstancias);
 		
 		//indicacion de Clusters
-		lblCantClusters = new JLabel("Cantidad de Clusters");
-		panel.add(lblCantClusters);
+        this._lblCantClusters = new JLabel("Cantidad de Clusters");
+        this._panel.add(_lblCantClusters);
 		
 		//campo a llenar con la cant de clusters
-		txtCantClusters = new JTextField();
-		txtCantClusters.setColumns(2);
-		seteaCantClusters(0);
-		panel.add(txtCantClusters);
+        this._txtCantClusters = new JTextField();
+        this._txtCantClusters.setColumns(2);
+        this.seteaCantClusters(0);
+        this._panel.add(_txtCantClusters);
 		
 		//boton para iniciar el clustering
-		btnIniciarDivision = new JButton("Iniciar Division");
-		panel.add(btnIniciarDivision);
-		btnIniciarDivision.addActionListener(new ActionListener()
+        this._btnIniciarDivision = new JButton("Iniciar Division");
+        this._panel.add(_btnIniciarDivision);
+        this._btnIniciarDivision.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
 				
-				int cantClusters=Integer.parseInt(txtCantClusters.getText());
+				int cantClusters=Integer.parseInt(_txtCantClusters.getText());
 				boolean erroresValidacion=false;
 				String	mensajeErroresValidacion="";
 				
@@ -163,7 +161,7 @@ public class vista_ppal
 					JOptionPane.showMessageDialog(null,"Iniciando division!");
 					String instanciaSelecionada=options[cmbxInstancias.getSelectedIndex()];
 					try{
-						muestraNuevoMapa(instanciaSelecionada,cantClusters);
+						muestraMapa(instanciaSelecionada,cantClusters);
 					}catch(IOException exception){
 						System.out.println("Error al cargar la instancia");
 					}
@@ -172,62 +170,36 @@ public class vista_ppal
 		});	
 	}
 	
-	private void muestraNuevoMapa(String instancia,int cantClusters) throws IOException 
+	private void muestraMapa(String instancia,int cantClusters) throws IOException 
 	{
-		
-		
 		DAOVertices dao=new DAOVertices("src/modelo/"+instancia+".json");
 		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(dao.obtenerVertices());
 		GrafoPesado grafo=tupla.getGrafoPesado();
 		//agregando pesos a las aristas del grafo pesado
-		for (int i = 0; i <grafo.cantVertices()-1; i++) {
-			for (int j = i+1; j < grafo.cantVertices(); j++) {
-				grafo.agregarArista(i, j);
-			}
-		}
+		this.llenaGrafoConAristas(grafo);
 		
 		//centra el mapa y hace zoom segun instancia elegida
-				Vertice primerVertice=grafo.obtenerVertice((grafo.getCantVertices())/2);
-				
-				_mapa.setDisplayPositionByLatLon(primerVertice.getLatitud(),primerVertice.getLongitud(),12);
-				
-				_mapa.removeAllMapPolygons();//borra todas las aristas
-				_mapa.removeAllMapMarkers();//borra todos los marcadores		
+		centrarMapa(grafo);	
 		
+		//borro todos los puntos y lineas del mapa
+		this.reseteaMapa();		
 		
 		//lista de aristas del AGM
 		Clustering cluster=new Clustering(tupla.getAristasAGM());
-		listaAristasAMG=new ArrayList<Arista>();
-		listaAristasAMG=cluster.getPesosAristas();
-		cluster.obviarAristasMayores(listaAristasAMG, cantClusters);
-		System.out.println(listaAristasAMG);//////////////
-		for (int i = 0; i < listaAristasAMG.size(); i++) {
-			
-			//aca deberia hacer la arista a b a entre vertices pero desde las aristas
-			
+		this._listaAristasAMG=new ArrayList<Arista>();
+		this._listaAristasAMG=cluster.getPesosAristas();
+		cluster.obviarAristasMayores(this._listaAristasAMG, cantClusters);
+		System.out.println(this._listaAristasAMG);//////////////
+		for (int i = 0; i < this._listaAristasAMG.size(); i++) 
+		{
+			//TODO
+			//aca deberia hacer la arista (a, b)(b,a) entre vértices pero desde las aristas	
 		}
-		
-		
-		
-		
-		
-		
-		/*-- Armado del/los poligono/s --*/
-		//Arma tantos poligonos teniendo en cuenta la cantidad de grupos
-		//de vertices(clusters) que reciba
-//		for(ArrayList<Vertice> cluster:clustering.listaClusters(cantClusters))
-//		{
-//			System.out.println("prueba");
-//			ArrayList<Coordinate> coordenadasDesdeCluster = llenaListaCoordenadas(cluster);
-//			MapPolygon polygon = new MapPolygonImpl(coordenadasDesdeCluster);
-//			//System.out.println("prueba"+coordenadasDesdeCluster.toString());
-//			_mapa.addMapPolygon(polygon);
-//		}
 		
 		ArrayList<Coordinate> coordenadas = llenaListaCoordenadas(grafo.obtenerVertices());
 		// Y un marcador en cada vertice del poligono!
 		for(Coordinate c: coordenadas)
-			_mapa.addMapMarker(new MapMarkerDot(c));
+			this._mapa.addMapMarker(new MapMarkerDot(c));
 	}
 
 	/*-- Genera una lista de coordendas --*/
@@ -240,8 +212,35 @@ public class vista_ppal
 		return coordenadas;
 	}
 	
+	/*-- Llena un grafoPesado de aristas(Ej:(1,2),(2,3),etc) --*/
+	private void llenaGrafoConAristas(GrafoPesado grafo)
+	{
+		for (int i = 0; i < grafo.cantVertices()-1; i++)
+		{
+			for (int j = i+1; j < grafo.cantVertices(); j++)
+			{
+				grafo.agregarArista(i, j);
+			}
+		}
+	}
+	
+	/*-- Elige el vértice del medio de la instancia y centra el zoom en él --*/
+	public void centrarMapa(GrafoPesado grafo)
+	{
+		Vertice primerVertice=grafo.obtenerVertice((grafo.getCantVertices())/2);
+		this._mapa.setDisplayPositionByLatLon(primerVertice.getLatitud(),primerVertice.getLongitud(),12);
+	}
+	
+	/*-- Borra toso los puntos y líneas del mapa --*/
+	private void reseteaMapa()
+	{
+		this._mapa.removeAllMapPolygons();//borra todas las aristas
+		this._mapa.removeAllMapMarkers();//borra todos los marcadores
+	}
+	
+	/*-- Setea en 0 el campo "txtCantClusters" para poder validarlo --*/
 	private void seteaCantClusters(int cant)
 	{
-		txtCantClusters.setText("0");
+		this._txtCantClusters.setText("0");
 	}	
 }

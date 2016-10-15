@@ -8,7 +8,6 @@ import java.util.Set;
 import modelo.DAOVertices;
 //import modelo.DAOVertices;
 import modelo.Tupla_GrafoPesado_Aristas;
-import modelo.Vertice;
 
 public class Algoritmos
 {
