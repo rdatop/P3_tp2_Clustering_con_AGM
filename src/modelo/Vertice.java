@@ -9,9 +9,9 @@ public class Vertice {
 	private Double longitud;
 	
 	// Constructor
-	public Vertice(Integer id, Double latitud, Double longitud)/////////////
+	public Vertice(Double latitud, Double longitud)/////////////
 	{
-		this.setId(id);
+		this.setId(generadorID.aumentarContador());
 		this.setLatitud(latitud);
 		this.setLongitud(longitud);
 	}
@@ -54,6 +54,17 @@ public class Vertice {
 	public String toString()
 	{
 		return "ID: "+this.getId()+" , latitud: "+this.getLatitud()+", longitud: "+this.getLongitud();
+	}
+	
+	public static class generadorID
+	{
+		public static int ID=0;
+		
+		public static int aumentarContador()
+		{
+			ID++;
+			return ID;
+		}
 	}
 	
 }

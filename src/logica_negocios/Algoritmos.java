@@ -18,14 +18,20 @@ public class Algoritmos
 		Set<Integer> vertAGM=new HashSet<Integer>();//vertices del AGM
 		vertAGM.add(0);//se inicializa
 		
-		for(int i=0;i<grafo.cantVertices()-1;i++)//recorro los vertices del grafo hasta el ante último
+		int cantAristas=tupla.getCantAristas();
+		
+		if(cantAristas > 0)
 		{
-			Arista arista=menorArista(grafo, vertAGM);//crea una arista que sera la de menor valor
-			tupla.agregaAristaGrafoPesado(arista.vertAGM, arista.vertice);//se agrega al AGM los vertices
-			                                                              // con la arista de menor peso
-			vertAGM.add(arista.vertice);//se agrega AGM los vertices por prioridad de peso
-			tupla.agregaAristaAListaAgm(arista);
+			for(int i=0;i<grafo.cantVertices()-1;i++)//recorro los vertices del grafo hasta el ante último
+			{
+				Arista arista=menorArista(grafo, vertAGM);//crea una arista que sera la de menor valor
+				tupla.agregaAristaGrafoPesado(arista.vertAGM, arista.vertice);//se agrega al AGM los vertices
+				                                                              // con la arista de menor peso
+				vertAGM.add(arista.vertice);//se agrega AGM los vertices por prioridad de peso
+				tupla.agregaAristaAListaAgm(arista);
+			}
 		}
+		
 		return tupla;
 	}
 		
