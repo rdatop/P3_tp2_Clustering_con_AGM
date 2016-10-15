@@ -115,14 +115,4 @@ public class Grafo
 	{
 		return idVertice >= 0 && idVertice <= cantVertices();
 	}
-	
-	@Override
-	public String toString(){
-		String s="";
-		for (int i = 0; i < _vertices.size(); i++) {
-			System.out.println(s+",");
-		}
-		
-		return s;
-	}	
 }
