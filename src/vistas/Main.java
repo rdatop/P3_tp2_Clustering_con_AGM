@@ -24,6 +24,7 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
+import logica_negocios.Algoritmos;
 import logica_negocios.Algoritmos.Arista;
 import logica_negocios.Clustering;
 import logica_negocios.GrafoPesado;
@@ -31,7 +32,7 @@ import modelo.DAOVertices;
 import modelo.Tupla_GrafoPesado_Aristas;
 import modelo.Vertice;
 
-public class vista_ppal 
+public class Main 
 {
 	//variables de instancia
 	private JFrame _frame;
@@ -53,7 +54,7 @@ public class vista_ppal
 			{
 				try 
 				{
-					vista_ppal window = new vista_ppal();
+					Main window = new Main();
 					window._frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,7 +64,7 @@ public class vista_ppal
 	}
 
 	//constructor
-	public vista_ppal() 
+	public Main() 
 	{
 		try//manejo de look and feel
 		{
@@ -173,13 +174,14 @@ public class vista_ppal
 	private void muestraMapa(String instancia,int cantClusters) throws IOException 
 	{
 		DAOVertices dao=new DAOVertices("src/modelo/"+instancia+".json");
-		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(dao.obtenerVertices());
-		GrafoPesado grafo=tupla.getGrafoPesado();
+		GrafoPesado grafoPesado=new GrafoPesado(dao.obtenerVertices());
+		Tupla_GrafoPesado_Aristas tupla=Algoritmos.AGM(grafoPesado);
+		grafoPesado=tupla.getGrafoPesado();
 		//agregando pesos a las aristas del grafo pesado
-		this.llenaGrafoConAristas(grafo);
+		this.llenaGrafoConAristas(grafoPesado);
 		
-		//centra el mapa y hace zoom segun instancia elegida
-		centrarMapa(grafo);	
+		//centra el mapa y hace zoom según instancia elegida
+		centrarMapa(grafoPesado);	
 		
 		//borro todos los puntos y lineas del mapa
 		this.reseteaMapa();		
@@ -189,14 +191,14 @@ public class vista_ppal
 		this._listaAristasAMG=new ArrayList<Arista>();
 		this._listaAristasAMG=cluster.getPesosAristas();
 		cluster.obviarAristasMayores(this._listaAristasAMG, cantClusters);
-		System.out.println(this._listaAristasAMG);//////////////
+		System.out.println("Puto el que lee: "+this._listaAristasAMG);//////////////
 		for (int i = 0; i < this._listaAristasAMG.size(); i++) 
 		{
 			//TODO
 			//aca deberia hacer la arista (a, b)(b,a) entre vértices pero desde las aristas	
 		}
 		
-		ArrayList<Coordinate> coordenadas = llenaListaCoordenadas(grafo.obtenerVertices());
+		ArrayList<Coordinate> coordenadas = llenaListaCoordenadas(grafoPesado.obtenerVertices());
 		// Y un marcador en cada vertice del poligono!
 		for(Coordinate c: coordenadas)
 			this._mapa.addMapMarker(new MapMarkerDot(c));
