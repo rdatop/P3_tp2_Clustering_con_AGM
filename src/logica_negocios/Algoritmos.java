@@ -6,27 +6,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 import modelo.DAOVertices;
-//import modelo.DAOVertices;
 import modelo.Tupla_GrafoPesado_Aristas;
 
 public class Algoritmos
-{
-	//sin constructor
-	
+{	
 	// Algoritmo de Prim
 	public static Tupla_GrafoPesado_Aristas AGM(GrafoPesado grafo)
 	{
 		//Tupla: grafoPesado + lista de aristas del AGM (dirigido a Clustering)
 		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(grafo.obtenerVertices());
-		Set<Integer>vertAMG=new HashSet<Integer>();//vertices del AGM
-		vertAMG.add(0);//se inicializa
+		Set<Integer> vertAGM=new HashSet<Integer>();//vertices del AGM
+		vertAGM.add(0);//se inicializa
 		
-		for(int i=0;i<grafo.cantVertices()-1;i++)//recorro los vertices del grafo hasta el ultimo
+		for(int i=0;i<grafo.cantVertices()-1;i++)//recorro los vertices del grafo hasta el ante último
 		{
-			Arista arista=menorArista(grafo, vertAMG);//crea una arista que sera la de menor valor
+			Arista arista=menorArista(grafo, vertAGM);//crea una arista que sera la de menor valor
 			tupla.agregaAristaGrafoPesado(arista.vertAGM, arista.vertice);//se agrega al AGM los vertices
 			                                                              // con la arista de menor peso
-			vertAMG.add(arista.vertice);//se agrega AGM los vertices por prioridad de peso
+			vertAGM.add(arista.vertice);//se agrega AGM los vertices por prioridad de peso
 			tupla.agregaAristaAListaAgm(arista);
 		}
 		return tupla;
@@ -43,9 +40,9 @@ public class Algoritmos
 		// Constructor
 		public Arista(int verticeIncluido, int verticeNoIncluido, double pesoArista)//// Vertices
 		{
-			vertAGM=verticeIncluido;//.getId();
-			vertice=verticeNoIncluido;//.getId();
-			peso=pesoArista;
+			this.vertAGM=verticeIncluido;//.getId();
+			this.vertice=verticeNoIncluido;//.getId();
+			this.peso=pesoArista;
 		}
 		
 		// Equals de object sobreescrito (comparacion por igualdad)
@@ -61,7 +58,7 @@ public class Algoritmos
 				return false;
 			}
 			Arista otra=(Arista)obj;
-			return vertAGM==otra.vertAGM && vertice==otra.vertice;
+			return this.vertAGM==otra.vertAGM && this.vertice==otra.vertice;
 		}
 		
 		// CompareTo sobreescrito (comparacion por peso de aristas - Clustering)
@@ -82,23 +79,24 @@ public class Algoritmos
 		// Lectura protegida
 		public int getVertAGM() 
 		{
-			return vertAGM;
+			return this.vertAGM;
 		}
 		
 		public int getVertice() 
 		{
-			return vertice;
+			return this.vertice;
 		}
 		
 		public double getPeso() 
 		{
-			return peso;
+			return this.peso;
 		}
 		
 		//representacion luego borrar
 		@Override
-		public String toString(){
-			return "["+getVertAGM()+"/"+getVertice()+", "+getPeso()+"]";
+		public String toString()
+		{
+			return "[("+this.getVertAGM()+","+this.getVertice()+"),Peso:"+this.getPeso()+"]";
 		}
 		
 	}/**fin de clase inner*/
