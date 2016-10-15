@@ -51,4 +51,9 @@ public class Vertice {
 		return coordenadasVertice;
 	}
 	
+	public String toString()
+	{
+		return "ID: "+this.getId()+" , latitud: "+this.getLatitud()+", longitud: "+this.getLongitud();
+	}
+	
 }
