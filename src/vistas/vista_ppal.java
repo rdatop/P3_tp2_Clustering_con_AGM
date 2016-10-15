@@ -200,9 +200,10 @@ public class vista_ppal
 		listaAristasAMG=new ArrayList<Arista>();
 		listaAristasAMG=cluster.getPesosAristas();
 		cluster.obviarAristasMayores(listaAristasAMG, cantClusters);
-		
+		System.out.println(listaAristasAMG);//////////////
 		for (int i = 0; i < listaAristasAMG.size(); i++) {
 			
+			//aca deberia hacer la arista a b a entre vertices pero desde las aristas
 			
 		}
 		

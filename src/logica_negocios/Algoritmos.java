@@ -1,7 +1,6 @@
 package logica_negocios;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +8,7 @@ import java.util.Set;
 import modelo.DAOVertices;
 //import modelo.DAOVertices;
 import modelo.Tupla_GrafoPesado_Aristas;
+import modelo.Vertice;
 
 public class Algoritmos
 {
@@ -41,11 +41,11 @@ public class Algoritmos
 		public int vertice;
 		public double peso;
 		
-		//constructor
-		public Arista(int verticeIncluido, int verticeNoIncluido, double pesoArista)
+		// Constructor
+		public Arista(int verticeIncluido, int verticeNoIncluido, double pesoArista)//// Vertices
 		{
-			vertAGM=verticeIncluido;
-			vertice=verticeNoIncluido;
+			vertAGM=verticeIncluido;//.getId();
+			vertice=verticeNoIncluido;//.getId();
 			peso=pesoArista;
 		}
 		
@@ -107,7 +107,7 @@ public class Algoritmos
 	// Retorna la arista de menor peso entre un verticeAGM y uno no AMG
 	public static Arista menorArista(GrafoPesado grafo, Set<Integer>vertAGM)
 	{
-		Arista ret=new Arista(0,0,Double.MAX_VALUE);
+		Arista ret=new Arista(0,0,Double.MAX_VALUE);/////0,0
 		
 		for(Integer i: vertAGM)//recorre vertAGM
 		{
