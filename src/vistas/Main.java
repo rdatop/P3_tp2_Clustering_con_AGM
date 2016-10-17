@@ -191,7 +191,6 @@ public class Main
 		this._listaAristasAMG=new ArrayList<Arista>();
 		this._listaAristasAMG=cluster.getPesosAristas();
 		cluster.obviarAristasMayores(this._listaAristasAMG, cantClusters);
-		//System.out.println("Puto el que lee: "+this._listaAristasAMG);//////////////
 		for (int i = 0; i < this._listaAristasAMG.size(); i++) 
 		{
 			//TODO

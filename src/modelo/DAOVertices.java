@@ -38,9 +38,9 @@ public class DAOVertices {
 		
 		ArrayList<Vertice> listaCoordenadas=_gson.fromJson(br,collectionType);
 		
-		if(listaCoordenadas==null)//sí el archivo está vacio
+		if(listaCoordenadas==null)//sï¿½ el archivo estï¿½ vacio
 		{
-			listaCoordenadas=new ArrayList<Vertice>();//hago una lista vacía
+			listaCoordenadas=new ArrayList<Vertice>();//hago una lista vacï¿½a
 		}
 		
 		return listaCoordenadas;
