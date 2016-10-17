@@ -175,10 +175,11 @@ public class Main
 	{
 		DAOVertices dao=new DAOVertices("src/modelo/"+instancia+".json");
 		GrafoPesado grafoPesado=new GrafoPesado(dao.obtenerVertices());
-		Tupla_GrafoPesado_Aristas tupla=Algoritmos.AGM(grafoPesado);
-		grafoPesado=tupla.getGrafoPesado();
 		//agregando pesos a las aristas del grafo pesado
 		this.llenaGrafoConAristas(grafoPesado);
+		Tupla_GrafoPesado_Aristas tupla=Algoritmos.AGM(grafoPesado);
+		grafoPesado=tupla.getGrafoPesado();
+		
 		
 		//centra el mapa y hace zoom según instancia elegida
 		centrarMapa(grafoPesado);	
@@ -186,9 +187,10 @@ public class Main
 		//borro todos los puntos y lineas del mapa
 		this.reseteaMapa();		
 		
+		
+		
 		//lista de aristas del AGM
 		Clustering cluster=new Clustering(tupla.getAristasAGM());
-		this._listaAristasAMG=new ArrayList<Arista>();
 		this._listaAristasAMG=cluster.getPesosAristas();
 		cluster.obviarAristasMayores(this._listaAristasAMG, cantClusters);
 		System.out.println("Puto el que lee: "+this._listaAristasAMG);//////////////
@@ -217,12 +219,9 @@ public class Main
 	/*-- Llena un grafoPesado de aristas(Ej:(1,2),(2,3),etc) --*/
 	private void llenaGrafoConAristas(GrafoPesado grafo)
 	{
-		for (int i = 0; i < grafo.cantVertices()-1; i++)
+		for (int i = 1; i <= grafo.cantVertices(); i++)
 		{
-			for (int j = i+1; j < grafo.cantVertices(); j++)
-			{
-				grafo.agregarArista(i, j);
-			}
+			grafo.agregarArista(i,i+1);
 		}
 	}
 	
