@@ -55,16 +55,4 @@ public class Vertice {
 	{
 		return "ID: "+this.getId()+" , latitud: "+this.getLatitud()+", longitud: "+this.getLongitud();
 	}
-	
-	public static class generadorID
-	{
-		public static int ID=0;
-		
-		public static int aumentarContador()
-		{
-			ID++;
-			return ID;
-		}
-	}
-	
 }
