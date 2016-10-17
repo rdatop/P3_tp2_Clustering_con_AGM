@@ -4,14 +4,14 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 
 public class Vertice {
 	//variables de instancia
-	private int id;////////////
+	private int id;
 	private Double latitud;
 	private Double longitud;
 	
 	// Constructor
-	public Vertice(Double latitud, Double longitud)/////////////
+	public Vertice(int id,Double latitud, Double longitud)
 	{
-		this.setId(generadorID.aumentarContador());
+		this.setId(id);
 		this.setLatitud(latitud);
 		this.setLongitud(longitud);
 	}

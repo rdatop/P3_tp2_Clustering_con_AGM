@@ -40,6 +40,20 @@ public class DAOVertices
 		{
 			listaCoordenadas=new ArrayList<Vertice>();//hara una lista vacía
 		}
+		
+		this.asignaIds(listaCoordenadas);
+		
 		return listaCoordenadas;
+	}
+
+	//Ya que el mapeo objeto json->objeto Vertice no asigna id,lo
+	//hago mediante un for
+	private void asignaIds(ArrayList<Vertice> listaCoordenadas)
+	{
+		for(int i=0;i < listaCoordenadas.size();i++)
+		{
+			int id=i+1;
+			listaCoordenadas.get(i).setId(id);
+		}	
 	}
 }

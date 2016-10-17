@@ -6,7 +6,6 @@ import logica_negocios.Algoritmos;
 import logica_negocios.GrafoPesado;
 import modelo.DAOVertices;
 import modelo.Tupla_GrafoPesado_Aristas;
-import modelo.Vertice.generadorID;
 
 public class DebugGrafo {
 
@@ -17,10 +16,7 @@ public class DebugGrafo {
 		Tupla_GrafoPesado_Aristas tupla=Algoritmos.AGM(grafoPesado);
 		grafoPesado=tupla.getGrafoPesado();
 		
-		System.out.println(generadorID.aumentarContador());
-		
-		System.out.println(generadorID.aumentarContador());
-		
-		System.out.println(generadorID.aumentarContador());
+		//Muestro que ahora cada Vertice posee un ID
+		System.out.println(grafoPesado.obtenerVertices());
 	}
 }
