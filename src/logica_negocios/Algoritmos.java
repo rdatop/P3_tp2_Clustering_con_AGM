@@ -18,7 +18,7 @@ public class Algoritmos
 		Set<Integer> vertAGM=new HashSet<Integer>();//vertices del AGM
 		vertAGM.add(0);//se inicializa
 		
-		int cantAristas=tupla.getCantAristas();
+		int cantAristas=grafo.cantAristas();
 		
 		if(cantAristas > 0)
 		{

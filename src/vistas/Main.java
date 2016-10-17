@@ -180,14 +180,11 @@ public class Main
 		Tupla_GrafoPesado_Aristas tupla=Algoritmos.AGM(grafoPesado);
 		grafoPesado=tupla.getGrafoPesado();
 		
-		
 		//centra el mapa y hace zoom según instancia elegida
 		centrarMapa(grafoPesado);	
 		
 		//borro todos los puntos y lineas del mapa
 		this.reseteaMapa();		
-		
-		
 		
 		//lista de aristas del AGM
 		Clustering cluster=new Clustering(tupla.getAristasAGM());
@@ -219,7 +216,7 @@ public class Main
 	/*-- Llena un grafoPesado de aristas(Ej:(1,2),(2,3),etc) --*/
 	private void llenaGrafoConAristas(GrafoPesado grafo)
 	{
-		for (int i = 1; i <= grafo.cantVertices(); i++)
+		for (int i = 0; i < grafo.cantVertices()-1; i++)
 		{
 			grafo.agregarArista(i,i+1);
 		}

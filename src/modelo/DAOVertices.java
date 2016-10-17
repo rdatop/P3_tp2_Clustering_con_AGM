@@ -52,8 +52,7 @@ public class DAOVertices
 	{
 		for(int i=0;i < listaCoordenadas.size();i++)
 		{
-			int id=i+1;
-			listaCoordenadas.get(i).setId(id);
+			listaCoordenadas.get(i).setId(i);
 		}	
 	}
 }
