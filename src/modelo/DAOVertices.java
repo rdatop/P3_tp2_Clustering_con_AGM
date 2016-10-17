@@ -9,19 +9,18 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class DAOVertices 
-{
+public class DAOVertices {
 	//variables de instancia
 	private Gson _gson;
 	private String nombreArchivo;
 	private ArrayList<Vertice> listaCoordenadas;
 	
-	// cosntructor
+	// Cosntructor
 	public DAOVertices(String nombreArchivo)throws IOException
 	{
 		this._gson=new Gson();
 		this.nombreArchivo=nombreArchivo;
-		this.listaCoordenadas=this.desserializaJson(this.nombreArchivo);
+		this.listaCoordenadas=this.desserializaJson(this.nombreArchivo);//este tiene que ir
 	}
 
 	// Retorna lista de coordenadas
@@ -34,25 +33,16 @@ public class DAOVertices
 	private ArrayList<Vertice> desserializaJson(String nombreArchivo)throws IOException
 	{
 		BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
+		
 		Type collectionType=new TypeToken<ArrayList<Vertice>>(){}.getType();
+		
 		ArrayList<Vertice> listaCoordenadas=_gson.fromJson(br,collectionType);
+		
 		if(listaCoordenadas==null)//sí el archivo está vacio
 		{
-			listaCoordenadas=new ArrayList<Vertice>();//hara una lista vacía
+			listaCoordenadas=new ArrayList<Vertice>();//hago una lista vacía
 		}
 		
-		this.asignaIds(listaCoordenadas);
-		
 		return listaCoordenadas;
-	}
-
-	//Ya que el mapeo objeto json->objeto Vertice no asigna id,lo
-	//hago mediante un for
-	private void asignaIds(ArrayList<Vertice> listaCoordenadas)
-	{
-		for(int i=0;i < listaCoordenadas.size();i++)
-		{
-			listaCoordenadas.get(i).setId(i);
-		}	
 	}
 }

@@ -1,15 +1,11 @@
 package logica_negocios;
 
-//import Logica.Coordenada;
-
-public class Convert 
-{
+public class Convert {
 	//variable de instancia sin constructor
 	private static Double _radioTerrestre= 6371.00; //radio medio del planeta en Kilometros
 
 	// Calcula la distancia entre dos vertices
-	public static Double calcularDistanciaEntre(Double lat1, Double lon1, Double lat2, Double lon2)
-	{
+	public static Double calcularDistanciaEntre(Double lat1, Double lon1, Double lat2, Double lon2){
 	  Double Radio = Convert._radioTerrestre; //6371.00;
 	  Double dLat = Convert.aRadianes(lat2-lat1);
 	  Double dLon = Convert.aRadianes(lon2-lon1);            
@@ -20,20 +16,11 @@ public class Convert
 	  return Radio * c;		
 	}
 	
-	// Covercion a Radianes valor de punto * Pi/180
-	public static Double aRadianes(Double punto)
-	{
+	// Covercion a Radianes
+	public static Double aRadianes(Double punto){//valor de punto * Pi/180
 	   Double peso = punto * 3.1415926 / 180;
 	   return peso;	
 	}
-	
-//	public static double calcularDistanciaEntre(Double lat1, Double lon1, Double lat2, Double lon2) {
-//		double dx = lat1-lat2;//coordinada.getLatitud() - this.getLatitud();
-//		double dy = lon1-lon2;//coordinada.getLongitud() - this.getLongitud();
-//		double dCuadrado = dx * dx + dy * dy;
-//		
-//		return Math.sqrt(dCuadrado);
-//	}
 	
 	//main a efectos de verificar funcionamiento, luego borrar
 	public static void main(String[]args){

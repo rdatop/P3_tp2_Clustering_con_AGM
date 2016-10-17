@@ -175,12 +175,12 @@ public class Main
 	{
 		DAOVertices dao=new DAOVertices("src/modelo/"+instancia+".json");
 		GrafoPesado grafoPesado=new GrafoPesado(dao.obtenerVertices());
-		//agregando pesos a las aristas del grafo pesado
-		this.llenaGrafoConAristas(grafoPesado);
 		Tupla_GrafoPesado_Aristas tupla=Algoritmos.AGM(grafoPesado);
 		grafoPesado=tupla.getGrafoPesado();
+		//agregando pesos a las aristas del grafo pesado
+		this.llenaGrafoConAristas(grafoPesado);
 		
-		//centra el mapa y hace zoom según instancia elegida
+		//centra el mapa y hace zoom segï¿½n instancia elegida
 		centrarMapa(grafoPesado);	
 		
 		//borro todos los puntos y lineas del mapa
@@ -188,13 +188,14 @@ public class Main
 		
 		//lista de aristas del AGM
 		Clustering cluster=new Clustering(tupla.getAristasAGM());
+		this._listaAristasAMG=new ArrayList<Arista>();
 		this._listaAristasAMG=cluster.getPesosAristas();
 		cluster.obviarAristasMayores(this._listaAristasAMG, cantClusters);
-		System.out.println("Puto el que lee: "+this._listaAristasAMG);//////////////
+		//System.out.println("Puto el que lee: "+this._listaAristasAMG);//////////////
 		for (int i = 0; i < this._listaAristasAMG.size(); i++) 
 		{
 			//TODO
-			//aca deberia hacer la arista (a, b)(b,a) entre vértices pero desde las aristas	
+			//aca deberia hacer la arista (a, b)(b,a) entre vertices pero desde las aristas	
 		}
 		
 		ArrayList<Coordinate> coordenadas = llenaListaCoordenadas(grafoPesado.obtenerVertices());
@@ -216,20 +217,23 @@ public class Main
 	/*-- Llena un grafoPesado de aristas(Ej:(1,2),(2,3),etc) --*/
 	private void llenaGrafoConAristas(GrafoPesado grafo)
 	{
-		for (int i = 0; i < grafo.cantVertices()-1; i++)
-		{
-			grafo.agregarArista(i,i+1);
+		for (int i = 0; i <grafo.cantVertices()-1; i++) {
+			grafo.obtenerVertice(i).setId(i);
+			for (int j = i+1; j < grafo.cantVertices(); j++) {
+				grafo.obtenerVertice(j).setId(j);
+				grafo.agregarArista(grafo.obtenerVertice(i),grafo.obtenerVertice(j));
+			}
 		}
 	}
 	
-	/*-- Elige el vértice del medio de la instancia y centra el zoom en él --*/
+	/*-- Elige el vertice del medio de la instancia y centra el zoom en el --*/
 	public void centrarMapa(GrafoPesado grafo)
 	{
 		Vertice primerVertice=grafo.obtenerVertice((grafo.getCantVertices())/2);
 		this._mapa.setDisplayPositionByLatLon(primerVertice.getLatitud(),primerVertice.getLongitud(),12);
 	}
 	
-	/*-- Borra toso los puntos y líneas del mapa --*/
+	/*-- Borra toso los puntos y lineas del mapa --*/
 	private void reseteaMapa()
 	{
 		this._mapa.removeAllMapPolygons();//borra todas las aristas

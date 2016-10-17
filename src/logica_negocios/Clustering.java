@@ -64,8 +64,10 @@ public class Clustering {
 		DAOVertices daoVertices=new DAOVertices("src/modelo/instancia1.json");
 		GrafoPesado grafo = new GrafoPesado(daoVertices.obtenerVertices());
 		for (int i = 0; i <grafo.cantVertices()-1; i++) {
+			grafo.obtenerVertice(i).setId(i);
 			for (int j = i+1; j < grafo.cantVertices(); j++) {
-				grafo.agregarArista(i, j);
+				grafo.obtenerVertice(j).setId(j);
+				grafo.agregarArista(grafo.obtenerVertice(i),grafo.obtenerVertice(j));
 			}
 		}
 
@@ -74,6 +76,6 @@ public class Clustering {
 		System.out.println(clustering.getPesosAristas().toString());
 		
 		System.out.println(" Prueba clustering");
-		System.out.println(clustering.obviarAristasMayores(clustering.getPesosAristas(), 3).toString());
+		System.out.println(clustering.obviarAristasMayores(clustering.getPesosAristas(),3).toString());
 	}	
 }
