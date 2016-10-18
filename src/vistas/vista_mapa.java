@@ -34,7 +34,7 @@ import modelo.DAOVertices;
 import modelo.Tupla_GrafoPesado_Aristas;
 import modelo.Vertice;
 
-public class Main 
+public class vista_mapa 
 {
 	//variables de instancia
 	private JFrame _frame;
@@ -56,7 +56,7 @@ public class Main
 			{
 				try 
 				{
-					Main window = new Main();
+					vista_mapa window = new vista_mapa();
 					window._frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,7 +66,7 @@ public class Main
 	}
 
 	//constructor
-	public Main() 
+	public vista_mapa() 
 	{
 		try//manejo de look and feel
 		{
