@@ -207,29 +207,33 @@ public class Main
 		
 		System.out.println(listaClusterizada);
 		
-		ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
+		
 		
 		//Formo el poligono utilizando la lista con las aristas obviadas
-		this.formaPoligono(listaClusterizada,coordenadas);
 		
-		//Agrego las coordenadas al mapa
-		MapPolygon polygon = new MapPolygonImpl(coordenadas);
-		
-		this._mapa.addMapPolygon(polygon);
-		
-		for(Vertice vert: tupla.getGrafoPesado().obtenerVertices())
-			this._mapa.addMapMarker(new MapMarkerDot(new Coordinate(vert.getLatitud(),vert.getLongitud())));
-	}
-
-	private void formaPoligono(ArrayList<Arista> listaClusterizada, ArrayList<Coordinate> coordenadas) {
 		for (int i = 0; i < listaClusterizada.size(); i++) 
 		{
+			ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
+			
 			Vertice vert_inicio=listaClusterizada.get(i).getVertAGM();
 			Vertice vert_fin=listaClusterizada.get(i).getVertice();
+			
 			coordenadas.add(new Coordinate(vert_inicio.getLatitud(),vert_inicio.getLongitud()));//A
 			coordenadas.add(new Coordinate(vert_fin.getLatitud(),vert_fin.getLongitud()));//B
 			coordenadas.add(new Coordinate(vert_inicio.getLatitud(),vert_inicio.getLongitud()));//A	
+			
+			MapPolygon polygon = new MapPolygonImpl(coordenadas);
+			
+			this._mapa.addMapPolygon(polygon);
 		}
+		
+		
+		
+		//Agrego las coordenadas al mapa
+		
+		
+		for(Vertice vert: tupla.getGrafoPesado().obtenerVertices())
+			this._mapa.addMapMarker(new MapMarkerDot(new Coordinate(vert.getLatitud(),vert.getLongitud())));
 	}
 	
 	/*-- Llena un grafoPesado de aristas(Ej:(1,2),(2,3),etc) --*/
