@@ -199,7 +199,7 @@ public class Main
 		
 		
 		//lista de aristas del AGM
-//		Clustering cluster=new Clustering(tupla.getAristasAGM());
+//		Clustering cluster=new Clustering(tupla.getAristasAGM());// ESTO ESTABA JODIENDO
 		this._listaAristasAMG=new ArrayList<Arista>();
 		this._listaAristasAMG=cluster.getPesosAristas();
 		
