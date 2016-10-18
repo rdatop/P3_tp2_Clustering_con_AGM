@@ -186,10 +186,20 @@ public class Main
 		centrarMapa(grafoPesado);	
 		
 		//borro todos los puntos y lineas del mapa
-		this.reseteaMapa();		
+		this.reseteaMapa();	
 		
 		//lista de aristas del AGM
-		Clustering cluster=new Clustering(tupla.getAristasAGM());
+		Clustering cluster=new Clustering(Algoritmos.AGM(grafoPesado).getAristasAGM());
+		System.out.println(" Aristas ya ordenadas de > a <");
+		System.out.println(cluster.getPesosAristas().toString());
+		
+		System.out.println(" Prueba clustering");
+		System.out.println(cluster.obviarAristasMayores(cluster.getPesosAristas(),3).toString());
+		
+		
+		
+		//lista de aristas del AGM
+//		Clustering cluster=new Clustering(tupla.getAristasAGM());
 		this._listaAristasAMG=new ArrayList<Arista>();
 		this._listaAristasAMG=cluster.getPesosAristas();
 		
@@ -232,6 +242,9 @@ public class Main
 				grafo.agregarArista(grafo.obtenerVertice(i),grafo.obtenerVertice(j));
 			}
 		}
+//		Tupla_GrafoPesado_Aristas tupla=Algoritmos.AGM(grafo);//////////////////////////PRUEBA/////////////////////
+//		System.out.println("asi se crea el AGM");
+//		System.out.println(tupla.getAristasAGM().toString());
 	}
 	
 	/*-- Elige el vertice del medio de la instancia y centra el zoom en el --*/
