@@ -139,7 +139,6 @@ public class Main
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				
 				int cantClusters=Integer.parseInt(_txtCantClusters.getText());
 				boolean erroresValidacion=false;
 				String	mensajeErroresValidacion="";
@@ -190,52 +189,20 @@ public class Main
 		
 		//lista de aristas del AGM
 		Clustering cluster=new Clustering(Algoritmos.AGM(grafoPesado).getAristasAGM());
-		System.out.println(" Aristas ya ordenadas de > a <");
-		System.out.println(cluster.getPesosAristas().toString());
-		
-		System.out.println(" Prueba clustering");
-		System.out.println(cluster.obviarAristasMayores(cluster.getPesosAristas(),3).toString());
-		
-		
 		
 		//lista de aristas del AGM
-//		Clustering cluster=new Clustering(tupla.getAristasAGM());// ESTO ESTABA JODIENDO
-		this._listaAristasAMG=new ArrayList<Arista>();
 		this._listaAristasAMG=cluster.getPesosAristas();
 		
 		ArrayList<Arista> listaClusterizada=cluster.obviarAristasMayores(this._listaAristasAMG, cantClusters);
 		
-		System.out.println(listaClusterizada);
-		
-		
-		
 		//Formo el poligono utilizando la lista con las aristas obviadas
-		
-		for (int i = 0; i < listaClusterizada.size(); i++) 
-		{
-			ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
-			
-			Vertice vert_inicio=listaClusterizada.get(i).getVertAGM();
-			Vertice vert_fin=listaClusterizada.get(i).getVertice();
-			
-			coordenadas.add(new Coordinate(vert_inicio.getLatitud(),vert_inicio.getLongitud()));//A
-			coordenadas.add(new Coordinate(vert_fin.getLatitud(),vert_fin.getLongitud()));//B
-			coordenadas.add(new Coordinate(vert_inicio.getLatitud(),vert_inicio.getLongitud()));//A	
-			
-			MapPolygon polygon = new MapPolygonImpl(coordenadas);
-			
-			this._mapa.addMapPolygon(polygon);
-		}
-		
-		
+		this.generadorPoligonos(listaClusterizada);
 		
 		//Agrego las coordenadas al mapa
-		
-		
 		for(Vertice vert: tupla.getGrafoPesado().obtenerVertices())
 			this._mapa.addMapMarker(new MapMarkerDot(new Coordinate(vert.getLatitud(),vert.getLongitud())));
 	}
-	
+
 	/*-- Llena un grafoPesado de aristas(Ej:(1,2),(2,3),etc) --*/
 	private void llenaGrafoConAristas(GrafoPesado grafo)
 	{
@@ -246,9 +213,6 @@ public class Main
 				grafo.agregarArista(grafo.obtenerVertice(i),grafo.obtenerVertice(j));
 			}
 		}
-//		Tupla_GrafoPesado_Aristas tupla=Algoritmos.AGM(grafo);//////////////////////////PRUEBA/////////////////////
-//		System.out.println("asi se crea el AGM");
-//		System.out.println(tupla.getAristasAGM().toString());
 	}
 	
 	/*-- Elige el vertice del medio de la instancia y centra el zoom en el --*/
@@ -270,4 +234,25 @@ public class Main
 	{
 		this._txtCantClusters.setText("0");
 	}	
+	
+	/*-- Crea poligonos y los inserta en el mapa --*/
+	private void generadorPoligonos(ArrayList<Arista> listaClusterizada) {
+		for (int i = 0; i < listaClusterizada.size(); i++) 
+		{
+			ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
+			
+			Vertice vert_inicio=listaClusterizada.get(i).getVertAGM();
+			Vertice vert_fin=listaClusterizada.get(i).getVertice();
+			
+			coordenadas.add(new Coordinate(vert_inicio.getLatitud(),vert_inicio.getLongitud()));//A
+			coordenadas.add(new Coordinate(vert_fin.getLatitud(),vert_fin.getLongitud()));//B
+			coordenadas.add(new Coordinate(vert_inicio.getLatitud(),vert_inicio.getLongitud()));//A	
+			
+			/*-- Crea un poligono que , en realidad,va a tener --*/
+			/*-- forma de linea --*/
+			MapPolygon polygon = new MapPolygonImpl(coordenadas);
+			
+			this._mapa.addMapPolygon(polygon);
+		}
+	}
 }
