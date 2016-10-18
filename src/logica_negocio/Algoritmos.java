@@ -9,13 +9,18 @@ import modelo.Vertice;
 public class Algoritmos
 {	
 	// Algoritmo de Prim
-	public static Tupla_GrafoPesado_Aristas AGM(GrafoPesado grafo){
+	public static Tupla_GrafoPesado_Aristas AGM(GrafoPesado grafo)
+	{
 		//Tupla: grafoPesado + lista de aristas del AGM (dirigido a Clustering)
 		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(grafo.obtenerVertices());
 		Set<Integer>vertAMG=new HashSet<Integer>();//vertices del AGM
 		vertAMG.add(0);//se inicializa
+		int cantAristas=grafo.cantAristas();
 		
-			for(int i=0;i<grafo.cantVertices()-1;i++){//recorro los vertices del grafo hasta el ultimo
+		if(cantAristas > 0)
+		{
+			for(int i=0;i<grafo.cantVertices()-1;i++)//recorro los vertices del grafo hasta el ultimo
+			{
 				Arista arista=menorArista(grafo, vertAMG);//crea una arista que sera la de menor valor
 				tupla.agregaAristaGrafoPesado(arista.vertAGM, arista.vertice);//se agrega al AGM 
 				//los vertices con la arista de menor peso
@@ -23,11 +28,14 @@ public class Algoritmos
 				vertAMG.add(arista.vertice.getId());//se agrega AGM los vertices por prioridad de peso
 				tupla.agregaAristaAListaAgm(arista);
 			}
+		}
+			
 		return tupla;
 	}
 		
 	/** Ineer class (clase interna, solo se usa en grafo)*/
-	public static class Arista implements Comparable<Arista>{//adhiere a Comparable
+	public static class Arista implements Comparable<Arista>//adhiere a Comparable
+	{
 		//variables de instancia
 		public Vertice vertAGM;
 		public Vertice vertice;
@@ -43,7 +51,8 @@ public class Algoritmos
 		
 		// Equals de object sobreescrito (comparacion por igualdad)
 		@Override
-		public boolean equals(Object obj){
+		public boolean equals(Object obj)
+		{
 			if(this==obj){
 				return true;
 			}
@@ -51,16 +60,19 @@ public class Algoritmos
 				return false;
 			}
 			Arista otra=(Arista)obj;
-			return vertAGM==otra.vertAGM && vertice==otra.vertice;
+			return this.vertAGM==otra.vertAGM && this.vertice==otra.vertice;
 		}
 		
 		// CompareTo sobreescrito (comparacion por peso de aristas - Clustering)
 		@Override
-		public int compareTo(Arista otraArista) {
-			if (this.getPeso()< otraArista.getPeso()) {
+		public int compareTo(Arista otraArista)
+		{
+			if(this.getPeso()< otraArista.getPeso())
+			{
 				return -1;
 			}
-			if (this.getPeso()> otraArista.getPeso()){
+			if (this.getPeso()> otraArista.getPeso())
+			{
 				return 1;
 			}
 			return 0;
@@ -91,8 +103,8 @@ public class Algoritmos
 	}/**fin de clase inner*/
 	
 	// Retorna la arista de menor peso entre un verticeAGM y uno no AMG
-	public static Arista menorArista(GrafoPesado grafo, Set<Integer>vertAGM){
-		
+	public static Arista menorArista(GrafoPesado grafo, Set<Integer>vertAGM)
+	{
 		Arista ret=new Arista(grafo.obtenerVertice(0),grafo.obtenerVertice(0),Double.MAX_VALUE);//para ir bajando el valor
 		
 		for(Integer i: vertAGM){//for recorre un conjunto de Integer llamados vertAGM
