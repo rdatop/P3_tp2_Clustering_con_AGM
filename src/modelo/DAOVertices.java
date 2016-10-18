@@ -36,9 +36,9 @@ public class DAOVertices
 		BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
 		Type collectionType=new TypeToken<ArrayList<Vertice>>(){}.getType();
 		ArrayList<Vertice> listaCoordenadas=_gson.fromJson(br,collectionType);
-		if(listaCoordenadas==null)//s� el archivo est� vacio
+		if(listaCoordenadas==null)//si el archivo esta vacio
 		{
-			listaCoordenadas=new ArrayList<Vertice>();//hara una lista vac�a
+			listaCoordenadas=new ArrayList<Vertice>();//hace una lista vacia
 		}
 		
 		this.asignaIds(listaCoordenadas);
