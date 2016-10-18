@@ -192,36 +192,34 @@ public class Main
 		Clustering cluster=new Clustering(tupla.getAristasAGM());
 		this._listaAristasAMG=new ArrayList<Arista>();
 		this._listaAristasAMG=cluster.getPesosAristas();
+		
 		ArrayList<Arista> listaClusterizada=cluster.obviarAristasMayores(this._listaAristasAMG, cantClusters);
 		
-//		for (int i = 0; i < listaClusterizada.size(); i++) 
-//		{
-//			Vertice vert_inicio=listaClusterizada.get(i).getVertAGM();
-//			Vertice vert_fin=listaClusterizada.get(i).getVertice();
-//			ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
-//			coordenadas.add(new Coordinate(vert_inicio.getLatitud(),vert_inicio.getLongitud()));//A
-//			coordenadas.add(new Coordinate(vert_fin.getLatitud(),vert_fin.getLongitud()));//B
-//			coordenadas.add(new Coordinate(vert_inicio.getLatitud(),vert_inicio.getLongitud()));//A
-//			MapPolygon polygon = new MapPolygonImpl(coordenadas);
-//			this._mapa.addMapPolygon(polygon);
-//			//aca deberia hacer la arista (a, b)(b,a) entre vertices pero desde las aristas	
-//		}
+		System.out.println(listaClusterizada);
 		
 		ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
-
-		coordenadas.add(new Coordinate(-34.532, -58.7128));//A
-
-		coordenadas.add(new Coordinate(-34.546, -58.719));//B
-
-		coordenadas.add(new Coordinate(-34.532, -58.7128));//A
-
+		
+		//Formo el poligono utilizando la lista con las aristas obviadas
+		this.formaPoligono(listaClusterizada,coordenadas);
+		
+		//Agrego las coordenadas al mapa
 		MapPolygon polygon = new MapPolygonImpl(coordenadas);
-
+		
 		this._mapa.addMapPolygon(polygon);
-	
-		// Y un marcador en cada vertice del poligono!
-		for(Coordinate c: coordenadas)
-			this._mapa.addMapMarker(new MapMarkerDot(c));
+		
+		for(Vertice vert: tupla.getGrafoPesado().obtenerVertices())
+			this._mapa.addMapMarker(new MapMarkerDot(new Coordinate(vert.getLatitud(),vert.getLongitud())));
+	}
+
+	private void formaPoligono(ArrayList<Arista> listaClusterizada, ArrayList<Coordinate> coordenadas) {
+		for (int i = 0; i < listaClusterizada.size(); i++) 
+		{
+			Vertice vert_inicio=listaClusterizada.get(i).getVertAGM();
+			Vertice vert_fin=listaClusterizada.get(i).getVertice();
+			coordenadas.add(new Coordinate(vert_inicio.getLatitud(),vert_inicio.getLongitud()));//A
+			coordenadas.add(new Coordinate(vert_fin.getLatitud(),vert_fin.getLongitud()));//B
+			coordenadas.add(new Coordinate(vert_inicio.getLatitud(),vert_inicio.getLongitud()));//A	
+		}
 	}
 	
 	/*-- Llena un grafoPesado de aristas(Ej:(1,2),(2,3),etc) --*/
