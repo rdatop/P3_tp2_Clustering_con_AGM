@@ -22,7 +22,9 @@ import java.io.IOException;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
+import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
 
 import logica_negocios.Algoritmos;
 import logica_negocios.Algoritmos.Arista;
@@ -190,27 +192,36 @@ public class Main
 		Clustering cluster=new Clustering(tupla.getAristasAGM());
 		this._listaAristasAMG=new ArrayList<Arista>();
 		this._listaAristasAMG=cluster.getPesosAristas();
-		cluster.obviarAristasMayores(this._listaAristasAMG, cantClusters);
-		for (int i = 0; i < this._listaAristasAMG.size(); i++) 
-		{
-			//TODO
-			//aca deberia hacer la arista (a, b)(b,a) entre vertices pero desde las aristas	
-		}
+		ArrayList<Arista> listaClusterizada=cluster.obviarAristasMayores(this._listaAristasAMG, cantClusters);
 		
-		ArrayList<Coordinate> coordenadas = llenaListaCoordenadas(grafoPesado.obtenerVertices());
+//		for (int i = 0; i < listaClusterizada.size(); i++) 
+//		{
+//			Vertice vert_inicio=listaClusterizada.get(i).getVertAGM();
+//			Vertice vert_fin=listaClusterizada.get(i).getVertice();
+//			ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
+//			coordenadas.add(new Coordinate(vert_inicio.getLatitud(),vert_inicio.getLongitud()));//A
+//			coordenadas.add(new Coordinate(vert_fin.getLatitud(),vert_fin.getLongitud()));//B
+//			coordenadas.add(new Coordinate(vert_inicio.getLatitud(),vert_inicio.getLongitud()));//A
+//			MapPolygon polygon = new MapPolygonImpl(coordenadas);
+//			this._mapa.addMapPolygon(polygon);
+//			//aca deberia hacer la arista (a, b)(b,a) entre vertices pero desde las aristas	
+//		}
+		
+		ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
+
+		coordenadas.add(new Coordinate(-34.532, -58.7128));//A
+
+		coordenadas.add(new Coordinate(-34.546, -58.719));//B
+
+		coordenadas.add(new Coordinate(-34.532, -58.7128));//A
+
+		MapPolygon polygon = new MapPolygonImpl(coordenadas);
+
+		this._mapa.addMapPolygon(polygon);
+	
 		// Y un marcador en cada vertice del poligono!
 		for(Coordinate c: coordenadas)
 			this._mapa.addMapMarker(new MapMarkerDot(c));
-	}
-
-	/*-- Genera una lista de coordendas --*/
-	private ArrayList<Coordinate> llenaListaCoordenadas(ArrayList<Vertice> listaVertices) 
-	{
-		ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
-		for(Vertice vertice:listaVertices){
-			coordenadas.add(new Coordinate(vertice.getLatitud(),vertice.getLongitud()));
-		}
-		return coordenadas;
 	}
 	
 	/*-- Llena un grafoPesado de aristas(Ej:(1,2),(2,3),etc) --*/
