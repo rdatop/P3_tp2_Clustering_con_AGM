@@ -1,21 +1,16 @@
 package modelo;
 
-import java.io.IOException;
-
-import org.openstreetmap.gui.jmapviewer.Coordinate;
-
-import logica_negocios.GrafoPesado;
-
-public class Vertice {
+public class Vertice
+{
 	//variables de instancia
-	private int id;////////////
+	private int id;
 	private Double latitud;
 	private Double longitud;
 	
 	// Constructor
-	public Vertice( Double latitud, Double longitud)/////////////int id,
+	public Vertice( int id,Double latitud, Double longitud)
 	{
-		this.setId(generadorID.aumentarContador());//
+		this.setId(id);//
 		this.setLatitud(latitud);
 		this.setLongitud(longitud);
 	}
@@ -40,46 +35,18 @@ public class Vertice {
 		this.longitud = longitud;
 	}
 	
-	public void setId(int iD)///////// agregado
+	public void setId(int iD)
 	{
 		this.id=iD;
 	}
 	
-	public int getId()//////////  agregado
+	public int getId()
 	{
 		return this.id;
-	}
-	public Coordinate getCoordenadas()////////////  agregado
-	{
-		Coordinate coordenadasVertice=new Coordinate(latitud, longitud);
-		return coordenadasVertice;
 	}
 	
 	public String toString()
 	{
 		return "ID: "+this.getId()+" , latitud: "+this.getLatitud()+", longitud: "+this.getLongitud();
-	}
-	
-	public static class generadorID
-	{
-		public static int ID=0;
-		
-		public static int aumentarContador()
-		{
-			ID++;
-			return ID;
-		}
-	}
-	
-	public static void main(String[]args) throws IOException{
-		DAOVertices daoVertices=new DAOVertices("src/modelo/instancia1.json");
-		GrafoPesado grafo = new GrafoPesado(daoVertices.obtenerVertices());
-		System.out.println("Cantidad de vertices del grafo pesado: "+grafo.cantVertices());
-		for (int i = 0; i <grafo.cantVertices()-1; i++) {
-			grafo.obtenerVertice(i).setId(i);
-			System.out.println(grafo.obtenerVertice(i).toString());/////////////////// el toString es tuyo
-			grafo.agregarArista(grafo.obtenerVertice(i), grafo.obtenerVertice(i+1));
-		}
-		
 	}
 }
