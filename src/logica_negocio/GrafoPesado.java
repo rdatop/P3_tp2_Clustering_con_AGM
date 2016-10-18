@@ -49,13 +49,13 @@ public class GrafoPesado
 	}
 		
 	// Peso de una arista entre dos vertices
-	public double getPesoArista(Vertice idVert_a, Vertice idVert_b)
+	public double getPesoArista(int idVert_a, int idVert_b)
 	{
-		if(this._grafo.contieneArista(idVert_a.getId(), idVert_b.getId())==false)
+		if(this._grafo.contieneArista(idVert_a,idVert_b)==false)
 		{
 			throw new IllegalArgumentException("Se consulto el peso de una arista inexistente! " + idVert_a + ", " + idVert_b);
 		}
-		return this._pesos[idVert_a.getId()][idVert_b.getId()];
+		return this._pesos[idVert_a][idVert_b];
 	}
 	
 	// Expuesto: contine aristas sin herencia de la class Grafo
@@ -88,7 +88,7 @@ public class GrafoPesado
 		return this.cantAristas();
 	}
 	
-	// Expuesto: conjunto de vecinos de un vértice
+	// Expuesto: conjunto de vecinos de un vï¿½rtice
 	public Set<Integer> vecinos(int id)
 	{
 		return this._grafo.vecinosDelVertice(id);

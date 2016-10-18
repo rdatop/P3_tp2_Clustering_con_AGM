@@ -112,10 +112,10 @@ public class Algoritmos
 			{
 				if(vertAGM.contains(j)==false)
 				{
-					if(grafo.getPesoArista(grafo.obtenerVertice(i),grafo.obtenerVertice(j))<ret.peso)
+					if(grafo.getPesoArista(grafo.obtenerVertice(i).getId(),grafo.obtenerVertice(j).getId())<ret.peso)
 					{
 						ret=new Arista(grafo.obtenerVertice(i),grafo.obtenerVertice(j)
-						, grafo.getPesoArista(grafo.obtenerVertice(i),grafo.obtenerVertice(j)));
+						, grafo.getPesoArista(grafo.obtenerVertice(i).getId(),grafo.obtenerVertice(j).getId()));
 					}
 				}
 			}
