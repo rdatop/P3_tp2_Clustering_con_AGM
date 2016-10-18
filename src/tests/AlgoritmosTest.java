@@ -1,45 +1,45 @@
-//package tests;
-//
-//import static org.junit.Assert.*;
-//
-//import java.util.ArrayList;
-//import java.util.HashSet;
-//import java.util.Set;
-//
-//import org.junit.Test;
-//import logica_negocios.Algoritmos;
-//import logica_negocios.GrafoPesado;
-//import modelo.Vertice;
-//
-//public class AlgoritmosTest {
-//
-//	//testeo de un vertice del agm
-//	@Test
-//	public void unAmarilloTest() {
-//		GrafoPesado grafo=instancia();
-//		
-//		Set<Integer>amarillos=new HashSet<Integer>();
-//		amarillos.add(0);
-//		
-//		Algoritmos.Arista arista=Algoritmos.menorArista(grafo, amarillos);
-//		assertEquals(new Algoritmos.Arista(0, 1, 5),arista);
-//	}
-//	
-//	//testea tres vertices de agm (amarillo por la clase teorica
-//	@Test
-//	public void tresAmarillosTest()
-//	{
-//		GrafoPesado grafo = instancia();
-//
-//		Set<Integer> amarillos = new HashSet<Integer>();
-//		amarillos.add(0);
-//		amarillos.add(1);
-//		amarillos.add(2);
-//		
-//		Algoritmos.Arista arista = Algoritmos.menorArista(grafo, amarillos);
-//		assertEquals(new Algoritmos.Arista(2,3,0.08658641316587116), arista);
-//	}
-//
+package tests;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.Test;
+import logica_negocio.Algoritmos;
+import logica_negocio.GrafoPesado;
+import modelo.Vertice;
+
+public class AlgoritmosTest {
+
+	//testeo de un vertice del agm
+	@Test
+	public void unAmarilloTest() {
+		GrafoPesado grafo=instancia();
+		
+		Set<Integer>amarillos=new HashSet<Integer>();
+		amarillos.add(0);
+		
+		Algoritmos.Arista arista=Algoritmos.menorArista(grafo, amarillos);
+		assertEquals(new Algoritmos.Arista(grafo.obtenerVertice(0),grafo.obtenerVertice(1),0.5),arista);
+	}
+	
+	//testea tres vertices de agm (amarillo por la clase teorica
+	@Test
+	public void tresAmarillosTest()
+	{
+		GrafoPesado grafo = this.instancia();
+
+		Set<Integer> amarillos = new HashSet<Integer>();
+		amarillos.add(0);
+		amarillos.add(1);
+		amarillos.add(2);
+		
+		Algoritmos.Arista arista = Algoritmos.menorArista(grafo, amarillos);
+		assertEquals(new Algoritmos.Arista(grafo.obtenerVertice(2),grafo.obtenerVertice(3),0.08658641316587116), arista);
+	}
+
 ////	//test del algoritmo de PRIM tira excepcion,fijate por favor agus
 ////	@Test
 ////	public void primTest()
@@ -60,24 +60,23 @@
 ////		assertTrue(arista.negro==0 || arista.negro==1);
 ////		assertTrue(arista.negro != arista.negro);
 ////	}
-//	
-//	//banco de prueba
-//	private GrafoPesado instancia()
-//	{
-//		ArrayList<Vertice> listaVertices=new ArrayList<Vertice>();
-//		listaVertices.add(new Vertice(-34.52133782929332,-58.70068073272705));
-//		listaVertices.add(new Vertice(-34.520772089706036,-58.702311515808105));
-//		listaVertices.add(new Vertice(-34.52126711205503,-58.70325565338135));
-//		listaVertices.add(new Vertice(-34.52186820666683,-58.70265483856201));
-//		listaVertices.add(new Vertice(-34.522433938809684,-58.70325565338135));
-//		
-//		GrafoPesado grafo = new GrafoPesado(listaVertices);
-//		grafo.agregarArista(0, 1);
-//		grafo.agregarArista(0, 2);
-//		grafo.agregarArista(0, 3);
-//		grafo.agregarArista(1, 2);
-//		grafo.agregarArista(2, 3);
-//		
-//		return grafo;
-//	}
-//}
+	
+	private GrafoPesado instancia()
+	{
+		ArrayList<Vertice> verts=new ArrayList<Vertice>();
+		verts.add(new Vertice(0,-34.52133782929332,-58.70068073272705));
+		verts.add(new Vertice(1,-34.520772089706036,-58.702311515808105));
+		verts.add(new Vertice(2,-34.52126711205503,-58.70325565338135));
+		verts.add(new Vertice(3,-34.52186820666683,-58.70265483856201));
+		verts.add(new Vertice(4,-34.522433938809684,-58.70325565338135));
+		
+		GrafoPesado grafo = new GrafoPesado(verts);
+		grafo.agregarArista(verts.get(0),verts.get(1));
+		grafo.agregarArista(verts.get(0),verts.get(2));
+		grafo.agregarArista(verts.get(0),verts.get(3));
+		grafo.agregarArista(verts.get(1),verts.get(2));
+		grafo.agregarArista(verts.get(2),verts.get(3));
+		
+		return grafo;
+	}
+}
