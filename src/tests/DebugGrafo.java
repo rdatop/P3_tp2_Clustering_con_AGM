@@ -2,8 +2,8 @@ package tests;
 
 import java.io.IOException;
 
-import logica_negocios.Algoritmos;
-import logica_negocios.GrafoPesado;
+import logica_negocio.Algoritmos;
+import logica_negocio.GrafoPesado;
 import modelo.DAOVertices;
 import modelo.Tupla_GrafoPesado_Aristas;
 

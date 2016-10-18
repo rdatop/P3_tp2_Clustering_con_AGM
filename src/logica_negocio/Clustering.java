@@ -1,9 +1,9 @@
-package logica_negocios;
+package logica_negocio;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import logica_negocios.Algoritmos.Arista;
+import logica_negocio.Algoritmos.Arista;
 
 public class Clustering
 {

@@ -26,10 +26,10 @@ import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
 
-import logica_negocios.Algoritmos;
-import logica_negocios.Algoritmos.Arista;
-import logica_negocios.Clustering;
-import logica_negocios.GrafoPesado;
+import logica_negocio.Algoritmos;
+import logica_negocio.Clustering;
+import logica_negocio.GrafoPesado;
+import logica_negocio.Algoritmos.Arista;
 import modelo.DAOVertices;
 import modelo.Tupla_GrafoPesado_Aristas;
 import modelo.Vertice;

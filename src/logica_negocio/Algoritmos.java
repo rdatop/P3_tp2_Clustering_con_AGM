@@ -1,4 +1,4 @@
-package logica_negocios;
+package logica_negocio;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,8 +1,9 @@
 package modelo;
 
 import java.util.ArrayList;
-import logica_negocios.Algoritmos.Arista;
-import logica_negocios.GrafoPesado;
+
+import logica_negocio.GrafoPesado;
+import logica_negocio.Algoritmos.Arista;
 
 public class Tupla_GrafoPesado_Aristas
 {

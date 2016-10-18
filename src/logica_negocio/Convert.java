@@ -1,4 +1,4 @@
-package logica_negocios;
+package logica_negocio;
 
 public class Convert
 {
