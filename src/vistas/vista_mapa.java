@@ -172,6 +172,7 @@ public class vista_mapa
 		});	
 	}
 	
+	//coloca los vertices en el mapa y realiza el clustering
 	private void muestraMapa(String instancia,int cantClusters) throws IOException 
 	{
 		DAOVertices dao=new DAOVertices("src/modelo/"+instancia+".json");

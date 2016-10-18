@@ -57,26 +57,15 @@ public class Grafo
 	// Relaciona dos vertices mediante una aristas
 	public void agregarAristas(Vertice idVert_i, Vertice idVert_j)
 	{
-		this.chequearExtremos(idVert_i.getId(), idVert_j.getId());//verifica rangos
-		if(!this.contieneArista(idVert_i.getId(),idVert_j.getId()))//verifica que no esten asignados
+		this.chequearExtremos(idVert_i.getId(), idVert_j.getId());
+		if(!this.contieneArista(idVert_i.getId(),idVert_j.getId()))
 		{
 			this._aristas++;//incremente cant aristas
 		}
-		this._vecinos.get(idVert_i.getId()).add(idVert_j.getId());//
-		this._vecinos.get(idVert_j.getId()).add(idVert_i.getId());//asignacion simetrica
+		this._vecinos.get(idVert_i.getId()).add(idVert_j.getId());
+		this._vecinos.get(idVert_j.getId()).add(idVert_i.getId());
 	}
 	
-	// Desvincula dos vertices eliminando la arista q los unio
-	public void removerArista(int idVert_i, int idVert_j)
-	{
-		this.chequearExtremos(idVert_i, idVert_j);
-		if(this.contieneArista(idVert_i, idVert_j)){//si esta asignado
-			this._aristas --;//decrementa cant aristas 
-		}
-		this._vecinos.get(idVert_i).remove(idVert_j);//
-		this._vecinos.get(idVert_j).remove(idVert_i);//desasignacion asimetrica
-	}
-		
 	// Verifica asignacion entre vertices
 	public boolean contieneArista(int idVert_i, int idVert_j)
 	{

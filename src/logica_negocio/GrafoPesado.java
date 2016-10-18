@@ -2,14 +2,13 @@ package logica_negocio;
 
 import java.util.ArrayList;
 import java.util.Set;
-
 import modelo.Vertice;
 
 /**
  * Grafo Pesado Utiliza la estructura de un 
  * Grafo simple(clase Grafo) y le agrega 
  * pesos a sus aristas
- * @author Agus-MSI
+ * @author Pabluntu-Agus
  */
 
 public class GrafoPesado
@@ -28,10 +27,11 @@ public class GrafoPesado
 	// Agregar aristas con peso, actua la clase Convert (lat y log de los vertices)
 	public void agregarArista(Vertice idVert_i, Vertice idVert_j)
 	{
-		this._grafo.agregarAristas(idVert_i, idVert_j);//contiene aristas/cheq extremos de grafo simple
+		this._grafo.agregarAristas(idVert_i, idVert_j);
 		Vertice vertice1=_grafo.obtenerVertice(idVert_i.getId());
-		Vertice vertice2=_grafo.obtenerVertice(idVert_j.getId());//obtiene los vertices para generar peso de arista
-		Double calculaDistancia=Convert.calcularDistanciaEntre(vertice1.getLatitud(),vertice1.getLongitud(),vertice2.getLatitud(),vertice2.getLongitud());
+		Vertice vertice2=_grafo.obtenerVertice(idVert_j.getId());
+		Double calculaDistancia=Convert.calcularDistanciaEntre(vertice1.getLatitud(),vertice1.getLongitud()
+				                                              ,vertice2.getLatitud(),vertice2.getLongitud());
 		this._pesos[idVert_i.getId()][idVert_j.getId()]=calculaDistancia;
 		this._pesos[idVert_j.getId()][idVert_i.getId()]=calculaDistancia;//peso de forma simetrica
 	}
@@ -55,7 +55,7 @@ public class GrafoPesado
 		{
 			throw new IllegalArgumentException("Se consulto el peso de una arista inexistente! " + idVert_a + ", " + idVert_b);
 		}
-		return this._pesos[idVert_a.getId()][idVert_b.getId()];//si no es falso el cont arist entrega el peso de la arista
+		return this._pesos[idVert_a.getId()][idVert_b.getId()];
 	}
 	
 	// Expuesto: contine aristas sin herencia de la class Grafo

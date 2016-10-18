@@ -13,23 +13,21 @@ public class Algoritmos
 	{
 		//Tupla: grafoPesado + lista de aristas del AGM (dirigido a Clustering)
 		Tupla_GrafoPesado_Aristas tupla=new Tupla_GrafoPesado_Aristas(grafo.obtenerVertices());
-		Set<Integer>vertAMG=new HashSet<Integer>();//vertices del AGM
-		vertAMG.add(0);//se inicializa
+		Set<Integer>vertAMG=new HashSet<Integer>();
+		vertAMG.add(0);
 		int cantAristas=grafo.cantAristas();
 		
 		if(cantAristas > 0)
 		{
-			for(int i=0;i<grafo.cantVertices()-1;i++)//recorro los vertices del grafo hasta el ultimo
+			for(int i=0;i<grafo.cantVertices()-1;i++)
 			{
-				Arista arista=menorArista(grafo, vertAMG);//crea una arista que sera la de menor valor
-				tupla.agregaAristaGrafoPesado(arista.vertAGM, arista.vertice);//se agrega al AGM 
-				//los vertices con la arista de menor peso
-			
-				vertAMG.add(arista.vertice.getId());//se agrega AGM los vertices por prioridad de peso
+				Arista arista=menorArista(grafo, vertAMG);
+				tupla.agregaAristaGrafoPesado(arista.vertAGM, arista.vertice);
+							
+				vertAMG.add(arista.vertice.getId());
 				tupla.agregaAristaAListaAgm(arista);
 			}
 		}
-			
 		return tupla;
 	}
 		
@@ -94,6 +92,7 @@ public class Algoritmos
 			return this.peso;
 		}
 		
+		//representacion de prueba
 		@Override
 		public String toString()
 		{
@@ -105,13 +104,18 @@ public class Algoritmos
 	// Retorna la arista de menor peso entre un verticeAGM y uno no AMG
 	public static Arista menorArista(GrafoPesado grafo, Set<Integer>vertAGM)
 	{
-		Arista ret=new Arista(grafo.obtenerVertice(0),grafo.obtenerVertice(0),Double.MAX_VALUE);//para ir bajando el valor
+		Arista ret=new Arista(grafo.obtenerVertice(0),grafo.obtenerVertice(0),Double.MAX_VALUE);
 		
-		for(Integer i: vertAGM){//for recorre un conjunto de Integer llamados vertAGM
-			for(Integer j: grafo.vecinos(i)){//recorre un conjunto de Integer llamados vecinos de grafo
-				if(vertAGM.contains(j)==false){//si el vertice de grafo esta contenido ya en el AGM
-					if(grafo.getPesoArista(grafo.obtenerVertice(i),grafo.obtenerVertice(j))<ret.peso){//y si el peso entre un vertAGM y uno NoIncluido es menor que el anterior
-						ret=new Arista(grafo.obtenerVertice(i),grafo.obtenerVertice(j),grafo.getPesoArista(grafo.obtenerVertice(i),grafo.obtenerVertice(j)));//convierte la arista con sus estremos y el peso
+		for(Integer i: vertAGM)
+		{
+			for(Integer j: grafo.vecinos(i))
+			{
+				if(vertAGM.contains(j)==false)
+				{
+					if(grafo.getPesoArista(grafo.obtenerVertice(i),grafo.obtenerVertice(j))<ret.peso)
+					{
+						ret=new Arista(grafo.obtenerVertice(i),grafo.obtenerVertice(j)
+						, grafo.getPesoArista(grafo.obtenerVertice(i),grafo.obtenerVertice(j)));
 					}
 				}
 			}

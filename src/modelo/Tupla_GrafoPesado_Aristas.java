@@ -53,5 +53,4 @@ public class Tupla_GrafoPesado_Aristas
 	{
 		return this._grafoPesado.cantAristas();
 	}
-	
 }
