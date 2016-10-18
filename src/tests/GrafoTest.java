@@ -28,8 +28,8 @@ public class GrafoTest
 	{
 		Grafo grafo=new Grafo(caminito().obtenerVertices());
 		Vertice vertice=grafo.obtenerVertice(0);
-		assertEquals( -34.52133782929332,vertice.getLatitud(), 1e-4 );
-		assertEquals( -58.70068073272705,vertice.getLongitud(), 1e-4 );
+		assertEquals( -34.52133782929365,vertice.getLatitud(), 1e-4 );
+		assertEquals( -58.70068073272778,vertice.getLongitud(), 1e-4 );
 	}
 	
 	@Test
@@ -86,12 +86,7 @@ public class GrafoTest
 
 	private Grafo casita()
 	{
-		ArrayList<Vertice> listaVertices=new ArrayList<Vertice>();
-		listaVertices.add(new Vertice(0,-34.52133782929332,-58.70068073272705));
-		listaVertices.add(new Vertice(1,-34.520772089706036,-58.702311515808105));
-		listaVertices.add(new Vertice(2,-34.52126711205503,-58.70325565338135));
-		listaVertices.add(new Vertice(3,-34.52186820666683,-58.70265483856201));
-		listaVertices.add(new Vertice(4,-34.522433938809684,-58.70325565338135));
+		ArrayList<Vertice> listaVertices=InstanciaVertice.getInstanciaCincoVertices();
 		
 		Grafo grafo = new Grafo(listaVertices);
 		grafo.agregarAristas(listaVertices.get(0),listaVertices.get(1));
@@ -106,10 +101,7 @@ public class GrafoTest
 	
 	private Grafo caminito()
 	{
-		ArrayList<Vertice> listaVertices=new ArrayList<Vertice>();
-		listaVertices.add(new Vertice(0,-34.52133782929332,-58.70068073272705));
-		listaVertices.add(new Vertice(1,-34.520772089706036,-58.702311515808105));
-		listaVertices.add(new Vertice(2,-34.52126711205503,-58.70325565338135));
+		ArrayList<Vertice> listaVertices=InstanciaVertice.getInstanciaTresVertices();
 		
 		Grafo grafo = new Grafo(listaVertices);
 		grafo.agregarAristas(listaVertices.get(0),listaVertices.get(2));
